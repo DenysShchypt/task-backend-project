@@ -26,6 +26,7 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'avatarURL is required']
     },
+    theme: enum[]
 }, { versionKey: false, timestamps: true })
 const User = model('user', userSchema)
 export default User;
