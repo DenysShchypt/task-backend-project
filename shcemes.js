@@ -51,7 +51,7 @@ const boardSchema = new mongoose.Schema({
 const columnSchema = new mongoose.Schema({
   title: { type: String, required: true },
   board: { type: Schema.Types.ObjectId, ref: "board", required: true },
-  // owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  owner: { type: Schema.Types.ObjectId, ref: "user", required: true },
 });
 
 // Схема картки (Card)
@@ -62,12 +62,13 @@ const cardSchema = new mongoose.Schema({
     type: String,
     enum: ["default", "low", "medium", "high"],
   },
+  deadLine: { type: Date, required: true },
   column: {
     type: Schema.Types.ObjectId,
     ref: "column",
     required: true,
   },
-  deadLine: { type: Date, required: true },
+  owner: { type: Schema.Types.ObjectId, ref: "user", required: true },
 });
 
 // Модель користувача (User)
