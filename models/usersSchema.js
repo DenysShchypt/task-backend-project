@@ -1,7 +1,7 @@
 import Joi from "joi";
 import { Schema, model } from "mongoose";
 
-const emailRegexp =
+export const emailRegexp =
   /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
 const userSchema = new Schema(
