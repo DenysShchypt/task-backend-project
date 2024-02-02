@@ -6,11 +6,14 @@ import { ctrlWrapper } from "../decorators/index.js";
 import { HttpError } from "../helpers/index.js";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-import path from "path";
-
-const avatarPath = path.resolve("user.svg");
 
 const { JWT_SECRET } = process.env;
+
+const generateToken = (user) => {
+  const payload = { id: user._id };
+  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "20h" });
+  return token;
+};
 
 const signup = async (req, res) => {
   const { email, password } = req.body;
@@ -32,13 +35,16 @@ const signup = async (req, res) => {
     theme: "dark",
   });
 
-  const { email: emailCreatedNewUser } = newUser;
+  const token = generateToken(newUser);
+  newUser.token = token;
+  await newUser.save();
 
   res.status(201).json({
-    message: "registration success",
-    user: {
-      email: emailCreatedNewUser,
-    },
+    token: token,
+    user: newUser.name,
+    email: newUser.email,
+    avatarURL,
+    theme: "dark",
   });
 };
 
@@ -64,16 +70,16 @@ const signin = async (req, res) => {
     token: token,
     user: {
       theme: user.theme,
-      avatarURL: avatarPath,
+      avatarURL: user.avatarURL,
     },
   });
 };
 
 const logout = async (req, res) => {
   const { _id } = req.user;
-  await UserModel.findByIdAndUpdate(_id, { token: "" });
+  await User.findByIdAndUpdate(_id, { token: "" });
 
-  res.status(204).json({ messgae: "success" });
+  res.status(204).json({ message: "success" });
 };
 
 export default {
