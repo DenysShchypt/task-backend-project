@@ -1,8 +1,12 @@
 import express from "express";
 import authController from "../../controllers/authController.js";
 import { validateBody } from "../../decorators/index.js";
-import { userSignupSchema } from "../../schemes/user-schema.js";
+
 import { authenticate, isEmptyBody } from "../../middlewares/index.js";
+import {
+  userSigninSchema,
+  userSignupSchema,
+} from "../../models/usersSchema.js";
 const authRouter = express.Router();
 
 authRouter.post(
@@ -15,7 +19,7 @@ authRouter.post(
 authRouter.post(
   "/login",
   isEmptyBody,
-  validateBody(userSignupSchema),
+  validateBody(userSigninSchema),
   authController.signin
 );
 

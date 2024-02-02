@@ -35,6 +35,7 @@ const signup = async (req, res) => {
   const { email: emailCreatedNewUser } = newUser;
 
   res.status(201).json({
+    message: "registration success",
     user: {
       email: emailCreatedNewUser,
     },

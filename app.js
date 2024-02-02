@@ -17,7 +17,7 @@ app.use(express.json());
 // Middleware звідки брати файли коли прийде запит на файли які можна віддавати
 app.use(express.static("public"));
 // Обробка запитів на API за допомогою маршрутів
-app.use("/auth", authRouter);
+app.use("/api/auth", authRouter);
 // Middleware для невірного запиту
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
