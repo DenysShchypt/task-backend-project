@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { HttpError } from "../helpers/index.js";
-import User from "../models/Users_schema.js";
+import User from "../models/usersSchema.js";
 // Додавання данних з env змінні оточення process.env
 import "dotenv/config";
 const { JWT_SECRET } = process.env
