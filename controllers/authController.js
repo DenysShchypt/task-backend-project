@@ -1,5 +1,4 @@
 import { User } from "../models/index.js";
-
 import bcrypt from "bcrypt";
 import gravatar from "gravatar";
 import { ctrlWrapper } from "../decorators/index.js";
