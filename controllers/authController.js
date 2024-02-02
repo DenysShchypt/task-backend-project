@@ -22,6 +22,7 @@ const signup = async (req, res) => {
     ...req.body,
     password: hashPassword,
     avatarURL,
+    theme: "dark",
   });
 
   const { email: emailCreatedNewUser } = newUser;
