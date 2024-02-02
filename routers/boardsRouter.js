@@ -7,6 +7,8 @@ const boardsRouter = express.Router();
 
 boardsRouter.get("/", boardController.getAllUserBoards);
 
+boardsRouter.get("/:boardID", boardController.getBoardData);
+
 boardsRouter.post("/", validateBody(addBoardSchema), boardController.addBoard);
 
 export default boardsRouter;
