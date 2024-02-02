@@ -1,4 +1,4 @@
-import Joi, { string } from "joi";
+import Joi from "joi";
 import { Schema, model } from "mongoose";
 import { backgroundNames, iconsNames } from "../properties/index.js";
 
