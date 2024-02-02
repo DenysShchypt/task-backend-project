@@ -14,7 +14,7 @@ boardsRouter.post("/", validateBody(addBoardSchema), boardController.addBoard);
 boardsRouter.put(
   "/:boardID",
   validateBody(updateBoardSchema),
-  boardController.updateBoardSchema
+  boardController.updateBoard
 );
 
 export default boardsRouter;
