@@ -1,7 +1,7 @@
 import express from "express";
 import { authenticate, upload } from "../../middlewares/index.js";
 
-import { updProfile } from "../../controllers/users/index.js";
+import { needHelps, updProfile } from "../../controllers/users/index.js";
 
 const usersRouter = express.Router();
 
@@ -11,5 +11,7 @@ usersRouter.patch(
   upload.single("avatar"),
   updProfile
 );
+
+usersRouter.post("/", authenticate, needHelps);
 
 export default usersRouter;
