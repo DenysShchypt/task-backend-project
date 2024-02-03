@@ -5,7 +5,12 @@ import authRouter from "./routers/api/authRouter.js";
 import userRouters from "./routers/api/userRouters.js";
 import swaggerUI from "swagger-ui-express";
 import path from "path";
-import "dotenv/config";
+import dotenv from "dotenv";
+
+// Додавання данних з env змінні оточення process.env
+dotenv.config();
+
+import cardsRouter from "./routers/api/cards-router.js";
 
 const swaggerDocument = path.resolve("swagger", "api.json");
 const app = express(); //web-server
