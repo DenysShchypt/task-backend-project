@@ -6,11 +6,8 @@
     "version" : "1.0.0"
   },
   "servers" : [ {
-    "url" : "http://localhost:3030/api",
+    "url" : "http://localhost:3030/api/",
     "description" : "Local Dev Server"
-  }, {
-    "url" : "https://goit.app/api",
-    "description" : "Production Server"
   } ],
   "tags" : [ {
     "name" : "Auth",

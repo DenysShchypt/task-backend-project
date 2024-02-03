@@ -3,14 +3,10 @@ import logger from "morgan";
 import cors from "cors";
 import authRouter from "./routers/api/authRouter.js";
 import userRouters from "./routers/api/userRouters.js";
+import cardsRouter from "./routers/api/cards-router.js";
 import swaggerUI from "swagger-ui-express";
 import path from "path";
-import dotenv from "dotenv";
-
-// Додавання данних з env змінні оточення process.env
-dotenv.config();
-
-import cardsRouter from "./routers/api/cards-router.js";
+import "dotenv/config";
 
 const swaggerDocument = path.resolve("swagger", "api.json");
 const app = express(); //web-server
@@ -28,8 +24,8 @@ app.use("/api/users", userRouters);
 app.use("/api/support", userRouters);
 // app.use("/api/boards", boardsRouter);
 // app.use("/api/columns", columnsRouter);
-// app.use("/api/cards", cardsRouter);
-app.use("/api/", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use("/api/cards", cardsRouter);
+app.use("/api/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 // Middleware для невірного запиту
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
