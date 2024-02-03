@@ -4,12 +4,6 @@ import { Schema, model } from "mongoose";
 export const emailRegexp =
   /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
-const emailSchema = Joi.string().email().required().messages({
-  "string.empty": "email must not be empty",
-  "any.required": "missed required email field",
-  "string.email": "Invalid email format",
-});
-
 const userSchema = new Schema(
   {
     name: {
@@ -61,11 +55,6 @@ export const userSignupSchema = Joi.object({
 });
 
 export const userSigninSchema = Joi.object({
-  name: Joi.string().required().messages({
-    "string.empty": "name must not be empty",
-    "any.required": "missed required name field",
-  }),
-
   email: Joi.string().pattern(emailRegexp).required().messages({
     "string.empty": "email must not be empty",
     "any.required": "missed required email field",
