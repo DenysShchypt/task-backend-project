@@ -1,6 +1,6 @@
 import Joi from "joi";
 import { Schema, model } from "mongoose";
-import { handleSaveError } from "./ hooks.js";
+import { handleSaveError } from "../hooks/index.js";
 
 const cardSchema = new Schema({
     title: {
