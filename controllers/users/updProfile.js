@@ -1,24 +1,43 @@
 import { User } from "../../models/index.js";
-import path from "path";
+import { parse } from "path";
 import fs from "fs/promises";
 import { ctrlWrapper } from "../../decorators/index.js";
-const avatarDir = path.resolve("public", "avatars");
+import bcrypt from "bcrypt";
+import { cloudinary } from "../../helpers/index.js";
 
 export const updProfile = async (req, res) => {
   const { _id } = req.user;
 
-  const { path: tempUpload, originalname } = req.file;
+  const { path, originalname } = req.file;
+  const { name, email, password } = req.body;
 
-  const uniqueName = `${_id}_${originalname}`;
-  const pathRedirectFile = path.join(avatarDir, uniqueName);
+  const hashPassword = await bcrypt.hash(password, 10);
 
-  await fs.rename(tempUpload, pathRedirectFile);
+  const { name: fileName, ext: fileExtension } = parse(originalname);
 
-  const avatarURL = path.join("avatars", uniqueName);
-  await User.findByIdAndUpdate(_id, { avatarURL });
+  const options = {
+    public_id: `${_id}_${fileName}`,
+    unique_filename: false,
+    overwrite: true,
+    folder: "avatars",
+    transformation: [{ height: 100, width: 100, crop: "scale" }],
+  };
+
+  const { url } = await cloudinary.uploader.upload(path, options);
+
+  const user = await User.findByIdAndUpdate(_id, {
+    avatarURL: url,
+    name,
+    email,
+    password: hashPassword,
+  });
+
+  await fs.unlink(req.file.path);
 
   res.json({
-    avatarURL,
+    avatarURL: user.avatarURL,
+    name,
+    email,
   });
 };
 
