@@ -1,7 +1,7 @@
 import express from 'express';
-import cardsController from '../../controllers/cards/index.js';
+import * as cardsController from '../../controllers/cards/index.js';
 import { validateBody } from '../../decorators/index.js';
-import { cardAddSchema, cardUpdateSchema } from '../../schemas/cards-schemas.js';
+import { cardAddSchema, cardUpdateSchema } from '../../models/cardSchema.js';
 import { authenticate, isValidId, isEmptyBody } from '../../middlewares/index.js';
 
 

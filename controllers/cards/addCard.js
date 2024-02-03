@@ -1,3 +1,4 @@
+import {ctrlWrapper} from '../../decorators/index.js';   
 import Card from '../../models/cardSchema.js';
 
 const addCard = async (req, res) => {
@@ -7,4 +8,4 @@ const addCard = async (req, res) => {
     res.status(201).json(result);
 }
 
-export default addCard;
+export default ctrlWrapper(addCard);
