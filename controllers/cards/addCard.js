@@ -1,9 +1,9 @@
 import Card from '../../models/cardSchema.js';
 
 const addCard = async (req, res) => {
-    const {id: column} = req.params;
+    const {id: columnId} = req.params;
 
-    const result = await Card.create({...req.body, column});
+    const result = await Card.create({...req.body, columnId});
     res.status(201).json(result);
 }
 
