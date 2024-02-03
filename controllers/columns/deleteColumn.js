@@ -2,7 +2,7 @@ import Column from "../../models/columnsSchema.js"
 import { HttpError } from "../../helpers/index.js"
 
 const deleteColumn = async (req, res) => {
-    const { params: { columnId: _id } } = req;
+    const { params: { id: _id } } = req;
     const { _id: owner } = req.user;
     
     // додати видалення карток підвязаних до ід колонки

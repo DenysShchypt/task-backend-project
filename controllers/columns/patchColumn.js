@@ -3,7 +3,7 @@ import { HttpError } from "../../helpers/index.js"
 
 const patchColumn = async (req, res) => {
 
-    const { body, params: { columnId: _id } } = req;
+    const { body, params: { id: _id } } = req;
     const { _id: owner } = req.user;
 
     const update = await Column.findOneAndUpdate({ _id, owner }, body);

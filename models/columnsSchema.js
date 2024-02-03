@@ -23,6 +23,7 @@ const columnSchema = new Schema({
 
 export const schemaAddColumn = Joi.object({
     title: Joi.string().required().min(1).max(50),
+    boardId: Joi.string().required(),
 })
 
 export const schemaUpdateColumn = Joi.object({

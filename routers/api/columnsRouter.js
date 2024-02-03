@@ -10,9 +10,9 @@ columnsRouter.use(authenticate);
 
 columnsRouter.post('/', isEmptyBody, validateBody(schemaAddColumn), ctrlWrapper(addColumn));
 
-columnsRouter.patch('/:columnId', isValidId, isEmptyBody, validateBody(schemaUpdateColumn), ctrlWrapper(patchColumn));
+columnsRouter.patch('/:id', isValidId, isEmptyBody, validateBody(schemaUpdateColumn), ctrlWrapper(patchColumn));
 
-columnsRouter.delete('/:columnId', isValidId, ctrlWrapper(deleteColumn));
+columnsRouter.delete('/:id', isValidId, ctrlWrapper(deleteColumn));
 
 
 export default columnsRouter;
