@@ -4,7 +4,7 @@ import cors from "cors";
 import swaggerUI from "swagger-ui-express";
 import path from "path";
 import dotenv from "dotenv";
-import { boardsRouter } from "./routes/api/index.js";
+import { boardsRouter } from "./routers/api/index.js";
 // Додавання данних з env змінні оточення process.env
 dotenv.config();
 
