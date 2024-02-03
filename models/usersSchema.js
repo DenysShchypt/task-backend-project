@@ -32,7 +32,7 @@ const userSchema = new Schema(
     },
     avatarURL: {
       type: String,
-      required: [true, "avatarURL is required"],
+      default: "default",
     },
     theme: {
       type: String,

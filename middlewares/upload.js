@@ -9,10 +9,12 @@ const storage = multer.diskStorage({
   destination,
   // для перейменування файлу
   filename: (req, file, callback) => {
+    // >>> УНІКАЛЬНУ НАЗВУ = ІД КОРИСТУВАЧА, В КОНТРОЛЕРІ updProfile <<<
+
     // додавання унікальності файлу
-    const uniqueSuffix = `${Date.now()}_${Math.round(Math.random() * 1e9)}`;
-    const filename = `${uniqueSuffix}_${file.originalname}`;
-    callback(null, filename);
+    // const uniqueSuffix = `${Date.now()}_${Math.round(Math.random() * 1e9)}`;
+    // const filename = `${uniqueSuffix}_${file.originalname}`;
+    callback(null, file.originalname);
   },
 });
 // налаштування для middlewares size
