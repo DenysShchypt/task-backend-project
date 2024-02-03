@@ -3,6 +3,7 @@ import logger from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRouter from "./routes/api/authRouter.js";
+import userRouters from "./routes/api/userRouters.js";
 // Додавання данних з env змінні оточення process.env
 dotenv.config();
 const app = express(); //web-server
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.static("public"));
 // Обробка запитів на API за допомогою маршрутів
 app.use("/api/auth", authRouter);
+app.use("/api/users", userRouters);
 // Middleware для невірного запиту
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
