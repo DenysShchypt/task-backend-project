@@ -1,8 +1,8 @@
 import express from "express";
 import logger from "morgan";
 import cors from "cors";
-import authRouter from "./routes/api/authRouter.js";
-import userRouters from "./routes/api/userRouters.js";
+import authRouter from "./routers/api/authRouter.js";
+import userRouters from "./routers/api/userRouters.js";
 import swaggerUI from "swagger-ui-express";
 import path from "path";
 import "dotenv/config";
@@ -17,8 +17,6 @@ app.use(logger(formatsLogger));
 app.use(cors());
 // Middleware для обробки тіла запиту(req.body) по заголовку Content-type в форматі json (application/json);
 app.use(express.json());
-// Middleware звідки брати файли коли прийде запит на файли які можна віддавати
-app.use(express.static("public"));
 // Обробка запитів на API за допомогою маршрутів
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouters);
