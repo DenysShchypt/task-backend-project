@@ -18,11 +18,17 @@ const cardSchema = new Schema({
     deadline: {
         type: Date,
     },
-    column: {
+    columnId: {
         type: Schema.Types.ObjectId,
         ref: 'column',
         required: true,
     },
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: "user",
+        required: true,
+        },
+    
 }, { versionKey: false, timestamps: true });
 
 cardSchema.post('save', handleSaveError);
@@ -34,7 +40,7 @@ export const cardAddSchema = Joi.object({
     description: Joi.string().allow(''),
     priority: Joi.string().valid("without", "low", "medium", "high"),
     deadline: Joi.date().iso(),
-    column: Joi.string().required().messages({
+    columnId: Joi.string().required().messages({
         "any.required": `the "column" field is missing`,
     }),
 });
