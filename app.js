@@ -4,7 +4,6 @@ import cors from "cors";
 import swaggerUI from "swagger-ui-express";
 import path from "path";
 import dotenv from "dotenv";
-
 import cardsRouter from "./routes/api/cards-router.js";
 // Додавання данних з env змінні оточення process.env
 dotenv.config();
@@ -26,7 +25,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/boards", boardsRouter);
 app.use("/api/columns", columnsRouter);
 app.use("/api/cards", cardsRouter);
-//app.use('/api/', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use('/api/', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 // Middleware для невірного запиту
 app.use((req, res) => {
     res.status(404).json({ message: 'Not found' })
