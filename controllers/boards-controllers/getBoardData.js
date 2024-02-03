@@ -5,7 +5,16 @@ const getBoardData = async (req, res) => {
   const { _id: owner } = req.user;
   const { boardID: _id } = req.params;
 
-  const result = await Column.findOne({ _id, owner });
+  const result = await Column.find({
+    _id,
+    owner,
+    $lookup: {
+      from: "cards",
+      localField: "cardId",
+      foreignField: "_id",
+      as: "cards",
+    },
+  });
 
   res.json(result);
 };
