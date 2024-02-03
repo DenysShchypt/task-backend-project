@@ -3,6 +3,7 @@ import logger from "morgan";
 import cors from "cors";
 import authRouter from "./routers/api/authRouter.js";
 import userRouters from "./routers/api/userRouters.js";
+import columnsRouter from "./routers/api/columnsRouter.js";
 import swaggerUI from "swagger-ui-express";
 import path from "path";
 import "dotenv/config";
@@ -21,7 +22,7 @@ app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouters);
 // app.use("/api/boards", boardsRouter);
-// app.use("/api/columns", columnsRouter);
+app.use("/api/columns", columnsRouter);
 // app.use("/api/cards", cardsRouter);
 app.use('/api/', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 // Middleware для невірного запиту
