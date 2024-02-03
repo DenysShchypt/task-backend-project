@@ -8,6 +8,8 @@ import dotenv from "dotenv";
 // Додавання данних з env змінні оточення process.env
 dotenv.config();
 
+import cardsRouter from "./routers/api/cards-router.js";
+
 const swaggerDocument = path.resolve("swagger", "api.json");
 const app = express();//web-server 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
