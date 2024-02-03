@@ -1,7 +1,10 @@
 import express from "express";
-import { validateBody } from "../decorators/index.js";
-import { addBoardSchema, updateBoardSchema } from "../models/boardsSchema.js";
-import * as boardController from "../controllers/boards-controllers/index.js";
+import { validateBody } from "../../decorators/index.js";
+import {
+  addBoardSchema,
+  updateBoardSchema,
+} from "../../models/boardsSchema.js";
+import * as boardController from "../../controllers/boards-controllers/index.js";
 
 const boardsRouter = express.Router();
 
