@@ -22,17 +22,17 @@ app.use(express.static("public"));
 // Обробка запитів на API за допомогою маршрутів
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouters);
-app.use("/api/boards", boardsRouter);
-app.use("/api/columns", columnsRouter);
-app.use("/api/cards", cardsRouter);
+// app.use("/api/boards", boardsRouter);
+// app.use("/api/columns", columnsRouter);
+// app.use("/api/cards", cardsRouter);
 app.use('/api/', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 // Middleware для невірного запиту
 app.use((req, res) => {
-  res.status(404).json({ message: "Not found" });
+    res.status(404).json({ message: "Not found" });
 });
 // next(error)=>Обробник помилок error. це middleware з 4ма параметрами
 app.use((err, req, res, next) => {
-  const { status = 500, message = "Server error" } = err;
-  res.status(status).json({ message });
+    const { status = 500, message = "Server error" } = err;
+    res.status(status).json({ message });
 });
 export default app;
