@@ -3,9 +3,7 @@ import logger from "morgan";
 import cors from "cors";
 import swaggerUI from "swagger-ui-express";
 import path from "path";
-import dotenv from "dotenv";
-// Додавання данних з env змінні оточення process.env
-dotenv.config();
+import "dotenv/config";
 
 const swaggerDocument = path.resolve("swagger", "api.json");
 const app = express();//web-server 
