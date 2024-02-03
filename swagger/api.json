@@ -1,0 +1,278 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Task Pro Swagger documentation",
+    "description" : "The API for Task Pro Service.",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:3030/api",
+    "description" : "Local Dev Server"
+  }, {
+    "url" : "https://goit.app/api",
+    "description" : "Production Server"
+  } ],
+  "tags" : [ {
+    "name" : "Auth",
+    "description" : "Authorization endpoints"
+  }, {
+    "name" : "User",
+    "description" : "User endpoints"
+  }, {
+    "name" : "Boards",
+    "description" : "Boards endpoints"
+  }, {
+    "name" : "Columns",
+    "description" : "Columns endpoints"
+  }, {
+    "name" : "Cards",
+    "description" : "Cards endpoints"
+  } ],
+  "paths" : {
+    "/auth/register" : {
+      "post" : {
+        "operationId" : "Register",
+        "summary" : "Registers a new user",
+        "tags" : [ "Auth" ],
+        "parameters" : [ ],
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/UserRegistrationRequest"
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Successfull operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RegistrationResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad request (invalid request body)",
+            "content" : { }
+          },
+          "409" : {
+            "description" : "Provided email already exists",
+            "content" : { }
+          },
+          "5XX" : {
+            "description" : "(5XX) Internal server error",
+            "content" : { }
+          }
+        }
+      }
+    },
+    "/auth/login" : {
+      "post" : {
+        "operationId" : "Login",
+        "summary" : "Authenticates a user via login credentials",
+        "tags" : [ "Auth" ],
+        "parameters" : [ ],
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/LoginRequest"
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Successfull operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad request (invalid request body)",
+            "content" : { }
+          },
+          "403" : {
+            "description" : "Email doesn't exist / Password is wrong",
+            "content" : { }
+          },
+          "5XX" : {
+            "description" : "(5XX) Internal server error",
+            "content" : { }
+          }
+        }
+      }
+    },
+    "/auth/logout" : {
+      "post" : {
+        "operationId" : "Logout",
+        "summary" : "User logout",
+        "security" : [ {
+          "JwtBearerAuth" : [ ]
+        } ],
+        "tags" : [ "Auth" ],
+        "parameters" : [ {
+          "in" : "header",
+          "name" : "Authorization",
+          "required" : true
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Successfull operation",
+            "content" : { }
+          },
+          "400" : {
+            "description" : "No token provided",
+            "content" : { }
+          },
+          "401" : {
+            "description" : "Unauthorized (invalid access token)",
+            "content" : { }
+          },
+          "404" : {
+            "description" : "Invalid user / Invalid session",
+            "content" : { }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "securitySchemes" : {
+      "JwtBearerAuth" : {
+        "type" : "http",
+        "scheme" : "bearer",
+        "bearerFormat" : "JWT"
+      }
+    },
+    "requestBodies" : {
+      "LoginRequest" : {
+        "required" : true,
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/LoginParams"
+            }
+          }
+        }
+      },
+      "UserRegistrationRequest" : {
+        "required" : true,
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/UserRegistrationParams"
+            }
+          }
+        }
+      }
+    },
+    "schemas" : {
+      "UserRegistrationParams" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "$ref" : "#/components/schemas/Name"
+          },
+          "email" : {
+            "$ref" : "#/components/schemas/Email"
+          },
+          "password" : {
+            "$ref" : "#/components/schemas/Password"
+          }
+        },
+        "required" : [ "name", "email", "password" ]
+      },
+      "RegistrationResponse" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "$ref" : "#/components/schemas/Name"
+          },
+          "email" : {
+            "$ref" : "#/components/schemas/Email"
+          },
+          "token" : {
+            "$ref" : "#/components/schemas/Token"
+          },
+          "avatarURL" : {
+            "$ref" : "#/components/schemas/AvatarURL"
+          },
+          "theme" : {
+            "$ref" : "#/components/schemas/Theme"
+          }
+        }
+      },
+      "LoginParams" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "$ref" : "#/components/schemas/Email"
+          },
+          "password" : {
+            "$ref" : "#/components/schemas/Password"
+          }
+        },
+        "required" : [ "email", "password" ]
+      },
+      "LoginResponse" : {
+        "type" : "object",
+        "properties" : {
+          "token" : {
+            "$ref" : "#/components/schemas/Token"
+          },
+          "user" : {
+            "type" : "object",
+            "properties" : {
+              "avatarURL" : {
+                "$ref" : "#/components/schemas/AvatarURL"
+              },
+              "theme" : {
+                "$ref" : "#/components/schemas/Theme"
+              }
+            }
+          }
+        }
+      },
+      "Error" : {
+        "type" : "object",
+        "description" : "An error response object.",
+        "properties" : {
+          "error" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Email" : {
+        "type" : "string",
+        "format" : "email",
+        "description" : "A user's email address."
+      },
+      "Name" : {
+        "type" : "string",
+        "description" : "User's name",
+        "example" : "Denys",
+        "minLength" : 2,
+        "maxLength" : 20
+      },
+      "Password" : {
+        "type" : "string",
+        "description" : "User's password",
+        "example" : "F558r$flo69sknx",
+        "minLength" : 6,
+        "maxLength" : 30
+      },
+      "Token" : {
+        "type" : "string",
+        "description" : "User's token",
+        "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmU3OTJiMWRjOWQ5OWU4NjZmNjQxYiIsImlhdCI6MTcwNjk4MTY3NSwiZXhwIjoxNzA3MDUzNjc1fQ.CR1wWNZvCtiPpvpOUNpmSiBDWPeyaT_eeYXcZ_UL4OM"
+      },
+      "AvatarURL" : {
+        "type" : "string",
+        "description" : "User's avatar",
+        "example" : "www.gravatar.com/avatar/60fd9610a8d3fbfd1674b7d3afd72828 or nul"
+      },
+      "Theme" : {
+        "type" : "string",
+        "description" : "User's theme",
+        "enum" : [ "dark", "light", "violet" ]
+      }
+    }
+  }
+}
