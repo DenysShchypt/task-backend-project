@@ -4,7 +4,7 @@ import {
   addBoardSchema,
   updateBoardSchema,
 } from "../../models/boardsSchema.js";
-import * as boardController from "../../controllers/boards-controllers/index.js";
+import * as boardController from "../../controllers/boardsControllers/index.js";
 
 import { authenticate } from "../../middlewares/index.js";
 
