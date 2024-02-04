@@ -1,14 +1,14 @@
 {
-  "openapi" : "3.0.1",
+  "openapi" : "3.0.0",
   "info" : {
     "title" : "Task Pro Swagger documentation",
     "description" : "The API for Task Pro Service.",
     "version" : "1.0.0"
   },
   "servers" : [ {
-    "url" : "http://localhost:3030/api/",
+    "url" : "http://localhost:3030/api",
     "description" : "Local Dev Server"
-  } ],
+  }],
   "tags" : [ {
     "name" : "Auth",
     "description" : "Authorization endpoints"
@@ -107,7 +107,10 @@
         "parameters" : [ {
           "in" : "header",
           "name" : "Authorization",
-          "required" : true
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
         } ],
         "responses" : {
           "204" : {
