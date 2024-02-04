@@ -2,16 +2,14 @@ import express from "express";
 import logger from "morgan";
 import cors from "cors";
 import swaggerUi from "swagger-ui-express";
-import path from "path";
 import dotenv from "dotenv";
+import swaggerDocument from './swagger/api.json'
 import authRouter from "./routers/api/authRouter.js";
 import userRouters from "./routers/api/userRouters.js";
 import columnsRouter from "./routers/api/columnsRouter.js";
 import cardsRouter from "./routers/api/cards-router.js";
 dotenv.config();
 
-
-const swaggerDocument = path.resolve("swagger", "api.json");
 const app = express(); //web-server
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
