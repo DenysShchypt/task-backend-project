@@ -2,7 +2,8 @@ import express from "express";
 import logger from "morgan";
 import cors from "cors";
 import swaggerUi from "swagger-ui-express";
-import path from "path";
+import { readFile } from "fs/promises";
+
 import dotenv from "dotenv";
 import {
   authRouter,
@@ -11,10 +12,13 @@ import {
   columnsRouter,
   usersRouter,
 } from "./routers/api/index.js";
+const swaggerDocument = JSON.parse(
+  await readFile(new URL("./swagger/api.json", import.meta.url))
+);
+
 // Додавання данних з env змінні оточення process.env
 dotenv.config();
 
-const swaggerDocument = path.resolve("swagger", "api.json");
 const app = express(); //web-server
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
