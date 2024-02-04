@@ -38,6 +38,8 @@ const userSchema = new Schema(
   },
   { versionKey: false, timestamps: true }
 );
+userSchema.pre("findOneAndUpdate", setUpdateOptions);
+userSchema.post("save", handleSaveError);
 
 userSchema.post("save", handleSaveError);
 userSchema.pre("findOneAndUpdate", setUpdateOptions);
