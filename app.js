@@ -3,10 +3,12 @@ import logger from "morgan";
 import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import path from "path";
+import dotenv from "dotenv";
 import authRouter from "./routers/api/authRouter.js";
 import userRouters from "./routers/api/userRouters.js";
 import cardsRouter from "./routers/api/cards-router.js";
-import "dotenv/config";
+dotenv.config();
+
 
 const swaggerDocument = path.resolve("swagger", "api.json");
 const app = express(); //web-server
@@ -24,7 +26,7 @@ app.use("/api/users", userRouters);
 app.use("/api/support", userRouters);
 // app.use("/api/boards", boardsRouter);
 // app.use("/api/columns", columnsRouter);
-app.use("/api/cards", cardsRouter);
+// app.use("/api/cards", cardsRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // Middleware для невірного запиту
 app.use((req, res) => {
