@@ -7,10 +7,6 @@
   },
   "servers": [
     {
-      "url": "https://virtserver.swaggerhub.com/DENYSSHCHYPTSOVIT/contacts/1.0.2",
-      "description": "SwaggerHub API Auto Mocking"
-    },
-    {
       "url": "https://task-backend-project.onrender.com/api",
       "description": "Local Dev Server"
     }
