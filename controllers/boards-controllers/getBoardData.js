@@ -1,20 +1,38 @@
+import mongoose from "mongoose";
 import { ctrlWrapper } from "../../decorators/index.js";
-import { Column } from "../../models/index.js";
+import { Board, Column } from "../../models/index.js";
+import { HttpError } from "../../helpers/index.js";
 
 const getBoardData = async (req, res) => {
   const { _id: owner } = req.user;
-  const { boardID: _id } = req.params;
+  const { boardId } = req.params;
 
-  const result = await Column.find({
-    _id,
-    owner,
-    $lookup: {
-      from: "cards",
-      localField: "cardId",
-      foreignField: "_id",
-      as: "cards",
+  const board = await Board.findOne({ _id: boardId, owner });
+
+  if (!board) {
+    throw HttpError(403);
+  }
+
+  const result = await Column.aggregate([
+    {
+      $match: {
+        boardId: new mongoose.Types.ObjectId(boardId),
+        owner: new mongoose.Types.ObjectId(owner),
+      },
     },
-  });
+    {
+      $lookup: {
+        from: "cards",
+        localField: "_id",
+        foreignField: "columnId",
+        as: "cards",
+      },
+    },
+  ]);
+
+  if (result.length < 1) {
+    throw HttpError(404);
+  }
 
   res.json(result);
 };

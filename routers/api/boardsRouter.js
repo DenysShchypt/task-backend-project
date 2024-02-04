@@ -14,12 +14,12 @@ boardsRouter.use(authenticate);
 
 boardsRouter.get("/", boardController.getAllUserBoards);
 
-boardsRouter.get("/:boardID", boardController.getBoardData);
+boardsRouter.get("/:boardId", boardController.getBoardData);
 
 boardsRouter.post("/", validateBody(addBoardSchema), boardController.addBoard);
 
 boardsRouter.put(
-  "/:boardID",
+  "/:boardId",
   validateBody(updateBoardSchema),
   boardController.updateBoard
 );
