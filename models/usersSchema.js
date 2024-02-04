@@ -74,10 +74,20 @@ export const userSigninSchema = Joi.object({
   }),
 });
 
-export const userUpdateTheme = Joi.object({
+export const userUpdateThemeSchema = Joi.object({
   theme: Joi.string()
     .valid(...themeList)
     .required(),
+});
+
+export const userRefreshTokenSchema = Joi.object({
+  refreshToken: Joi.string().required(),
+});
+
+export const userUpdProfileSchema = Joi.object({
+  name: Joi.string(),
+  email: Joi.string().pattern(emailRegexp),
+  password: Joi.string().min(4),
 });
 
 const User = model("user", userSchema);

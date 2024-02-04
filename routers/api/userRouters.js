@@ -5,18 +5,27 @@ import {
   changeTheme,
   needHelps,
   updProfile,
+  updavatar,
 } from "../../controllers/users/index.js";
 import { validateBody } from "../../decorators/index.js";
-import { userUpdateTheme } from "../../models/usersSchema.js";
-
+import {
+  userUpdProfileSchema,
+  userUpdateThemeSchema,
+} from "../../models/usersSchema.js";
 const usersRouter = express.Router();
 
 usersRouter.use(authenticate);
 
-usersRouter.patch("/profiles", upload.single("avatar"), updProfile);
+// app.use(express.urlencoded({ extended: true }));
+usersRouter.patch("/avatar", upload.single("avatar"), updavatar);
+usersRouter.patch("/profile", validateBody(userUpdProfileSchema), updProfile);
 
 usersRouter.post("/", needHelps);
 
-usersRouter.patch("/change-theme", validateBody(userUpdateTheme), changeTheme);
+usersRouter.patch(
+  "/change-theme",
+  validateBody(userUpdateThemeSchema),
+  changeTheme
+);
 
 export default usersRouter;
