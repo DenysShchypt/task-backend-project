@@ -5,7 +5,12 @@
     "description": "The API for Task Pro Service.",
     "version": "1.0.2"
   },
-  "servers": [{
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/DENYSSHCHYPTSOVIT/contacts/1.0.2",
+      "description": "SwaggerHub API Auto Mocking"
+    },
+    {
       "url": "https://task-backend-project.onrender.com/api",
       "description": "Local Dev Server"
     }
@@ -118,6 +123,7 @@
           {
             "name": "Authorization",
             "in": "header",
+            "description": "token to be passed as a header",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -146,7 +152,7 @@
         },
         "security": [
           {
-            "JwtBearerAuth": []
+            "bearerAuth": []
           }
         ]
       }
@@ -199,7 +205,7 @@
         },
         "security": [
           {
-            "JwtBearerAuth": []
+            "bearerAuth": []
           }
         ]
       }
@@ -252,7 +258,7 @@
         },
         "security": [
           {
-            "JwtBearerAuth": []
+            "bearerAuth": []
           }
         ]
       }
@@ -305,7 +311,7 @@
         },
         "security": [
           {
-            "JwtBearerAuth": []
+            "bearerAuth": []
           }
         ]
       }
@@ -358,7 +364,7 @@
         },
         "security": [
           {
-            "JwtBearerAuth": []
+            "bearerAuth": []
           }
         ]
       }
@@ -439,7 +445,7 @@
       "UpdateThemeParams": {
         "type": "object",
         "properties": {
-          "name": {
+          "theme": {
             "$ref": "#/components/schemas/Theme"
           }
         }
@@ -614,7 +620,7 @@
       }
     },
     "securitySchemes": {
-      "JwtBearerAuth": {
+      "bearerAuth": {
         "type": "http",
         "scheme": "bearer",
         "bearerFormat": "JWT"

@@ -9,7 +9,7 @@ import "dotenv/config";
 const { JWT_SECRET } = process.env;
 
 const signin = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { email, password } = req.body;
 
   const user = await User.findOne({ email });
 
@@ -30,6 +30,7 @@ const signin = async (req, res) => {
     token: token,
     user: {
       name: user.name,
+      email: user.email,
       theme: user.theme,
       avatarURL: user.avatarURL,
     },
