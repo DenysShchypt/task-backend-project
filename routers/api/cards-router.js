@@ -4,7 +4,6 @@ import { validateBody } from '../../decorators/index.js';
 import { cardAddSchema, cardUpdateSchema } from '../../models/cardSchema.js';
 import { authenticate, isValidId, isEmptyBody } from '../../middlewares/index.js';
 
-
 const cardsRouter = express.Router();
 cardsRouter.use(authenticate);
 

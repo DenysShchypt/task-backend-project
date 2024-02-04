@@ -1,9 +1,9 @@
-import { User } from "../../models/index.js";
+
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import gravatar from "gravatar";
+import { User } from "../../models/index.js";
 import { ctrlWrapper } from "../../decorators/index.js";
 import { HttpError } from "../../helpers/index.js";
-import jwt from "jsonwebtoken";
 import "dotenv/config";
 
 const { JWT_SECRET } = process.env;
