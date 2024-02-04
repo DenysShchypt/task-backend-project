@@ -26,7 +26,7 @@ app.use("/api/support", userRouters);
 // app.use("/api/boards", boardsRouter);
 app.use("/api/columns", columnsRouter);
 app.use("/api/cards", cardsRouter);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // Middleware для невірного запиту
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
