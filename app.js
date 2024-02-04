@@ -1,11 +1,11 @@
 import express from "express";
 import logger from "morgan";
 import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+import path from "path";
 import authRouter from "./routers/api/authRouter.js";
 import userRouters from "./routers/api/userRouters.js";
 import cardsRouter from "./routers/api/cards-router.js";
-import swaggerUI from "swagger-ui-express";
-import path from "path";
 import "dotenv/config";
 
 const swaggerDocument = path.resolve("swagger", "api.json");
@@ -25,7 +25,7 @@ app.use("/api/support", userRouters);
 // app.use("/api/boards", boardsRouter);
 // app.use("/api/columns", columnsRouter);
 app.use("/api/cards", cardsRouter);
-app.use("/api/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // Middleware для невірного запиту
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
