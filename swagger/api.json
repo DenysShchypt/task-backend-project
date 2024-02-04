@@ -1,12 +1,12 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.0.1",
   "info": {
     "title": "Task Pro Swagger documentation",
     "description": "The API for Task Pro Service.",
     "version": "1.0.2"
   },
   "servers": [{
-      "url": "http://localhost:3030/api",
+      "url": "https://task-backend-project.onrender.com/api",
       "description": "Local Dev Server"
     }
   ],
