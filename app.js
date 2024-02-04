@@ -6,6 +6,7 @@ import path from "path";
 import dotenv from "dotenv";
 import authRouter from "./routers/api/authRouter.js";
 import userRouters from "./routers/api/userRouters.js";
+import columnsRouter from "./routers/api/columnsRouter.js";
 import cardsRouter from "./routers/api/cards-router.js";
 dotenv.config();
 
@@ -25,8 +26,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/users", userRouters);
 app.use("/api/support", userRouters);
 // app.use("/api/boards", boardsRouter);
-// app.use("/api/columns", columnsRouter);
-// app.use("/api/cards", cardsRouter);
+app.use("/api/columns", columnsRouter);
+app.use("/api/cards", cardsRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // Middleware для невірного запиту
 app.use((req, res) => {
