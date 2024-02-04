@@ -11,8 +11,6 @@ export const updProfile = async (req, res) => {
   const { path, originalname } = req.file;
   const { name, email, password } = req.body;
 
-  const hashPassword = await bcrypt.hash(password, 10);
-
   const { name: fileName, ext: fileExtension } = parse(originalname);
 
   const options = {
@@ -25,12 +23,26 @@ export const updProfile = async (req, res) => {
 
   const { url } = await cloudinary.uploader.upload(path, options);
 
-  const user = await User.findByIdAndUpdate(_id, {
-    avatarURL: url,
-    name,
-    email,
-    password: hashPassword,
-  });
+  const updateFields = {};
+
+  if (name) {
+    updateFields.name = name;
+  }
+
+  if (email) {
+    updateFields.email = email;
+  }
+
+  if (password) {
+    const hashPassword = await bcrypt.hash(password, 10);
+    updateFields.password = hashPassword;
+  }
+
+  if (url) {
+    updateFields.avatarURL = url;
+  }
+
+  const user = await User.findByIdAndUpdate(_id, updateFields);
 
   await fs.unlink(req.file.path);
 
