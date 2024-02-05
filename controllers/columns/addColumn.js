@@ -1,6 +1,5 @@
 import { isValidObjectId } from 'mongoose';
-import Board from '../../models/boardsSchema.js';
-import Column from "../../models/columnsSchema.js"
+import { Board, Column } from '../../models/index.js';
 import { HttpError } from "../../helpers/index.js"
 
 const addColumn = async (req, res) => {
@@ -9,13 +8,13 @@ const addColumn = async (req, res) => {
     // перевірка boardId на валідність ід   
     const { boardId } = req.body;
     if (!isValidObjectId(boardId)) {
-        throw HttpError(404, `board id=${_id} not valid!`)
+        throw HttpError(400, `boardId not valid!`);
     };
 
     // перевірка boardId на належність користувачу 
-    const haveBoard = Board.findOne({_id: boardId, owner})
+    const haveBoard = await Board.findOne({ _id: boardId, owner });
     if (!haveBoard) {
-        throw HttpError(404, `board id=${_id} not found!`)
+        throw HttpError(404, `board id=${boardId} not found!`)
     };
 
     // додаємо колонку

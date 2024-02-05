@@ -1,5 +1,6 @@
 import Joi from "joi";
 import { Schema, model } from "mongoose";
+import { handleSaveError, setUpdateOptions } from "../hooks/index.js";
 
 const columnSchema = new Schema({
     title: {
@@ -19,16 +20,22 @@ const columnSchema = new Schema({
 }, {
     versionKey: false,
     timestamp: true,
-})
+});
+
+columnSchema.post("save", handleSaveError);
+
+columnSchema.pre("findOneAndUpdate", setUpdateOptions);
 
 export const schemaAddColumn = Joi.object({
-    title: Joi.string().required().min(1).max(50),
+    title: Joi.string().required().min(1).max(150).messages({
+        "any.required": `the "title" field is missing`,
+    }),
     boardId: Joi.string().required(),
-})
+});
 
 export const schemaUpdateColumn = Joi.object({
-    title: Joi.string().min(1).max(50),
-})
+    title: Joi.string().min(1).max(150),
+});
 
 const Column = model('column', columnSchema);
 
