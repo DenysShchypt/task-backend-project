@@ -1,5 +1,4 @@
-import Column from "../../models/columnsSchema.js"
-import Card from '../../models/cardSchema.js';
+import { Card, Column } from "../../models/index.js"
 import { HttpError } from "../../helpers/index.js"
 import { ctrlWrapper } from "../../decorators/index.js";
 

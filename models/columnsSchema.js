@@ -19,7 +19,7 @@ const columnSchema = new Schema({
     }
 }, {
     versionKey: false,
-    timestamp: true,
+    timestamps: true,
 });
 
 columnSchema.post("save", handleSaveError);
