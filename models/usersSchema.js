@@ -2,8 +2,7 @@ import Joi from "joi";
 import { Schema, model } from "mongoose";
 import { handleSaveError, setUpdateOptions } from "../hooks/index.js";
 
-const emailRegexp =
-  /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const themeList = ["dark", "light", "violet"];
 
