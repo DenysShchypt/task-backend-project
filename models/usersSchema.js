@@ -2,8 +2,7 @@ import Joi from "joi";
 import { Schema, model } from "mongoose";
 import { handleSaveError, setUpdateOptions } from "../hooks/index.js";
 
-const emailRegexp =
-  /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const themeList = ["dark", "light", "violet"];
 
@@ -77,10 +76,20 @@ export const userSigninSchema = Joi.object({
   }),
 });
 
-export const userUpdateTheme = Joi.object({
+export const userUpdateThemeSchema = Joi.object({
   theme: Joi.string()
     .valid(...themeList)
     .required(),
+});
+
+export const userRefreshTokenSchema = Joi.object({
+  refreshToken: Joi.string().required(),
+});
+
+export const userUpdProfileSchema = Joi.object({
+  name: Joi.string(),
+  email: Joi.string().pattern(emailRegexp),
+  password: Joi.string().min(4),
 });
 
 const User = model("user", userSchema);

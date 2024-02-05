@@ -20,9 +20,12 @@ export const updateAvatar = async (req, res) => {
 
   const { url } = await cloudinary.uploader.upload(path, options);
 
-  const user = await User.findOneAndUpdate({ _id }, {
-    avatarURL: url
-  });
+  const user = await User.findOneAndUpdate(
+    { _id },
+    {
+      avatarURL: url,
+    }
+  );
 
   await fs.unlink(req.file.path);
 

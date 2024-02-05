@@ -18,8 +18,6 @@ const signup = async (req, res) => {
     password: hashPassword,
   });
 
-
-
   res.status(201).json({
     name: newUser.name,
     email: newUser.email,
