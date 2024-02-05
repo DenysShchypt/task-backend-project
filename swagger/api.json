@@ -1,806 +1,404 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.0.1",
   "info": {
-    "title": "My favorite contacts",
-    "description": "My API DENYS SHCHYPTSOV",
-    "version": "1.0.1"
+    "title": "Task Pro Swagger documentation",
+    "description": "The API for Task Pro Service.",
+    "version": "1.0.2"
   },
   "servers": [
     {
-      "url": "http://localhost:3000/api/",
-      "description": "Contacts server description"
+      "url": "https://task-backend-project.onrender.com/api",
+      "description": "Local Dev Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authorization endpoints"
+    },
+    {
+      "name": "User",
+      "description": "User endpoints"
+    },
+    {
+      "name": "Boards",
+      "description": "Boards endpoints"
+    },
+    {
+      "name": "Columns",
+      "description": "Columns endpoints"
+    },
+    {
+      "name": "Cards",
+      "description": "Cards endpoints"
     }
   ],
   "paths": {
-    "/contacts": {
-      "get": {
-        "tags": [
-          "Contacts"
-        ],
-        "summary": "Returns a list of contacts and add new contact.",
-        "operationId": "getAll",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "is required",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "format": "token",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A JSON array of contacts",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Contacts"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Everything is non-standard",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
+    "/auth/register": {
       "post": {
         "tags": [
-          "Contacts"
+          "Auth"
         ],
-        "summary": "creat new contact",
-        "operationId": "addContact",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "is required",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "format": "token",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
-            }
-          }
-        ],
+        "summary": "Registers a new user",
+        "operationId": "Register",
+        "parameters": [],
         "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ContactAdd"
-              }
-            }
-          },
-          "required": true
+          "$ref": "#/components/requestBodies/UserRegistrationRequest"
         },
         "responses": {
           "201": {
-            "description": "Success response",
+            "description": "Successfull operation",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Contact"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Everything is non-standard",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/contacts/{_id}": {
-      "get": {
-        "tags": [
-          "Contacts"
-        ],
-        "summary": "Returns a list of contacts and add new contact.",
-        "operationId": "getById",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "is required",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "format": "token",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
-            }
-          },
-          {
-            "name": "_id",
-            "in": "path",
-            "description": "id contact",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "format": "_id",
-              "example": "6580a8c81f10533f6530c5a6"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Contacts"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Everything is non-standard",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Contacts"
-        ],
-        "summary": "Update contact",
-        "operationId": "updateContact",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "is required",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "format": "token",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
-            }
-          },
-          {
-            "name": "_id",
-            "in": "path",
-            "description": "id contact",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "format": "_id",
-              "example": "6580a8c81f10533f6530c5a6"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success update",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Contact"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Everything is non-standard",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Contacts"
-        ],
-        "summary": "Delete contact",
-        "operationId": "removeContact",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "is required",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "format": "token",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
-            }
-          },
-          {
-            "name": "_id",
-            "in": "path",
-            "description": "id contact",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "format": "_id",
-              "example": "6580a8c81f10533f6530c5a6"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success remove",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "default": {
-            "description": "Everything is non-standard",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Contacts"
-        ],
-        "summary": "Update ravorite contact",
-        "operationId": "updateFavorite",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "is required",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "format": "token",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
-            }
-          },
-          {
-            "name": "_id",
-            "in": "path",
-            "description": "id contact",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "format": "_id",
-              "example": "6580a8c81f10533f6530c5a6"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ContactUpdateFavorite"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Success update Favorite",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Favorite"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Everything is non-standard",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/users/register": {
-      "post": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Add new user.",
-        "operationId": "register",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserRegistration"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "A JSON information about user",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserRegistrationRes"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Everything is non-standard",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/users/login": {
-      "post": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Login user.",
-        "operationId": "login",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserRegistration"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "A JSON information about token and user",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserLoginRes"
+                  "$ref": "#/components/schemas/RegistrationResponse"
                 }
               }
             }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Bad request (invalid request body)",
+            "content": {}
           },
-          "401": {
-            "description": "Unauthorized"
+          "409": {
+            "description": "Provided email already exists",
+            "content": {}
           },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+          "5XX": {
+            "description": "(5XX) Internal server error",
+            "content": {}
           }
         }
       }
     },
-    "/users/logout": {
+    "/auth/login": {
       "post": {
         "tags": [
-          "Users"
+          "Auth"
         ],
-        "summary": "logout user.",
-        "operationId": "logout",
+        "summary": "Authenticates a user via login credentials",
+        "operationId": "Login",
+        "parameters": [],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/LoginRequest"
+        },
+        "responses": {
+          "201": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "403": {
+            "description": "Email doesn't exist / Password is wrong",
+            "content": {}
+          },
+          "5XX": {
+            "description": "(5XX) Internal server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "User logout",
+        "operationId": "Logout",
         "parameters": [
           {
             "name": "Authorization",
             "in": "header",
-            "description": "is required",
+            "description": "token to be passed as a header",
             "required": true,
             "style": "simple",
             "explode": false,
             "schema": {
-              "type": "string",
-              "format": "token",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
+              "type": "string"
             }
           }
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Successfull operation",
+            "content": {}
           },
           "400": {
-            "description": "Bad Request"
+            "description": "No token provided",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
           },
           "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "description": "Invalid user / Invalid session",
+            "content": {}
           }
-        }
-      }
-    },
-    "/users/current": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Current user.",
-        "operationId": "getCurrent",
-        "parameters": [
+        },
+        "security": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "is required",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string",
-              "format": "token",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
-            }
+            "bearerAuth": []
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "A JSON information about current user",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
-    "/users": {
+    "/users/avatar": {
       "patch": {
         "tags": [
-          "Users"
+          "User"
         ],
-        "summary": "Update subscription user.",
-        "operationId": "updateSubscription",
+        "summary": "User update Avatar",
+        "operationId": "Update Avatar",
         "parameters": [
           {
             "name": "Authorization",
             "in": "header",
-            "description": "is required",
             "required": true,
             "style": "simple",
             "explode": false,
             "schema": {
-              "type": "string",
-              "format": "token",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
+              "type": "string"
             }
           }
         ],
         "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/updateSubscriptionUser"
-              }
-            }
-          },
-          "required": true
+          "$ref": "#/components/requestBodies/UpdateAvatarRequest"
         },
         "responses": {
           "200": {
-            "description": "A JSON information about update subscription",
+            "description": "Successfull operation",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/updateSubscriptionUser"
+                  "$ref": "#/components/schemas/UpdateAvatarResponse"
                 }
               }
             }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
           },
           "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "description": "Invalid user / Invalid session",
+            "content": {}
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
-    "/users/avatars": {
-      "patch": {
+    "/users/profiles": {
+      "put": {
         "tags": [
-          "Users"
+          "User"
         ],
-        "summary": "Update avatar user.",
-        "operationId": "updateAvatar",
+        "summary": "Update User",
+        "operationId": "Update User",
         "parameters": [
           {
             "name": "Authorization",
             "in": "header",
-            "description": "is required",
             "required": true,
             "style": "simple",
             "explode": false,
             "schema": {
-              "type": "string",
-              "format": "token",
-              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZlMjZlN2E4NTRkM2M3M2FlMWNkZSIsImlhdCI6MTcwNDk3ODI3OSwiZXhwIjoxNzA1MDUwMjc5fQ.Y5NRZc26dR2VFG7Ex2J3TcCxXOYUFUfahlz7gdOJ9vs"
+              "type": "string"
             }
           }
         ],
         "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/users_avatars_body"
-              }
-            }
-          },
-          "required": true
+          "$ref": "#/components/requestBodies/UpdateUserRequest"
         },
         "responses": {
           "200": {
-            "description": "A JSON information about update subscription",
+            "description": "Successfull operation",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/updateSubscriptionUser"
+                  "$ref": "#/components/schemas/UpdateUserParams"
                 }
               }
             }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
           },
           "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
           },
           "404": {
-            "description": "Not Found",
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/change-theme": {
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update Theme",
+        "operationId": "Update Theme",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateThemeRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/UpdateThemeParams"
                 }
               }
             }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Send Help",
+        "operationId": "Sending a letter about help",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UserHelpRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserHelpResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     }
   },
   "components": {
     "schemas": {
-      "ContactAdd": {
+      "UserRegistrationParams": {
         "required": [
           "email",
-          "favorite",
           "name",
-          "phone"
+          "password"
         ],
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "$ref": "#/components/schemas/Name"
           },
           "email": {
-            "type": "string",
-            "format": "email"
+            "$ref": "#/components/schemas/Email"
           },
-          "phone": {
-            "type": "string"
-          },
-          "favorite": {
-            "type": "boolean"
+          "password": {
+            "$ref": "#/components/schemas/Password"
           }
         }
       },
-      "ContactUpdateFavorite": {
-        "required": [
-          "favorite"
-        ],
+      "RegistrationResponse": {
         "type": "object",
         "properties": {
-          "favorite": {
-            "type": "boolean"
-          }
-        }
-      },
-      "Contact": {
-        "required": [
-          "email",
-          "favorite",
-          "name",
-          "phone"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer"
-          },
           "name": {
-            "type": "string"
+            "$ref": "#/components/schemas/Name"
           },
           "email": {
-            "type": "string",
-            "format": "email"
-          },
-          "phone": {
-            "type": "string"
-          },
-          "favorite": {
-            "type": "boolean"
-          },
-          "owner": {
-            "type": "integer"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "2023-12-18T20:17:12.878+00:00"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "2023-12-18T20:17:12.878+00:00"
+            "$ref": "#/components/schemas/Email"
           }
         }
       },
-      "Contacts": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/Contact"
-        }
-      },
-      "Error": {
-        "required": [
-          "code",
-          "message"
-        ],
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "integer"
-          },
-          "message": {
-            "type": "string"
-          }
-        }
-      },
-      "Favorite": {
-        "required": [
-          "favorite"
-        ],
-        "type": "object",
-        "properties": {
-          "favorite": {
-            "type": "boolean"
-          }
-        }
-      },
-      "UserRegistrationRes": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string",
-            "format": "email"
-          },
-          "subscription": {
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "2023-12-18T20:17:12.878+00:00"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "2023-12-18T20:17:12.878+00:00"
-          }
-        }
-      },
-      "UserRegistration": {
+      "LoginParams": {
         "required": [
           "email",
           "password"
@@ -808,73 +406,220 @@
         "type": "object",
         "properties": {
           "email": {
-            "type": "string",
-            "format": "email"
+            "$ref": "#/components/schemas/Email"
           },
           "password": {
-            "maxLength": 15,
-            "minLength": 5,
-            "type": "string"
+            "$ref": "#/components/schemas/Password"
           }
         }
       },
-      "UserLoginRes": {
+      "LoginResponse": {
         "type": "object",
         "properties": {
           "token": {
-            "type": "string"
+            "$ref": "#/components/schemas/Token"
           },
           "user": {
-            "$ref": "#/components/schemas/UserLoginRes_user"
+            "$ref": "#/components/schemas/LoginResponse_user"
           }
         }
       },
-      "User": {
+      "UpdateUserParams": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/Name"
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          },
+          "password": {
+            "$ref": "#/components/schemas/Password"
+          }
+        }
+      },
+      "UpdateThemeParams": {
+        "type": "object",
+        "properties": {
+          "theme": {
+            "$ref": "#/components/schemas/Theme"
+          }
+        }
+      },
+      "UserHelpParams": {
         "type": "object",
         "properties": {
           "email": {
-            "type": "string",
-            "format": "email"
+            "$ref": "#/components/schemas/Email"
           },
-          "subscription": {
-            "type": "string"
+          "text": {
+            "$ref": "#/components/schemas/DescriptionHelp"
           }
         }
       },
-      "updateSubscriptionUser": {
+      "UserHelpResponse": {
         "type": "object",
         "properties": {
-          "subscription": {
-            "type": "string",
-            "enum": [
-              "starter",
-              "pro",
-              "business"
-            ]
+          "message": {
+            "$ref": "#/components/schemas/Message"
           }
         }
       },
-      "users_avatars_body": {
+      "UpdateAvatarParams": {
+        "required": [
+          "avatar"
+        ],
         "type": "object",
         "properties": {
           "avatar": {
-            "type": "string",
-            "format": "binary",
-            "nullable": true
+            "$ref": "#/components/schemas/AvatarURL"
           }
         }
       },
-      "UserLoginRes_user": {
+      "UpdateAvatarResponse": {
         "type": "object",
         "properties": {
-          "email": {
-            "type": "string",
-            "format": "email"
-          },
-          "subscription": {
-            "type": "string"
+          "AvatarURL": {
+            "$ref": "#/components/schemas/AvatarURL"
           }
         }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        },
+        "description": "An error response object."
+      },
+      "Email": {
+        "type": "string",
+        "description": "A user's email address.",
+        "format": "email"
+      },
+      "Name": {
+        "maxLength": 20,
+        "minLength": 2,
+        "type": "string",
+        "description": "User's name",
+        "example": "Denys"
+      },
+      "Password": {
+        "maxLength": 30,
+        "minLength": 6,
+        "type": "string",
+        "description": "User's password",
+        "example": "F558r$flo69sknx"
+      },
+      "Token": {
+        "type": "string",
+        "description": "User's token",
+        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmU3OTJiMWRjOWQ5OWU4NjZmNjQxYiIsImlhdCI6MTcwNjk4MTY3NSwiZXhwIjoxNzA3MDUzNjc1fQ.CR1wWNZvCtiPpvpOUNpmSiBDWPeyaT_eeYXcZ_UL4OM"
+      },
+      "AvatarURL": {
+        "type": "string",
+        "description": "User's avatar",
+        "format": "binary",
+        "example": "http://res.cloudinary.com/dsywt0aej/image/upload/v1707053839/avatars/65be792b1dc9d99e866f641b_Vasily.jpg or null"
+      },
+      "Theme": {
+        "type": "string",
+        "description": "User's theme",
+        "enum": [
+          "dark",
+          "light",
+          "violet"
+        ]
+      },
+      "DescriptionHelp": {
+        "type": "string",
+        "description": "User's help",
+        "example": "Hello, I need your help!!!"
+      },
+      "Message": {
+        "type": "string",
+        "description": "Successfull operation",
+        "example": "success"
+      },
+      "LoginResponse_user": {
+        "type": "object",
+        "properties": {
+          "avatarURL": {
+            "$ref": "#/components/schemas/AvatarURL"
+          },
+          "theme": {
+            "$ref": "#/components/schemas/Theme"
+          },
+          "name": {
+            "$ref": "#/components/schemas/Name"
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "LoginRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/LoginParams"
+            }
+          }
+        },
+        "required": true
+      },
+      "UserRegistrationRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserRegistrationParams"
+            }
+          }
+        },
+        "required": true
+      },
+      "UpdateAvatarRequest": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateAvatarParams"
+            }
+          }
+        }
+      },
+      "UpdateUserRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateUserParams"
+            }
+          }
+        }
+      },
+      "UpdateThemeRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateThemeParams"
+            }
+          }
+        }
+      },
+      "UserHelpRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserHelpParams"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }

@@ -17,15 +17,12 @@ const authenticate = async (req, res, next) => {
   }
   try {
     const { id } = jwt.verify(token, JWT_SECRET);
-
     const user = await User.findById(id);
-
     if (!user || !user.token || token !== user.token) {
       return next(HttpError(401));
     }
     // Записуємо інформацію в object req про user яка буде в req controllers
     req.user = user;
-
     next();
   } catch (error) {
     next(HttpError(401, error.message));
