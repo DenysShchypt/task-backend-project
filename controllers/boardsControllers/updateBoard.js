@@ -8,10 +8,7 @@ const updateBoard = async (req, res) => {
 
   const result = await Board.findOneAndUpdate({ _id, owner }, { ...req.body });
   if (!result) {
-    throw HttpError(
-      404,
-      "Board not found or you have not permissions for this board "
-    );
+    throw HttpError(404, `Board with id: ${_id} not found`);
   }
 
   res.json(result);
