@@ -21,8 +21,5 @@ const googleAuth = async (req, res) => {
     `https://accounts.google.com/o/oauth2/v2/auth?${stringifiedParams}`
   );
 };
-/**
- http://localhost:3000/api/auth/google-redirect?code=4%2F0AfJohXn6cDIUajLn2hhPGSOQ8mz_i8MeGCcIMCyUdigyQJtOnN-eTMODeTTVW5kaWSLV4Q&scope=email+profile+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&authuser=0&prompt=consent
- */
 
 export default ctrlWrapper(googleAuth);

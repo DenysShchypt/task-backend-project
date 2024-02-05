@@ -23,9 +23,12 @@ const updateToken = async (req, res) => {
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "15m" });
   const refreshToken = jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
 
-  await User.findByIdAndUpdate(id, {
-    token,
-  });
+  await User.findOneAndUpdate(
+    { _id: id },
+    {
+      token,
+    }
+  );
 
   res.json({
     token,

@@ -2,17 +2,22 @@ import { ctrlWrapper } from "../../decorators/index.js";
 import { HttpError } from "../../helpers/index.js";
 import { User } from "../../models/index.js";
 
-import url from "url";
+import jwt from "jsonwebtoken";
+
 import queryString from "query-string";
 import axios from "axios";
 import "dotenv/config";
+
+import "dotenv/config";
+
+const { JWT_SECRET } = process.env;
 
 const { GOOGLE_SECRET, GOOGLE_CLIENT_ID, BASE_URL, FRONT_BASE_URL } =
   process.env;
 
 const googleRedirect = async (req, res) => {
   const fullUrl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
-  const urlObj = new url(fullUrl);
+  const urlObj = new URL(fullUrl);
   const urlParams = queryString.parse(urlObj.search);
   const code = urlParams.code;
 
@@ -36,11 +41,50 @@ const googleRedirect = async (req, res) => {
     },
   });
 
-  console.log(userData);
+  // data = {
+  //   id: "116740619235013059086",
+  //   email: "laylau345@gmail.com",
+  //   verified_email: true,
+  //   name: "Андрій Ю",
+  //   given_name: "Андрій",
+  //   family_name: "Ю",
+  //   picture:
+  //     "https://lh3.googleusercontent.com/a/ACg8ocJRrz2YEfQ-AZS9KP7VgsFoI3HxJFffrBQN2tW4D2Ha=s96-c",
+  //   locale: "uk",
+  // };
 
-  // інфа по юзеру. ?token=${token}&refreshToken={refreshToken}
+  const user = await User.findOne({ email: userData.data.email });
+
+  if (!user) {
+    const newUser = await User.create({
+      name: userData.data.name,
+      email: userData.data.email,
+      avatarURL: userData.data.picture,
+    });
+
+    const token = jwt.sign({ id: newUser._id }, JWT_SECRET, {
+      expiresIn: "20h",
+    });
+
+    const refreshToken = jwt.sign({ id: newUser._id }, JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    return res.redirect(
+      `${FRONT_BASE_URL}/api/auth/google-redirect/?token=${token}&refreshToken=${refreshToken}`
+    );
+  }
+
+  const token = jwt.sign({ id: user._id }, JWT_SECRET, {
+    expiresIn: "20h",
+  });
+
+  const refreshToken = jwt.sign({ id: user._id }, JWT_SECRET, {
+    expiresIn: "7d",
+  });
+
   return res.redirect(
-    `${FRONT_BASE_URL}/google-redirect/?${userData.data.email}`
+    `${FRONT_BASE_URL}/api/auth/google-redirect/?token=${token}&refreshToken=${refreshToken}`
   );
 };
 
