@@ -4,15 +4,15 @@ import {
   signup,
   signin,
   logout,
-  updateToken,
-  googleAuth,
-  googleRedirect,
+  // updateToken,
+  // googleAuth,
+  // googleRedirect,
 } from "../../controllers/auth/index.js";
 
 import { validateBody } from "../../decorators/index.js";
 import { authenticate, isEmptyBody } from "../../middlewares/index.js";
 import {
-  userRefreshTokenSchema,
+  // userRefreshTokenSchema,
   userSigninSchema,
   userSignupSchema,
 } from "../../models/usersSchema.js";
@@ -30,13 +30,13 @@ authRouter.post("/login", isEmptyBody, validateBody(userSigninSchema), signin);
 
 authRouter.post("/logout", authenticate, logout);
 
-authRouter.post(
-  "/refreshToken",
-  validateBody(userRefreshTokenSchema),
-  updateToken
-);
+// authRouter.post(
+//   "/refreshToken",
+//   validateBody(userRefreshTokenSchema),
+//   updateToken
+// );
 
-authRouter.get("/google", googleAuth);
-authRouter.get("/google-redirect", googleRedirect);
+// authRouter.get("/google", googleAuth);
+// authRouter.get("/google-redirect", googleRedirect);
 
 export default authRouter;
