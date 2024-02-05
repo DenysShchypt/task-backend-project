@@ -30,10 +30,6 @@ const getBoardData = async (req, res) => {
     },
   ]);
 
-  if (result.length < 1) {
-    throw HttpError(404);
-  }
-
   res.json(result);
 };
 
