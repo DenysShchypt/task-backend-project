@@ -24,14 +24,14 @@ const signin = async (req, res) => {
   }
 
   const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "20h" });
-  const refreshToken = jwt.sign({ id: user._id }, JWT_SECRET, {
-    expiresIn: "7d",
-  });
+  // const refreshToken = jwt.sign({ id: user._id }, JWT_SECRET, {
+  //   expiresIn: "7d",
+  // });
   await User.findByIdAndUpdate(user._id, { token });
 
   res.json({
     token,
-    refreshToken,
+    // refreshToken,
     user: {
       name: user.name,
       email: user.email,
