@@ -1,6 +1,6 @@
-import { ctrlWrapper } from "../../decorators/index.js";
-import { HttpError } from "../../helpers/index.js";
-import { User } from "../../models/index.js";
+// import { ctrlWrapper } from "../../decorators/index.js";
+// import { HttpError } from "../../helpers/index.js";
+// import { User } from "../../models/index.js";
 
 import jwt from "jsonwebtoken";
 
@@ -21,25 +21,25 @@ const googleRedirect = async (req, res) => {
   const urlParams = queryString.parse(urlObj.search);
   const code = urlParams.code;
 
-  const tokenData = await axios({
-    url: `https://oauth2.googleapis.com/token`,
-    method: "post",
-    data: {
-      client_id: GOOGLE_CLIENT_ID,
-      client_secret: GOOGLE_SECRET,
-      redirect_uri: `${BASE_URL}/api/auth/google-redirect`,
-      grant_type: "authorization_code",
-      code,
-    },
-  });
+  //     const tokenData = await axios({
+  //         url: `https://oauth2.googleapis.com/token`,
+  //         method: "post",
+  //         data: {
+  //             client_id: GOOGLE_CLIENT_ID,
+  //             client_secret: GOOGLE_SECRET,
+  //             redirect_uri: `${BASE_URL}/api/auth/google-redirect`,
+  //             grant_type: "authorization_code",
+  //             code,
+  //         },
+  //     });
 
-  const userData = await axios({
-    url: "https://www.googleapis.com/oauth2/v2/userinfo",
-    method: "get",
-    headers: {
-      Authorization: `Bearer ${tokenData.data.access_token}`,
-    },
-  });
+  //     const userData = await axios({
+  //         url: "https://www.googleapis.com/oauth2/v2/userinfo",
+  //         method: "get",
+  //         headers: {
+  //             Authorization: `Bearer ${tokenData.data.access_token}`,
+  //         },
+  //     });
 
   // data = {
   //   id: "116740619235013059086",
@@ -88,4 +88,4 @@ const googleRedirect = async (req, res) => {
   );
 };
 
-export default ctrlWrapper(googleRedirect);
+// export default ctrlWrapper(googleRedirect);
