@@ -24,6 +24,6 @@ boardsRouter.put(
   boardController.updateBoard
 );
 
-boardsRouter.delete("/:boardID", boardController.deleteBoard);
+boardsRouter.delete("/:boardId", boardController.deleteBoard);
 
 export default boardsRouter;
