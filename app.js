@@ -11,7 +11,7 @@ import {
   columnsRouter,
   usersRouter,
 } from "./routers/api/index.js";
-import swaggerDocument from './swagger.json'
+import swaggerDocument from './swagger.json' assert { type: "json" };
 // const swaggerDocument = JSON.parse(
 //   await readFile(new URL("./swagger.json", import.meta.url))
 // );
