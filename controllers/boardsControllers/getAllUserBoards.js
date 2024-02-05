@@ -6,6 +6,10 @@ const getAllUserBoards = async (req, res) => {
 
   const result = await Board.find({ owner });
 
+  if (!result) {
+    res.json({ message: "You haven`t got any board" });
+  }
+
   res.json(result);
 };
 
