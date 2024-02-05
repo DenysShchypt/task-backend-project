@@ -12,8 +12,9 @@ import {
   usersRouter,
 } from "./routers/api/index.js";
 const swaggerDocument = JSON.parse(
-  await readFile(new URL("./swagger/api.json", import.meta.url))
+  await readFile(new URL("./swagger.json", import.meta.url))
 );
+// const swaggerDocument = YAML.load(path.join(__dirname, 'docs', 'docs.yaml'));
 
 // Додавання данних з env змінні оточення process.env
 dotenv.config();
