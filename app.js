@@ -1,18 +1,24 @@
 import express from "express";
 import logger from "morgan";
 import cors from "cors";
-import authRouter from "./routers/api/authRouter.js";
-import userRouters from "./routers/api/userRouters.js";
-import swaggerUI from "swagger-ui-express";
-import path from "path";
+import swaggerUi from "swagger-ui-express";
+import { readFile } from "fs/promises";
+
 import dotenv from "dotenv";
+import {
+  authRouter,
+  boardsRouter,
+  cardsRouter,
+  columnsRouter,
+  usersRouter,
+} from "./routers/api/index.js";
+const swaggerDocument = JSON.parse(
+  await readFile(new URL("./swagger/api.json", import.meta.url))
+);
 
 // Додавання данних з env змінні оточення process.env
 dotenv.config();
 
-import cardsRouter from "./routers/api/cards-router.js";
-
-const swaggerDocument = path.resolve("swagger", "api.json");
 const app = express(); //web-server
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 app.use("/link", (req, res) => {
@@ -26,12 +32,12 @@ app.use(cors());
 app.use(express.json());
 // Обробка запитів на API за допомогою маршрутів
 app.use("/api/auth", authRouter);
-app.use("/api/users", userRouters);
-app.use("/api/support", userRouters);
-// app.use("/api/boards", boardsRouter);
-// app.use("/api/columns", columnsRouter);
-// app.use("/api/cards", cardsRouter);
-app.use("/api/", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use("/api/users", usersRouter);
+app.use("/api/support", usersRouter);
+app.use("/api/boards", boardsRouter);
+app.use("/api/columns", columnsRouter);
+app.use("/api/cards", cardsRouter);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // Middleware для невірного запиту
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });

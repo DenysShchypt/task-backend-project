@@ -1,0 +1,40 @@
+import mongoose from "mongoose";
+import { ctrlWrapper } from "../../decorators/index.js";
+import { Board, Column } from "../../models/index.js";
+import { HttpError } from "../../helpers/index.js";
+
+const getBoardData = async (req, res) => {
+  const { _id: owner } = req.user;
+  const { boardId } = req.params;
+
+  const board = await Board.findOne({ _id: boardId, owner });
+
+  if (!board) {
+    throw HttpError(403);
+  }
+
+  const result = await Column.aggregate([
+    {
+      $match: {
+        boardId: new mongoose.Types.ObjectId(boardId),
+        owner: new mongoose.Types.ObjectId(owner),
+      },
+    },
+    {
+      $lookup: {
+        from: "cards",
+        localField: "_id",
+        foreignField: "columnId",
+        as: "cards",
+      },
+    },
+  ]);
+
+  if (result.length < 1) {
+    throw HttpError(404);
+  }
+
+  res.json(result);
+};
+
+export default ctrlWrapper(getBoardData);

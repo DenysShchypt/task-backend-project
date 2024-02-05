@@ -1,0 +1,626 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Task Pro Swagger documentation",
+    "description": "The API for Task Pro Service.",
+    "version": "1.0.2"
+  },
+  "servers": [
+    {
+      "url": "https://task-backend-project.onrender.com/api",
+      "description": "Local Dev Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authorization endpoints"
+    },
+    {
+      "name": "User",
+      "description": "User endpoints"
+    },
+    {
+      "name": "Boards",
+      "description": "Boards endpoints"
+    },
+    {
+      "name": "Columns",
+      "description": "Columns endpoints"
+    },
+    {
+      "name": "Cards",
+      "description": "Cards endpoints"
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Registers a new user",
+        "operationId": "Register",
+        "parameters": [],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UserRegistrationRequest"
+        },
+        "responses": {
+          "201": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "409": {
+            "description": "Provided email already exists",
+            "content": {}
+          },
+          "5XX": {
+            "description": "(5XX) Internal server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Authenticates a user via login credentials",
+        "operationId": "Login",
+        "parameters": [],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/LoginRequest"
+        },
+        "responses": {
+          "201": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "403": {
+            "description": "Email doesn't exist / Password is wrong",
+            "content": {}
+          },
+          "5XX": {
+            "description": "(5XX) Internal server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "User logout",
+        "operationId": "Logout",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "token to be passed as a header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfull operation",
+            "content": {}
+          },
+          "400": {
+            "description": "No token provided",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/avatar": {
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "User update Avatar",
+        "operationId": "Update Avatar",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateAvatarRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateAvatarResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/profiles": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update User",
+        "operationId": "Update User",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateUserRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateUserParams"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/change-theme": {
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update Theme",
+        "operationId": "Update Theme",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateThemeRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateThemeParams"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Send Help",
+        "operationId": "Sending a letter about help",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UserHelpRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserHelpResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserRegistrationParams": {
+        "required": [
+          "email",
+          "name",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/Name"
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          },
+          "password": {
+            "$ref": "#/components/schemas/Password"
+          }
+        }
+      },
+      "RegistrationResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/Name"
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          }
+        }
+      },
+      "LoginParams": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          },
+          "password": {
+            "$ref": "#/components/schemas/Password"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "$ref": "#/components/schemas/Token"
+          },
+          "user": {
+            "$ref": "#/components/schemas/LoginResponse_user"
+          }
+        }
+      },
+      "UpdateUserParams": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/Name"
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          },
+          "password": {
+            "$ref": "#/components/schemas/Password"
+          }
+        }
+      },
+      "UpdateThemeParams": {
+        "type": "object",
+        "properties": {
+          "theme": {
+            "$ref": "#/components/schemas/Theme"
+          }
+        }
+      },
+      "UserHelpParams": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          },
+          "text": {
+            "$ref": "#/components/schemas/DescriptionHelp"
+          }
+        }
+      },
+      "UserHelpResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "$ref": "#/components/schemas/Message"
+          }
+        }
+      },
+      "UpdateAvatarParams": {
+        "required": [
+          "avatar"
+        ],
+        "type": "object",
+        "properties": {
+          "avatar": {
+            "$ref": "#/components/schemas/AvatarURL"
+          }
+        }
+      },
+      "UpdateAvatarResponse": {
+        "type": "object",
+        "properties": {
+          "AvatarURL": {
+            "$ref": "#/components/schemas/AvatarURL"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        },
+        "description": "An error response object."
+      },
+      "Email": {
+        "type": "string",
+        "description": "A user's email address.",
+        "format": "email"
+      },
+      "Name": {
+        "maxLength": 20,
+        "minLength": 2,
+        "type": "string",
+        "description": "User's name",
+        "example": "Denys"
+      },
+      "Password": {
+        "maxLength": 30,
+        "minLength": 6,
+        "type": "string",
+        "description": "User's password",
+        "example": "F558r$flo69sknx"
+      },
+      "Token": {
+        "type": "string",
+        "description": "User's token",
+        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmU3OTJiMWRjOWQ5OWU4NjZmNjQxYiIsImlhdCI6MTcwNjk4MTY3NSwiZXhwIjoxNzA3MDUzNjc1fQ.CR1wWNZvCtiPpvpOUNpmSiBDWPeyaT_eeYXcZ_UL4OM"
+      },
+      "AvatarURL": {
+        "type": "string",
+        "description": "User's avatar",
+        "format": "binary",
+        "example": "http://res.cloudinary.com/dsywt0aej/image/upload/v1707053839/avatars/65be792b1dc9d99e866f641b_Vasily.jpg or null"
+      },
+      "Theme": {
+        "type": "string",
+        "description": "User's theme",
+        "enum": [
+          "dark",
+          "light",
+          "violet"
+        ]
+      },
+      "DescriptionHelp": {
+        "type": "string",
+        "description": "User's help",
+        "example": "Hello, I need your help!!!"
+      },
+      "Message": {
+        "type": "string",
+        "description": "Successfull operation",
+        "example": "success"
+      },
+      "LoginResponse_user": {
+        "type": "object",
+        "properties": {
+          "avatarURL": {
+            "$ref": "#/components/schemas/AvatarURL"
+          },
+          "theme": {
+            "$ref": "#/components/schemas/Theme"
+          },
+          "name": {
+            "$ref": "#/components/schemas/Name"
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "LoginRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/LoginParams"
+            }
+          }
+        },
+        "required": true
+      },
+      "UserRegistrationRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserRegistrationParams"
+            }
+          }
+        },
+        "required": true
+      },
+      "UpdateAvatarRequest": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateAvatarParams"
+            }
+          }
+        }
+      },
+      "UpdateUserRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateUserParams"
+            }
+          }
+        }
+      },
+      "UpdateThemeRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateThemeParams"
+            }
+          }
+        }
+      },
+      "UserHelpRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserHelpParams"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

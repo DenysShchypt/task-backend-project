@@ -1,4 +1,3 @@
-import { User } from "../../models/index.js";
 import { ctrlWrapper } from "../../decorators/index.js";
 import { sendEmail } from "../../helpers/sendEmail.js";
 

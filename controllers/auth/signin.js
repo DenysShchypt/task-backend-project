@@ -1,15 +1,15 @@
-import { User } from "../../models/index.js";
+
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import gravatar from "gravatar";
+import { User } from "../../models/index.js";
 import { ctrlWrapper } from "../../decorators/index.js";
 import { HttpError } from "../../helpers/index.js";
-import jwt from "jsonwebtoken";
 import "dotenv/config";
 
 const { JWT_SECRET } = process.env;
 
 const signin = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { email, password } = req.body;
 
   const user = await User.findOne({ email });
 
@@ -33,6 +33,8 @@ const signin = async (req, res) => {
     token,
     refreshToken,
     user: {
+      name: user.name,
+      email: user.email,
       theme: user.theme,
       avatarURL: user.avatarURL,
       name: user.name,

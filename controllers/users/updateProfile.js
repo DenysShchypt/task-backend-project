@@ -2,7 +2,7 @@ import { User } from "../../models/index.js";
 import { ctrlWrapper } from "../../decorators/index.js";
 import bcrypt from "bcrypt";
 
-export const updProfile = async (req, res) => {
+export const updateProfile = async (req, res) => {
   const { _id } = req.user;
 
   const { name, email, password } = req.body;
@@ -30,4 +30,4 @@ export const updProfile = async (req, res) => {
   });
 };
 
-export default ctrlWrapper(updProfile);
+export default ctrlWrapper(updateProfile);

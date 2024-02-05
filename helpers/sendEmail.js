@@ -3,10 +3,11 @@ import nodemailer from "nodemailer";
 
 dotenv.config();
 
-const { MAIL_FROM_UKRNET, API_KEY_UKRNET } = process.env;
+
+const { MAIL_FROM_UKRNET, API_KEY_UKRNET, NODE_EMAIL_HOST } = process.env;
 
 const nodemailerConfig = {
-  host: "smtp.ukr.net",
+  host: NODE_EMAIL_HOST,
   port: 465,
   secure: true,
   auth: {

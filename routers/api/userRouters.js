@@ -4,21 +4,25 @@ import { authenticate, upload } from "../../middlewares/index.js";
 import {
   changeTheme,
   needHelps,
-  updProfile,
-  updavatar,
+  updateAvatar,
+  updateProfile,
 } from "../../controllers/users/index.js";
 import { validateBody } from "../../decorators/index.js";
 import {
   userUpdProfileSchema,
   userUpdateThemeSchema,
 } from "../../models/usersSchema.js";
+
 const usersRouter = express.Router();
 
 usersRouter.use(authenticate);
 
-// app.use(express.urlencoded({ extended: true }));
-usersRouter.patch("/avatar", upload.single("avatar"), updavatar);
-usersRouter.patch("/profile", validateBody(userUpdProfileSchema), updProfile);
+usersRouter.patch("/avatar", upload.single("avatar"), updateAvatar);
+usersRouter.patch(
+  "/profile",
+  validateBody(userUpdProfileSchema),
+  updateProfile
+);
 
 usersRouter.post("/", needHelps);
 

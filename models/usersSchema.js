@@ -33,10 +33,13 @@ const userSchema = new Schema(
     theme: {
       type: String,
       enum: themeList,
+      default: "dark",
     },
   },
   { versionKey: false, timestamps: true }
 );
+userSchema.pre("findOneAndUpdate", setUpdateOptions);
+userSchema.post("save", handleSaveError);
 
 userSchema.post("save", handleSaveError);
 userSchema.pre("findOneAndUpdate", setUpdateOptions);
