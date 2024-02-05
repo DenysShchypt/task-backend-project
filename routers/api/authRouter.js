@@ -6,6 +6,7 @@ import {
   logout,
   updateToken,
   googleAuth,
+  googleRedirect,
 } from "../../controllers/auth/index.js";
 
 import { validateBody } from "../../decorators/index.js";
@@ -35,5 +36,6 @@ authRouter.post(
 );
 
 authRouter.get("/google", googleAuth);
+authRouter.get("/google-redirect", googleRedirect);
 
 export default authRouter;

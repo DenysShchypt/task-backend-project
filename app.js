@@ -15,7 +15,9 @@ import cardsRouter from "./routers/api/cards-router.js";
 const swaggerDocument = path.resolve("swagger", "api.json");
 const app = express(); //web-server
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
-
+app.use("/link", (req, res) => {
+  res.sendFile(path.resolve("public", "link.html"));
+});
 // Middleware для логування
 app.use(logger(formatsLogger));
 // Middleware for CORS questions
