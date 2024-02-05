@@ -8,7 +8,7 @@ const deleteBoard = async (req, res) => {
 
   const result = await Board.findOneAndDelete({ _id, owner });
   if (!result) {
-    throw HttpError(404, `Board with id: ${_id} not gound`);
+    throw HttpError(404, `Board with id: ${_id} not found`);
   }
 
   res.status(204).json({ message: "Board delete success" });

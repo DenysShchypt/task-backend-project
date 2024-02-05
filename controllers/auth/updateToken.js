@@ -6,31 +6,31 @@ import jwt from "jsonwebtoken";
 const { JWT_SECRET } = process.env;
 
 const updateToken = async (req, res) => {
-  const { refreshToken: incomingRefreshToken } = req.body;
+    const { refreshToken: incomingRefreshToken } = req.body;
 
-  const { id } = jwt.verify(incomingRefreshToken, JWT_SECRET);
+    const { id } = jwt.verify(incomingRefreshToken, JWT_SECRET);
 
-  const user = await User.findOne({ _id: id });
+    const user = await User.findOne({ _id: id });
 
-  if (!user) {
-    throw HttpError(403);
-  }
+    if (!user) {
+        throw HttpError(403);
+    }
 
-  const payload = {
-    id: user._id,
-  };
+    const payload = {
+        id: user._id,
+    };
 
-  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "15m" });
-  const refreshToken = jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "15m" });
+    const refreshToken = jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
 
-  await User.findByIdAndUpdate(id, {
-    token,
-  });
+    await User.findByIdAndUpdate(id, {
+        token,
+    });
 
-  res.json({
-    token,
-    refreshToken,
-  });
+    res.json({
+        token,
+        refreshToken,
+    });
 };
 
 export default ctrlWrapper(updateToken);
