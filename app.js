@@ -3,7 +3,6 @@ import logger from "morgan";
 import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import { readFile } from "fs/promises";
-
 import dotenv from "dotenv";
 import {
   authRouter,

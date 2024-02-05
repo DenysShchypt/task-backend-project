@@ -1,14 +1,14 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.0",
   "info": {
-    "title": "Task Pro Swagger documentation",
+    "title": "Task Pro Swagger documentation 📓",
     "description": "The API for Task Pro Service.",
-    "version": "1.0.2"
+    "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "https://task-backend-project.onrender.com/api",
-      "description": "Local Dev Server"
+      "url": "https://task-backend-project.onrender.com/api-docs",
+      "description": ""
     }
   ],
   "tags": [
@@ -119,7 +119,6 @@
           {
             "name": "Authorization",
             "in": "header",
-            "description": "token to be passed as a header",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -207,7 +206,7 @@
       }
     },
     "/users/profiles": {
-      "put": {
+      "patch": {
         "tags": [
           "User"
         ],
@@ -283,7 +282,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfull operation",
+            "description": "Successfull operation,",
             "content": {
               "application/json": {
                 "schema": {
@@ -341,6 +340,109 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserHelpResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/boards": {
+      "get": {
+        "tags": [
+          "Boards"
+        ],
+        "summary": "Get all boards",
+        "operationId": "Get all boards",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllBoardParams"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/boards/": {
+      "post": {
+        "tags": [
+          "Boards"
+        ],
+        "summary": "Add new Boards",
+        "operationId": "Add new Boards",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/AddBoardRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddBoardParams"
                 }
               }
             }
@@ -438,33 +540,6 @@
           }
         }
       },
-      "UpdateThemeParams": {
-        "type": "object",
-        "properties": {
-          "theme": {
-            "$ref": "#/components/schemas/Theme"
-          }
-        }
-      },
-      "UserHelpParams": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "$ref": "#/components/schemas/Email"
-          },
-          "text": {
-            "$ref": "#/components/schemas/DescriptionHelp"
-          }
-        }
-      },
-      "UserHelpResponse": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "$ref": "#/components/schemas/Message"
-          }
-        }
-      },
       "UpdateAvatarParams": {
         "required": [
           "avatar"
@@ -473,6 +548,65 @@
         "properties": {
           "avatar": {
             "$ref": "#/components/schemas/AvatarURL"
+          }
+        }
+      },
+      "UpdateThemeParams": {
+        "required": [
+          "text"
+        ],
+        "type": "object",
+        "properties": {
+          "theme": {
+            "$ref": "#/components/schemas/Theme"
+          }
+        }
+      },
+      "SendHelpParams": {
+        "required": [
+          "text",
+          "theme"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          },
+          "text": {
+            "$ref": "#/components/schemas/Text"
+          }
+        }
+      },
+      "AddBoardParams": {
+        "required": [
+          "backgroundBoard",
+          "icon",
+          "titleBoard"
+        ],
+        "type": "object",
+        "properties": {
+          "titleBoard": {
+            "$ref": "#/components/schemas/TitleBoard"
+          },
+          "backgroundBoard": {
+            "$ref": "#/components/schemas/BackgroundBoard"
+          },
+          "icon": {
+            "$ref": "#/components/schemas/IconBoard"
+          }
+        }
+      },
+      "AllBoardParams": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/AllBoardParams_inner"
+        }
+      },
+      "UserHelpResponse": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "$ref": "#/components/schemas/TextAnswer"
           }
         }
       },
@@ -517,6 +651,16 @@
         "description": "User's token",
         "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmU3OTJiMWRjOWQ5OWU4NjZmNjQxYiIsImlhdCI6MTcwNjk4MTY3NSwiZXhwIjoxNzA3MDUzNjc1fQ.CR1wWNZvCtiPpvpOUNpmSiBDWPeyaT_eeYXcZ_UL4OM"
       },
+      "Text": {
+        "type": "string",
+        "description": "User's help",
+        "example": "Hello! I need your help!"
+      },
+      "TextAnswer": {
+        "type": "string",
+        "description": "User's help",
+        "example": "Thank you for your request, we will contact you!"
+      },
       "AvatarURL": {
         "type": "string",
         "description": "User's avatar",
@@ -532,15 +676,24 @@
           "violet"
         ]
       },
-      "DescriptionHelp": {
+      "BackgroundBoard": {
         "type": "string",
-        "description": "User's help",
-        "example": "Hello, I need your help!!!"
+        "description": "User's background board theme",
+        "enum": [
+          "default"
+        ]
       },
-      "Message": {
+      "IconBoard": {
         "type": "string",
-        "description": "Successfull operation",
-        "example": "success"
+        "description": "User's icon board",
+        "enum": [
+          "default"
+        ]
+      },
+      "TitleBoard": {
+        "type": "string",
+        "description": "Board title",
+        "example": "My board"
       },
       "LoginResponse_user": {
         "type": "object",
@@ -553,6 +706,20 @@
           },
           "name": {
             "$ref": "#/components/schemas/Name"
+          }
+        }
+      },
+      "AllBoardParams_inner": {
+        "type": "object",
+        "properties": {
+          "titleBoard": {
+            "$ref": "#/components/schemas/TitleBoard"
+          },
+          "backgroundBoard": {
+            "$ref": "#/components/schemas/BackgroundBoard"
+          },
+          "icon": {
+            "$ref": "#/components/schemas/IconBoard"
           }
         }
       }
@@ -609,7 +776,16 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/UserHelpParams"
+              "$ref": "#/components/schemas/SendHelpParams"
+            }
+          }
+        }
+      },
+      "AddBoardRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AddBoardParams"
             }
           }
         }

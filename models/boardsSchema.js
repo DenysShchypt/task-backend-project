@@ -11,7 +11,7 @@ const boardSchema = new Schema(
       ref: "user",
       required: true,
     },
-    title: {
+    titleBoard: {
       type: String,
       required: [true, "Title cannot be empty"],
     },
@@ -40,12 +40,12 @@ boardSchema.pre("findOneAndUpdate", setUpdateOptions);
 //JOI
 
 export const addBoardSchema = Joi.object({
-  title: Joi.string().required(),
+  titleBoard: Joi.string().required(),
   background: Joi.string().valid(...backgroundNames),
   icon: Joi.string().valid(...iconsNames),
 });
 export const updateBoardSchema = Joi.object({
-  title: Joi.string(),
+  titleBoard: Joi.string(),
   background: Joi.string().valid(...backgroundNames),
   icon: Joi.string().valid(...iconsNames),
 });
