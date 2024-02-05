@@ -1,6 +1,7 @@
 import { isValidObjectId } from 'mongoose';
 import { Board, Column } from '../../models/index.js';
 import { HttpError } from "../../helpers/index.js"
+import { ctrlWrapper } from "../../decorators/index.js";
 
 const addColumn = async (req, res) => {
     const { _id: owner } = req.user;
@@ -23,4 +24,4 @@ const addColumn = async (req, res) => {
     res.status(201).json(add)
 }
 
-export default addColumn;
+export default ctrlWrapper(addColumn);

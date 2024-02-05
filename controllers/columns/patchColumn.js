@@ -1,5 +1,6 @@
 import Column from "../../models/columnsSchema.js"
 import { HttpError } from "../../helpers/index.js"
+import { ctrlWrapper } from "../../decorators/index.js";
 
 const patchColumn = async (req, res) => {
 
@@ -14,4 +15,4 @@ const patchColumn = async (req, res) => {
     res.json(update);
 };
 
-export default patchColumn;
+export default ctrlWrapper(patchColumn);
