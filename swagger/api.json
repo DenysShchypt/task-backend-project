@@ -1,14 +1,14 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Task Pro Swagger documentation",
+    "title": "Task Pro Swagger documentation 📓",
     "description": "The API for Task Pro Service.",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "https://virtserver.swaggerhub.com/DENYSSHCHYPTSOVIT/contacts/1.0.0",
-      "description": "SwaggerHub API Auto Mocking"
+      "url": "https://task-backend-project.onrender.com/api-docs/",
+      "description": "PROD ✔ "
     },
     {
       "url": "http://localhost:3030/api/",
@@ -315,7 +315,7 @@
         ]
       }
     },
-    "/users/": {
+    "/users": {
       "post": {
         "tags": [
           "User"
@@ -393,7 +393,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AddBoardParams"
+                  "$ref": "#/components/schemas/AllBoardParams"
                 }
               }
             }
@@ -416,9 +416,7 @@
             "bearerAuth": []
           }
         ]
-      }
-    },
-    "/boards/": {
+      },
       "post": {
         "tags": [
           "Boards"
@@ -461,6 +459,195 @@
           },
           "404": {
             "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/boards/{id}": {
+      "get": {
+        "tags": [
+          "Boards"
+        ],
+        "summary": "Get one board by Id",
+        "operationId": "Get one board by Id",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OneBoardResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "403": {
+            "description": "No access to data",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Boards"
+        ],
+        "summary": "Update one board by Id",
+        "operationId": "Update one board by Id",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateBoardRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddBoardParams"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "403": {
+            "description": "No access to data",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Boards"
+        ],
+        "summary": "Delete one board by Id",
+        "operationId": "Delete one board by Id",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfull operation",
+            "content": {}
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "403": {
+            "description": "No access to data",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          },
+          "409": {
+            "description": "Can`t remove!",
             "content": {}
           }
         },
@@ -606,6 +793,12 @@
           "$ref": "#/components/schemas/AllBoardParams_inner"
         }
       },
+      "OneBoardResponse": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/OneBoardResponse_inner"
+        }
+      },
       "UserHelpResponse": {
         "type": "object",
         "properties": {
@@ -699,6 +892,21 @@
         "description": "Board title",
         "example": "My board"
       },
+      "TitleColumn": {
+        "type": "string",
+        "description": "Column title",
+        "example": "My column"
+      },
+      "TitleCard": {
+        "type": "string",
+        "description": "Card title",
+        "example": "My card"
+      },
+      "Id": {
+        "type": "string",
+        "description": "Id",
+        "example": "65c12dc037484a7784493011"
+      },
       "LoginResponse_user": {
         "type": "object",
         "properties": {
@@ -724,6 +932,37 @@
           },
           "icon": {
             "$ref": "#/components/schemas/IconBoard"
+          }
+        }
+      },
+      "OneBoardResponse_inner": {
+        "type": "object",
+        "properties": {
+          "titleColumn": {
+            "$ref": "#/components/schemas/TitleColumn"
+          },
+          "boardId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "cards": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "titleColumn": {
+                  "$ref": "#/components/schemas/TitleCard"
+                },
+                "boardId": {
+                  "$ref": "#/components/schemas/Id"
+                },
+                "owner": {
+                  "$ref": "#/components/schemas/Id"
+                }
+              }
+            }
           }
         }
       }
@@ -786,6 +1025,15 @@
         }
       },
       "AddBoardRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AddBoardParams"
+            }
+          }
+        }
+      },
+      "UpdateBoardRequest": {
         "content": {
           "application/json": {
             "schema": {

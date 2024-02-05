@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 import { handleSaveError } from "../hooks/index.js";
 
 const cardSchema = new Schema({
-    title: {
+    titleCard: {
         type: String,
         required: [true, 'Set title for card'],
     },
@@ -27,14 +27,14 @@ const cardSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "user",
         required: true,
-        },
-    
+    },
+
 }, { versionKey: false, timestamps: true });
 
 cardSchema.post('save', handleSaveError);
 
 export const cardAddSchema = Joi.object({
-    title: Joi.string().required().messages({
+    titleCard: Joi.string().required().messages({
         "any.required": `the "title" field is missing`,
     }),
     description: Joi.string().allow(''),
