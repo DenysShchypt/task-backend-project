@@ -1,7 +1,10 @@
-import { User } from "../../models/index.js";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { User } from "../../models/index.js";
 import { ctrlWrapper } from "../../decorators/index.js";
 import { HttpError } from "../../helpers/index.js";
+
+const { JWT_SECRET } = process.env;
 
 const signup = async (req, res) => {
   const { email, password } = req.body;
