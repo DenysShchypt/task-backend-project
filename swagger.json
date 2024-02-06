@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://task-backend-project.onrender.com/api-docs",
+      "url": "https://task-backend-project.onrender.com/api",
       "description": "PROD"
     },
     {
