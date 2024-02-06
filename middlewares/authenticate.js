@@ -8,18 +8,18 @@ const { JWT_SECRET } = process.env;
 const authenticate = async (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization) {
-    return next(HttpError(401, "Authorization not define"));
+    return next(HttpError(401, "Unauthorized (invalid access token)"));
   }
   // Ділимо заголовок на 2 слога
   const [bearer, token] = authorization.split(" ");
   if (bearer !== "Bearer") {
-    return next(HttpError(401));
+    return next(HttpError(401, "Unauthorized (invalid access token)"));
   }
   try {
     const { id } = jwt.verify(token, JWT_SECRET);
     const user = await User.findById(id);
     if (!user || !user.token || token !== user.token) {
-      return next(HttpError(401));
+      return next(HttpError(401, "Unauthorized (invalid access token)"));
     }
     // Записуємо інформацію в object req про user яка буде в req controllers
     req.user = user;

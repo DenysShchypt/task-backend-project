@@ -9,7 +9,7 @@ const signup = async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user) {
-    throw HttpError(409, "Email in use");
+    throw HttpError(409, "Provided email already exists");
   }
   const hashPassword = await bcrypt.hash(password, 10);
 
@@ -19,6 +19,7 @@ const signup = async (req, res) => {
   });
 
   res.status(201).json({
+    message: "Successfull operation",
     name: newUser.name,
     email: newUser.email,
   });
