@@ -35,13 +35,13 @@ cardSchema.post('save', handleSaveError);
 
 export const cardAddSchema = Joi.object({
     titleCard: Joi.string().required().messages({
-        "any.required": `the "title" field is missing`,
+        "any.required": `the 'titleCard' field is missing`,
     }),
     description: Joi.string().allow(''),
     priority: Joi.string().valid("without", "low", "medium", "high"),
     deadline: Joi.date().iso(),
     columnId: Joi.string().required().messages({
-        "any.required": `the "column" field is missing`,
+        "any.required": `the 'columnId' field is missing`,
     }),
 });
 

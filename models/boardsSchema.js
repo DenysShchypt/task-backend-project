@@ -17,12 +17,18 @@ const boardSchema = new Schema(
     },
     background: {
       type: String,
-      enum: [...backgroundNames],
+      enum: {
+        values: backgroundNames,
+        message: `Background value must be in list ${backgroundNames}`,
+      },
       default: "default",
     },
     icon: {
       type: String,
-      enum: [...iconsNames],
+      enum: {
+        values: iconsNames,
+        message: `Icon value must be in list ${iconsNames}`,
+      },
       default: "default",
     },
   },

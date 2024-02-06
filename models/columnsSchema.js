@@ -28,7 +28,7 @@ columnSchema.pre("findOneAndUpdate", setUpdateOptions);
 
 export const schemaAddColumn = Joi.object({
     titleColumn: Joi.string().required().min(1).max(150).messages({
-        "any.required": `the "title" field is missing`,
+        "any.required": `the 'titleColumn' field is missing`,
     }),
     boardId: Joi.string().required(),
 });
