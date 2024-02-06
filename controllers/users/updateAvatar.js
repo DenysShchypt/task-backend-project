@@ -2,7 +2,7 @@ import { parse } from "path";
 import fs from "fs/promises";
 import { User } from "../../models/index.js";
 import { ctrlWrapper } from "../../decorators/index.js";
-import { cloudinary } from "../../helpers/index.js";
+import { HttpError, cloudinary } from "../../helpers/index.js";
 
 export const updateAvatar = async (req, res) => {
   const { _id } = req.user;
@@ -30,6 +30,7 @@ export const updateAvatar = async (req, res) => {
   await fs.unlink(req.file.path);
 
   res.json({
+    message: "Successfull operation",
     avatarURL: user.avatarURL,
   });
 };

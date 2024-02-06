@@ -35,6 +35,7 @@ const userSchema = new Schema(
       enum: themeList,
       default: "dark",
     },
+    googleId: String,
   },
   { versionKey: false, timestamps: true }
 );

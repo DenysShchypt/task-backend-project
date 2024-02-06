@@ -1,4 +1,3 @@
-
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { User } from "../../models/index.js";
@@ -14,24 +13,25 @@ const signin = async (req, res) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    throw HttpError(404, "user's not found");
+    throw HttpError(403, "Email doesn't exist / Password is wrong");
   }
 
   const matchPwd = await bcrypt.compare(password, user.password);
 
   if (!matchPwd) {
-    throw HttpError(401, "Email or password is wrong");
+    throw HttpError(403, "Email doesn't exist / Password is wrong");
   }
 
   const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "20h" });
-  // const refreshToken = jwt.sign({ id: user._id }, JWT_SECRET, {
-  //   expiresIn: "7d",
-  // });
+  const refreshToken = jwt.sign({ id: user._id }, JWT_SECRET, {
+    expiresIn: "7d",
+  });
   await User.findByIdAndUpdate(user._id, { token });
 
-  res.json({
+  res.status(201).json({
+    message: "Successfull operation",
     token,
-    // refreshToken,
+    refreshToken,
     user: {
       name: user.name,
       email: user.email,
