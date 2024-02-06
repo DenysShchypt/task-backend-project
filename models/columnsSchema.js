@@ -34,7 +34,7 @@ export const schemaAddColumn = Joi.object({
 });
 
 export const schemaUpdateColumn = Joi.object({
-    title: Joi.string().min(1).max(150),
+    titleColumn: Joi.string().min(1).max(150),
 });
 
 const Column = model('column', columnSchema);

@@ -18,7 +18,7 @@ cardsRouter.post(
   cardsController.addCard
 );
 cardsRouter.delete("/:id", isValidId, cardsController.deleteCard);
-cardsRouter.patch(
+cardsRouter.put(
   "/:id",
   isValidId,
   validateBody(cardUpdateSchema),
