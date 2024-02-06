@@ -1,5 +1,6 @@
-import { User } from "../../models/index.js";
+
 import bcrypt from "bcrypt";
+import { User } from "../../models/index.js";
 import { ctrlWrapper } from "../../decorators/index.js";
 import { HttpError } from "../../helpers/index.js";
 import jwt from "jsonwebtoken";
@@ -11,7 +12,6 @@ const generateToken = (user) => {
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "20h" });
   return token;
 };
-
 const signup = async (req, res) => {
   const { email, password } = req.body;
 
