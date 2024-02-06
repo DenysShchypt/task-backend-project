@@ -12,9 +12,6 @@ const generateToken = (user) => {
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "20h" });
   return token;
 };
-
-const { JWT_SECRET } = process.env;
-
 const signup = async (req, res) => {
   const { email, password } = req.body;
 
