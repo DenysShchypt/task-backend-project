@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+
 import bcrypt from "bcrypt";
 import { User } from "../../models/index.js";
 import { ctrlWrapper } from "../../decorators/index.js";

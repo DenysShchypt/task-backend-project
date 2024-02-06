@@ -1,5 +1,4 @@
 import express from "express";
-
 import {
     signup,
     signin,
@@ -7,7 +6,6 @@ import {
     updateToken,
     googleAuth,
     googleRedirect,
-    getCurrent,
 } from "../../controllers/auth/index.js";
 
 import { validateBody } from "../../decorators/index.js";
@@ -40,6 +38,5 @@ authRouter.post(
 authRouter.get("/google", googleAuth);
 authRouter.get("/google-redirect", googleRedirect);
 
-authRouter.get("/current", authenticate, getCurrent);
 
 export default authRouter;
