@@ -46,7 +46,7 @@ export const cardAddSchema = Joi.object({
 });
 
 export const cardUpdateSchema = Joi.object({
-    title: Joi.string(),
+    titleCard: Joi.string(),
     description: Joi.string().allow(''),
     priority: Joi.string().valid("without", "low", "medium", "high"),
     deadline: Joi.date().iso(),
