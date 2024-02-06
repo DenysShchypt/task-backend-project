@@ -35,12 +35,10 @@ const userSchema = new Schema(
       enum: themeList,
       default: "dark",
     },
+    googleId: String,
   },
   { versionKey: false, timestamps: true }
 );
-userSchema.pre("findOneAndUpdate", setUpdateOptions);
-userSchema.post("save", handleSaveError);
-
 userSchema.post("save", handleSaveError);
 userSchema.pre("findOneAndUpdate", setUpdateOptions);
 userSchema.post("findOneAndUpdate", handleSaveError);
