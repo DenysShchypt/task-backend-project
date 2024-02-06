@@ -4,7 +4,7 @@ import { Board } from "../../models/index.js";
 
 const deleteBoard = async (req, res) => {
   const { _id: owner } = req.user;
-  const { boardID: _id } = req.params;
+  const { boardId: _id } = req.params;
 
   const result = await Board.findOneAndDelete({ _id, owner });
   if (!result) {

@@ -30,11 +30,7 @@ const getBoardData = async (req, res) => {
     },
   ]);
 
-  // if (result.length < 1) {
-  //   throw HttpError(404);
-  // }
-
-  res.json(board);
+  res.json(result);
 };
 
 export default ctrlWrapper(getBoardData);

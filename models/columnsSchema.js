@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 import { handleSaveError, setUpdateOptions } from "../hooks/index.js";
 
 const columnSchema = new Schema({
-    title: {
+    titleColumn: {
         type: String,
         required: true,
     },
@@ -19,7 +19,7 @@ const columnSchema = new Schema({
     }
 }, {
     versionKey: false,
-    timestamp: true,
+    timestamps: true,
 });
 
 columnSchema.post("save", handleSaveError);
@@ -27,7 +27,7 @@ columnSchema.post("save", handleSaveError);
 columnSchema.pre("findOneAndUpdate", setUpdateOptions);
 
 export const schemaAddColumn = Joi.object({
-    title: Joi.string().required().min(1).max(150).messages({
+    titleColumn: Joi.string().required().min(1).max(150).messages({
         "any.required": `the "title" field is missing`,
     }),
     boardId: Joi.string().required(),

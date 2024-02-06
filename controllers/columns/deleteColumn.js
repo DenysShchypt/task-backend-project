@@ -1,6 +1,6 @@
-import Column from "../../models/columnsSchema.js"
-import Card from '../../models/cardSchema.js';
+import { Card, Column } from "../../models/index.js"
 import { HttpError } from "../../helpers/index.js"
+import { ctrlWrapper } from "../../decorators/index.js";
 
 const deleteColumn = async (req, res) => {
     const { params: { id: _id } } = req;
@@ -18,4 +18,4 @@ const deleteColumn = async (req, res) => {
     res.json(remove)
 };
 
-export default deleteColumn;
+export default ctrlWrapper(deleteColumn);
