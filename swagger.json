@@ -1,18 +1,15 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Task Pro Swagger documentation",
-    "description": "The API for Task Pro Service.",
+    "title": "Task Pro Swagger documentation 📓",
+    "description": "The API for Task Pro Service 👀.[Backend github repository](https://github.com/DenysShchypt/task-backend-project)",
+    "description": "The API for Task Pro Service 👀.[Frontend github repository](https://github.com/DenysShchypt/task-backend-project)",
     "version": "1.0.0"
   },
   "servers": [
     {
       "url": "https://task-backend-project.onrender.com/api",
-      "description": "PROD"
-    },
-    {
-      "url": "http://localhost:3030/api",
-      "description": "Local Dev Server"
+      "description": "DEV"
     }
   ],
   "tags": [
@@ -421,8 +418,8 @@
         "tags": [
           "Boards"
         ],
-        "summary": "Add new Boards",
-        "operationId": "Add new Boards",
+        "summary": "Add new board",
+        "operationId": "Add new board",
         "parameters": [
           {
             "name": "Authorization",
@@ -657,6 +654,358 @@
           }
         ]
       }
+    },
+    "/columns": {
+      "post": {
+        "tags": [
+          "Columns"
+        ],
+        "summary": "Add new column",
+        "operationId": "Add new column",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/AddColumnRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddColumnResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/columns/{id}": {
+      "delete": {
+        "tags": [
+          "Columns"
+        ],
+        "summary": "Delete one column by Id",
+        "operationId": "Delete one column by Id",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfull operation",
+            "content": {}
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "403": {
+            "description": "No access to data",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          },
+          "409": {
+            "description": "Can`t remove!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Columns"
+        ],
+        "summary": "Update titleColumn",
+        "operationId": "Update titleColumn",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateColumnRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateColumnResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/cards": {
+      "post": {
+        "tags": [
+          "Cards"
+        ],
+        "summary": "Add new card",
+        "operationId": "Add new card",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/AddCardRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddCardResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/cards/{id}": {
+      "delete": {
+        "tags": [
+          "Cards"
+        ],
+        "summary": "Delete one card by Id",
+        "operationId": "Delete one card by Id",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfull operation",
+            "content": {}
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "403": {
+            "description": "No access to data",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          },
+          "409": {
+            "description": "Can`t remove!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Cards"
+        ],
+        "summary": "Update Card",
+        "operationId": "Update Card",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateCardRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateCardResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -779,8 +1128,8 @@
           "titleBoard": {
             "$ref": "#/components/schemas/TitleBoard"
           },
-          "backgroundBoard": {
-            "$ref": "#/components/schemas/BackgroundBoard"
+          "background": {
+            "$ref": "#/components/schemas/Background"
           },
           "icon": {
             "$ref": "#/components/schemas/IconBoard"
@@ -794,9 +1143,164 @@
         }
       },
       "OneBoardResponse": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/OneBoardResponse_inner"
+        "type": "object",
+        "properties": {
+          "board": {
+            "$ref": "#/components/schemas/OneBoardResponse_board"
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OneBoardResponse_columns"
+            }
+          }
+        }
+      },
+      "AddColumnParams": {
+        "required": [
+          "boardId",
+          "titleColumn"
+        ],
+        "type": "object",
+        "properties": {
+          "titleColumn": {
+            "$ref": "#/components/schemas/TitleColumn"
+          },
+          "boardId": {
+            "$ref": "#/components/schemas/Id"
+          }
+        }
+      },
+      "UpdateColumnParams": {
+        "required": [
+          "titleColumn"
+        ],
+        "type": "object",
+        "properties": {
+          "titleColumn": {
+            "$ref": "#/components/schemas/TitleColumn"
+          }
+        }
+      },
+      "AddColumnResponse": {
+        "type": "object",
+        "properties": {
+          "titleColumn": {
+            "$ref": "#/components/schemas/TitleColumn"
+          },
+          "boardId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/Id"
+          }
+        }
+      },
+      "UpdateColumnResponse": {
+        "type": "object",
+        "properties": {
+          "titleColumn": {
+            "$ref": "#/components/schemas/TitleColumn"
+          },
+          "boardId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/Id"
+          }
+        }
+      },
+      "AddCardResponse": {
+        "type": "object",
+        "properties": {
+          "titleCard": {
+            "$ref": "#/components/schemas/TitleCard"
+          },
+          "description": {
+            "$ref": "#/components/schemas/Description"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/Priority"
+          },
+          "deadline": {
+            "$ref": "#/components/schemas/Time"
+          },
+          "columnId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/Id"
+          }
+        }
+      },
+      "UpdateCardResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "titleCard": {
+            "$ref": "#/components/schemas/TitleCard"
+          },
+          "description": {
+            "$ref": "#/components/schemas/Description"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/Priority"
+          },
+          "deadline": {
+            "$ref": "#/components/schemas/Time"
+          },
+          "columnId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/Id"
+          }
+        }
+      },
+      "UpdateCardParams": {
+        "type": "object",
+        "properties": {
+          "titleCard": {
+            "$ref": "#/components/schemas/TitleCard"
+          },
+          "description": {
+            "$ref": "#/components/schemas/Description"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/Priority"
+          },
+          "deadline": {
+            "$ref": "#/components/schemas/Time"
+          }
+        }
+      },
+      "AddCardParams": {
+        "required": [
+          "columnId",
+          "deadline",
+          "description",
+          "priority",
+          "titleCard"
+        ],
+        "type": "object",
+        "properties": {
+          "titleCard": {
+            "$ref": "#/components/schemas/TitleCard"
+          },
+          "description": {
+            "$ref": "#/components/schemas/Description"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/Priority"
+          },
+          "deadline": {
+            "$ref": "#/components/schemas/Time"
+          },
+          "columnId": {
+            "$ref": "#/components/schemas/Id"
+          }
         }
       },
       "UserHelpResponse": {
@@ -814,15 +1318,6 @@
             "$ref": "#/components/schemas/AvatarURL"
           }
         }
-      },
-      "Error": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "string"
-          }
-        },
-        "description": "An error response object."
       },
       "Email": {
         "type": "string",
@@ -873,7 +1368,7 @@
           "violet"
         ]
       },
-      "BackgroundBoard": {
+      "Background": {
         "type": "string",
         "description": "User's background board theme",
         "enum": [
@@ -885,6 +1380,16 @@
         "description": "User's icon board",
         "enum": [
           "default"
+        ]
+      },
+      "Priority": {
+        "type": "string",
+        "description": "Priority card",
+        "enum": [
+          "without",
+          "low",
+          "medium",
+          "high"
         ]
       },
       "TitleBoard": {
@@ -901,6 +1406,16 @@
         "type": "string",
         "description": "Card title",
         "example": "My card"
+      },
+      "Description": {
+        "type": "string",
+        "description": "Card description",
+        "example": "My plane on the future"
+      },
+      "Time": {
+        "type": "string",
+        "description": "Card deadline",
+        "example": "2015-03-01"
       },
       "Id": {
         "type": "string",
@@ -928,14 +1443,48 @@
             "$ref": "#/components/schemas/TitleBoard"
           },
           "backgroundBoard": {
-            "$ref": "#/components/schemas/BackgroundBoard"
+            "$ref": "#/components/schemas/Background"
           },
           "icon": {
             "$ref": "#/components/schemas/IconBoard"
           }
         }
       },
-      "OneBoardResponse_inner": {
+      "OneBoardResponse_board": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "titleBoard": {
+            "$ref": "#/components/schemas/TitleBoard"
+          },
+          "background": {
+            "$ref": "#/components/schemas/Background"
+          },
+          "icon": {
+            "$ref": "#/components/schemas/IconBoard"
+          }
+        }
+      },
+      "OneBoardResponse_cards": {
+        "type": "object",
+        "properties": {
+          "titleColumn": {
+            "$ref": "#/components/schemas/TitleCard"
+          },
+          "boardId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/Id"
+          }
+        }
+      },
+      "OneBoardResponse_columns": {
         "type": "object",
         "properties": {
           "titleColumn": {
@@ -950,18 +1499,7 @@
           "cards": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "titleColumn": {
-                  "$ref": "#/components/schemas/TitleCard"
-                },
-                "boardId": {
-                  "$ref": "#/components/schemas/Id"
-                },
-                "owner": {
-                  "$ref": "#/components/schemas/Id"
-                }
-              }
+              "$ref": "#/components/schemas/OneBoardResponse_cards"
             }
           }
         }
@@ -1038,6 +1576,42 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/AddBoardParams"
+            }
+          }
+        }
+      },
+      "AddColumnRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AddColumnParams"
+            }
+          }
+        }
+      },
+      "UpdateColumnRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateColumnParams"
+            }
+          }
+        }
+      },
+      "AddCardRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AddCardParams"
+            }
+          }
+        }
+      },
+      "UpdateCardRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateCardParams"
             }
           }
         }
