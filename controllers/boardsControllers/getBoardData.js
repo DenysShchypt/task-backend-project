@@ -30,7 +30,10 @@ const getBoardData = async (req, res) => {
     },
   ]);
 
-  res.json(result);
+  res.json({
+    board: board,
+    columns: result,
+  });
 };
 
 export default ctrlWrapper(getBoardData);
