@@ -3,6 +3,15 @@ import bcrypt from "bcrypt";
 import { User } from "../../models/index.js";
 import { ctrlWrapper } from "../../decorators/index.js";
 import { HttpError } from "../../helpers/index.js";
+import jwt from "jsonwebtoken";
+import "dotenv/config";
+const { JWT_SECRET } = process.env;
+
+const generateToken = (user) => {
+  const payload = { id: user._id };
+  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "20h" });
+  return token;
+};
 
 const { JWT_SECRET } = process.env;
 
@@ -21,10 +30,13 @@ const signup = async (req, res) => {
     password: hashPassword,
   });
 
+  const token = generateToken(newUser);
+  newUser.token = token;
+  await newUser.save();
+
   res.status(201).json({
     message: "Successfull operation",
-    name: newUser.name,
-    email: newUser.email,
+    user: { token: token, name: newUser.name, email: newUser.email },
   });
 };
 
