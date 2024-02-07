@@ -5,7 +5,7 @@ const isValidId = async (req, res, next) => {
     const { id } = req.params;
     // Перевіряємо чи може значення бути id
     if (!isValidObjectId(id)) {
-        return next(HttpError(404, `${id} not valid id`))
+        return next(HttpError(400, `${id} not valid id`))
     };
     next();
 };

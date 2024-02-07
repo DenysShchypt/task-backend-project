@@ -6,16 +6,22 @@ const deleteColumn = async (req, res) => {
     const { params: { id: _id } } = req;
     const { _id: owner } = req.user;
     
+    // перевірка чи існує колонка
+    const existColumn = await Column.findById(_id);
+    if (!existColumn) {
+        throw HttpError(404, `Column with id=${_id} not found`)
+    };
+
     // видалення колонки
     const remove = await Column.findOneAndDelete({ _id, owner })
     if (!remove) {
-        throw HttpError(404, `column with id=${_id} not found!`)
+        throw HttpError(403, `No access to data`)
     };
     
     // видалення карток підвязаних до ід колонки
     await Card.deleteMany({ columnId: _id, owner });
 
-    res.json(remove)
+    res.status(204).json({ message: "Column delete success" })
 };
 
 export default ctrlWrapper(deleteColumn);
