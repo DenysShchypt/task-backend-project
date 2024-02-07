@@ -255,7 +255,7 @@
         ]
       }
     },
-    "/users/profiles": {
+    "/users/profile": {
       "patch": {
         "tags": [
           "User"
