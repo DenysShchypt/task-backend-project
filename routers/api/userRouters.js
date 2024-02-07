@@ -19,7 +19,7 @@ const usersRouter = express.Router();
 
 usersRouter.use(authenticate);
 
-usersRouter.get("/current-user", getCurrentUser);
+usersRouter.post("/current-user", getCurrentUser);
 
 usersRouter.patch("/avatar", upload.single("avatar"), updateAvatar);
 usersRouter.patch(
