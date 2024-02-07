@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Task Pro Swagger documentation📓",
-    "description": "The API for Task Pro Service.👀\n[Backend github repository](https://github.com/DenysShchypt/task-backend-project)/\n[Frontend github repository](https://github.com/Alexandrbig1/task-pro)\n",
+    "title": "Task Pro Swagger documentation 📓",
+    "description": "The API for Task Pro Service.👁‍🗨 \n[Backend github repository](https://github.com/DenysShchypt/task-backend-project)/\n[Frontend github repository](https://github.com/Alexandrbig1/task-pro)\n",
     "version": "1.0.0"
   },
   "servers": [
@@ -152,6 +152,56 @@
         ]
       }
     },
+    "/users/current-user": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Information about User",
+        "operationId": "Information about User",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/users/avatar": {
       "patch": {
         "tags": [
@@ -233,7 +283,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdateUserParams"
+                  "$ref": "#/components/schemas/UpdateUserResponse"
                 }
               }
             }
@@ -354,6 +404,58 @@
           },
           "404": {
             "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/users/delete-user": {
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete User",
+        "operationId": "Delete User",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfull operation",
+            "content": {}
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "403": {
+            "description": "No access to data",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          },
+          "409": {
+            "description": "Can`t remove!",
             "content": {}
           }
         },
@@ -1068,8 +1170,22 @@
           "token": {
             "$ref": "#/components/schemas/Token"
           },
+          "refreshToken": {
+            "$ref": "#/components/schemas/RefreshToken"
+          },
           "user": {
             "$ref": "#/components/schemas/LoginResponse_user"
+          }
+        }
+      },
+      "UpdateUserResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/Name"
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email"
           }
         }
       },
@@ -1326,6 +1442,29 @@
           }
         }
       },
+      "CurrentUserResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "name": {
+            "$ref": "#/components/schemas/Name"
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          },
+          "token": {
+            "$ref": "#/components/schemas/Token"
+          },
+          "avatarURL": {
+            "$ref": "#/components/schemas/AvatarURL"
+          },
+          "theme": {
+            "$ref": "#/components/schemas/Theme"
+          }
+        }
+      },
       "Email": {
         "type": "string",
         "description": "A user's email address.",
@@ -1349,6 +1488,11 @@
         "type": "string",
         "description": "User's token",
         "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmU3OTJiMWRjOWQ5OWU4NjZmNjQxYiIsImlhdCI6MTcwNjk4MTY3NSwiZXhwIjoxNzA3MDUzNjc1fQ.CR1wWNZvCtiPpvpOUNpmSiBDWPeyaT_eeYXcZ_UL4OM"
+      },
+      "RefreshToken": {
+        "type": "string",
+        "description": "User's refreshToken",
+        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzIzMWNkNDViMjg3NGFjOWRjYmIyZSIsImlhdCI6MTcwNzMxMjI2NCwiZXhwIjoxNzA3OTE3MDY0fQ.Vi2u42kO8jnGzjyqJ1Q-52ioaffdDPwpQtxYLH8x2Iw"
       },
       "Text": {
         "type": "string",
@@ -1470,6 +1614,9 @@
           },
           "name": {
             "$ref": "#/components/schemas/Name"
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email"
           }
         }
       },
