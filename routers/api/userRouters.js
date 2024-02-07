@@ -3,6 +3,8 @@ import { authenticate, upload } from "../../middlewares/index.js";
 
 import {
   changeTheme,
+  deleteUser,
+  getCurrentUser,
   needHelps,
   updateAvatar,
   updateProfile,
@@ -17,19 +19,21 @@ const usersRouter = express.Router();
 
 usersRouter.use(authenticate);
 
+usersRouter.post("/current-user", getCurrentUser);
+
 usersRouter.patch("/avatar", upload.single("avatar"), updateAvatar);
 usersRouter.patch(
   "/profile",
   validateBody(userUpdProfileSchema),
   updateProfile
 );
-
-usersRouter.post("/", needHelps);
-
 usersRouter.patch(
   "/change-theme",
   validateBody(userUpdateThemeSchema),
   changeTheme
 );
+usersRouter.post("/", needHelps);
+
+usersRouter.delete("/delete-user", deleteUser);
 
 export default usersRouter;

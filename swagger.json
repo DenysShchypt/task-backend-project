@@ -1,15 +1,14 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Task Pro Swagger documentation 📓",
-    "description": "The API for Task Pro Service 👀.[Backend github repository](https://github.com/DenysShchypt/task-backend-project)",
-    "description": "The API for Task Pro Service 👀.[Frontend github repository](https://github.com/DenysShchypt/task-backend-project)",
+    "title": "Task Pro Swagger documentation📓",
+    "description": "The API for Task Pro Service.👀\n[Backend github repository](https://github.com/DenysShchypt/task-backend-project)/\n[Frontend github repository](https://github.com/Alexandrbig1/task-pro)\n",
     "version": "1.0.0"
   },
   "servers": [
     {
       "url": "https://task-backend-project.onrender.com/api",
-      "description": "DEV"
+      "description": "Dev"
     }
   ],
   "tags": [
@@ -819,6 +818,10 @@
             "description": "Unauthorized (invalid access token)",
             "content": {}
           },
+          "403": {
+            "description": "No access to data",
+            "content": {}
+          },
           "404": {
             "description": "Invalid user / Invalid session",
             "content": {}
@@ -993,6 +996,10 @@
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "403": {
+            "description": "No access to data",
             "content": {}
           },
           "404": {
@@ -1372,14 +1379,44 @@
         "type": "string",
         "description": "User's background board theme",
         "enum": [
-          "default"
+          "default",
+          "balloon",
+          "clouds",
+          "flowers",
+          "full-moon",
+          "gorge",
+          "kapadokia",
+          "milky-way",
+          "moon",
+          "night",
+          "ocean",
+          "pink-tree",
+          "plant",
+          "rocks",
+          "ship",
+          "unsplash"
         ]
       },
       "IconBoard": {
         "type": "string",
         "description": "User's icon board",
         "enum": [
-          "default"
+          "default",
+          "balloon",
+          "clouds",
+          "flowers",
+          "full-moon",
+          "gorge",
+          "kapadokia",
+          "milky-way",
+          "moon",
+          "night",
+          "ocean",
+          "pink-tree",
+          "plant",
+          "rocks",
+          "ship",
+          "unsplash"
         ]
       },
       "Priority": {
