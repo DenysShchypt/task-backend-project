@@ -10,13 +10,13 @@ const addCard = async (req, res) => {
   
   // перевірка, чи коректний ід нам переданий 
   if (!isValidObjectId(columnId)) {
-    throw HttpError(400, `ColumnId not valid`);
+    throw HttpError(400, `Column not valid`);
   };
 
   // перевірка columnId - чи існує та чи належить користувачу
   const haveColumn = await Column.findOne({ _id: columnId, owner });
   if (!haveColumn) {
-        throw HttpError(400, `Column with id: ${columnId} not found`)
+        throw HttpError(400, `Column not valid`)
   };
 
   const result = await Card.create({ ...req.body, owner });

@@ -8,7 +8,7 @@ const updateCard = async (req, res) => {
 
     const result = await Card.findByIdAndUpdate(id, req.body, { new: true });
     if (!result) {
-        throw HttpError(404, `Card not found`);
+        throw HttpError(404, `Card Not Found`);
     }
 
     res.status(200).json(result);
