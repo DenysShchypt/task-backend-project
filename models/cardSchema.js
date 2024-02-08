@@ -1,6 +1,6 @@
 import Joi from "joi";
 import { Schema, model } from "mongoose";
-import { handleSaveError } from "../hooks/index.js";
+import { handleSaveError, setUpdateOptions } from "../hooks/index.js";
 
 const cardSchema = new Schema({
     titleCard: {
@@ -33,6 +33,8 @@ const cardSchema = new Schema({
 
 cardSchema.post('save', handleSaveError);
 
+cardSchema.pre("findOneAndUpdate", setUpdateOptions);
+
 export const cardAddSchema = Joi.object({
     titleCard: Joi.string().required().messages({
         "any.required": `the 'titleCard' field is missing`,
@@ -50,6 +52,10 @@ export const cardUpdateSchema = Joi.object({
     description: Joi.string().allow(''),
     priority: Joi.string().valid("without", "low", "medium", "high"),
     deadline: Joi.date().iso(),
+});
+
+export const cardPatchSchema = Joi.object({
+    columnId: Joi.string().required(),
 });
 
 const Card = model('card', cardSchema);
