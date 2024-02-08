@@ -26,6 +26,8 @@ columnSchema.post("save", handleSaveError);
 
 columnSchema.pre("findOneAndUpdate", setUpdateOptions);
 
+columnSchema.post("findOneAndUpdate", handleSaveError);
+
 export const schemaAddColumn = Joi.object({
     titleColumn: Joi.string().required().min(1).max(150).messages({
         "any.required": `the 'titleColumn' field is missing`,

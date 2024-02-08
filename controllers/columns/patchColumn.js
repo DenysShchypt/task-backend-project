@@ -10,7 +10,7 @@ const patchColumn = async (req, res) => {
     const update = await Column.findOneAndUpdate({ _id, owner }, body);
 
   if (!update) {
-    throw HttpError(404, `columns with id=${_id} not found!`)
+    throw HttpError(404, `Columns with id=${_id} not found!`)
   }
     res.json(update);
 };

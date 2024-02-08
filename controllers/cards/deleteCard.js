@@ -7,9 +7,9 @@ const deleteCard = async (req, res) => {
 
     const result = await Card.findByIdAndDelete(id);
     if (!result) {
-        throw HttpError(404, `Card id=${id} not found`);
+        throw HttpError(404, `Card with id: ${id} not found`);
     }
-    res.status(200).json(result);
+    res.status(204).json(result);
 }
 
 export default ctrlWrapper(deleteCard);
