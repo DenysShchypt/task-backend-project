@@ -1,6 +1,6 @@
 import Joi from "joi";
 import { Schema, model } from "mongoose";
-import { handleSaveError } from "../hooks/index.js";
+import { handleSaveError, setUpdateOptions } from "../hooks/index.js";
 
 const cardSchema = new Schema({
     titleCard: {
@@ -32,6 +32,8 @@ const cardSchema = new Schema({
 }, { versionKey: false, timestamps: true });
 
 cardSchema.post('save', handleSaveError);
+
+cardSchema.pre("findOneAndUpdate", setUpdateOptions);
 
 export const cardAddSchema = Joi.object({
     titleCard: Joi.string().required().messages({
