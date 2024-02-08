@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://task-backend-project.onrender.com/api/",
+      "url": "https://task-backend-project.onrender.com/api",
       "description": "Dev"
     }
   ],
@@ -255,7 +255,7 @@
         ]
       }
     },
-    "/users/profile": {
+    "/users/profiles": {
       "patch": {
         "tags": [
           "User"
@@ -978,7 +978,7 @@
             "content": {}
           },
           "404": {
-            "description": "Invalid user / Invalid session",
+            "description": "Invalid user / Invalid session / Not found",
             "content": {}
           }
         },
@@ -990,67 +990,7 @@
       }
     },
     "/cards/{id}": {
-      "delete": {
-        "tags": [
-          "Cards"
-        ],
-        "summary": "Delete one card by Id",
-        "operationId": "Delete one card by Id",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Successfull operation",
-            "content": {}
-          },
-          "400": {
-            "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
-          },
-          "401": {
-            "description": "Unauthorized (invalid access token)",
-            "content": {}
-          },
-          "403": {
-            "description": "No access to data",
-            "content": {}
-          },
-          "404": {
-            "description": "Invalid user / Invalid session",
-            "content": {}
-          },
-          "409": {
-            "description": "Can`t remove!",
-            "content": {}
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "patch": {
+      "put": {
         "tags": [
           "Cards"
         ],
@@ -1105,7 +1045,132 @@
             "content": {}
           },
           "404": {
-            "description": "Invalid user / Invalid session",
+            "description": "Invalid user / Invalid session / Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Cards"
+        ],
+        "summary": "Delete one card by Id",
+        "operationId": "Delete one card by Id",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfull operation",
+            "content": {}
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "403": {
+            "description": "No access to data",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session / Not found",
+            "content": {}
+          },
+          "409": {
+            "description": "Can`t remove!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Cards"
+        ],
+        "summary": "Moving card by column",
+        "operationId": "Moving card by column",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateColumnCardRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateColumnCardResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "403": {
+            "description": "No access to data",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session / Not found",
             "content": {}
           }
         },
@@ -1382,6 +1447,32 @@
           }
         }
       },
+      "UpdateColumnCardResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "titleCard": {
+            "$ref": "#/components/schemas/TitleCard"
+          },
+          "description": {
+            "$ref": "#/components/schemas/Description"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/Priority"
+          },
+          "deadline": {
+            "$ref": "#/components/schemas/Time"
+          },
+          "columnId": {
+            "$ref": "#/components/schemas/Id2"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/Id"
+          }
+        }
+      },
       "UpdateCardParams": {
         "type": "object",
         "properties": {
@@ -1396,6 +1487,14 @@
           },
           "deadline": {
             "$ref": "#/components/schemas/Time"
+          }
+        }
+      },
+      "UpdateColumnCardParams": {
+        "type": "object",
+        "properties": {
+          "columnId": {
+            "$ref": "#/components/schemas/Id"
           }
         }
       },
@@ -1598,6 +1697,11 @@
         "description": "Card deadline",
         "example": "2015-03-01"
       },
+      "Id2": {
+        "type": "string",
+        "description": "Id",
+        "example": "65c4d3229f657e563e54e029"
+      },
       "Id": {
         "type": "string",
         "description": "Id",
@@ -1796,6 +1900,15 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/UpdateCardParams"
+            }
+          }
+        }
+      },
+      "UpdateColumnCardRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateColumnCardParams"
             }
           }
         }

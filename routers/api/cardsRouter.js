@@ -28,7 +28,7 @@ cardsRouter.patch(
   "/:id",
   isValidId,
   validateBody(cardPatchSchema),
-  cardsController.patchCard
+  cardsController.movingCard
 );
 
 export default cardsRouter;

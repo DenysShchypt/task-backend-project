@@ -3,7 +3,7 @@ import { Card, Column } from '../../models/index.js';
 import { HttpError } from '../../helpers/index.js';
 
 
-const patchCard = async (req, res) => {
+const movingCard = async (req, res) => {
     const { body: { columnId }, params: { id: _id } } = req;
     const { _id: owner } = req.user;
 
@@ -14,7 +14,7 @@ const patchCard = async (req, res) => {
     }
 
     // прописуємо в картку ід нової колонки 
-    const result = await Card.findOneAndUpdate( { _id, owner }, req.body, {new: true});
+    const result = await Card.findOneAndUpdate({ _id, owner }, req.body, { new: true });
     if (!result) {
         throw HttpError(404, `Card Not Found`);
     }
@@ -22,4 +22,4 @@ const patchCard = async (req, res) => {
     res.status(200).json(result);
 }
 
-export default ctrlWrapper(patchCard);
+export default ctrlWrapper(movingCard);
