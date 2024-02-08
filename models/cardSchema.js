@@ -52,6 +52,10 @@ export const cardUpdateSchema = Joi.object({
     deadline: Joi.date().iso(),
 });
 
+export const cardPatchSchema = Joi.object({
+    columnId: Joi.string().required(),
+});
+
 const Card = model('card', cardSchema);
 
 export default Card;
