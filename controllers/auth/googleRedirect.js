@@ -1,6 +1,7 @@
 import { ctrlWrapper } from "../../decorators/index.js";
 import { HttpError } from "../../helpers/index.js";
 import { User } from "../../models/index.js";
+import bcrypt from "bcrypt";
 
 import jwt from "jsonwebtoken";
 
@@ -17,13 +18,12 @@ const { GOOGLE_SECRET, GOOGLE_CLIENT_ID, BASE_URL, FRONT_BASE_URL } =
 
 const googleRedirect = async (req, res) => {
   const fullUrl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
-  // console.log("fullUrl: ", fullUrl);
 
   const urlObj = new URL(fullUrl);
-
-  // console.log("urlObj: ", urlObj);
+  // console.log(urlObj);
 
   const urlParams = queryString.parse(urlObj.search);
+  // console.log(urlParams);
   const code = urlParams.code;
 
   const tokenData = await axios({
@@ -44,37 +44,36 @@ const googleRedirect = async (req, res) => {
       Authorization: `Bearer ${tokenData.data.access_token}`,
     },
   });
-  // console.log(userData);
-
-  // data = {
-  //   id: "116740619235013059086",
-  //   email: "laylau345@gmail.com",
-  //   verified_email: true,
-  //   name: "Андрій Ю",
-  //   given_name: "Андрій",
-  //   family_name: "Ю",
-  //   picture:
-  //     "https://lh3.googleusercontent.com/a/ACg8ocJRrz2YEfQ-AZS9KP7VgsFoI3HxJFffrBQN2tW4D2Ha=s96-c",
-  //   locale: "uk",
-  // };
 
   const user = await User.findOne({ googleId: userData.data.id });
 
+  let payload = {};
+
   if (!user) {
-    await User.create({
+    const hashPassword = await bcrypt.hash(userData.data.id, 10);
+
+    const newUser = await User.create({
       name: userData.data.name,
       email: userData.data.email,
-      password: userData.data.id,
+      password: hashPassword,
       avatarURL: userData.data.picture,
       googleId: userData.data.id,
     });
+    await newUser.save();
+    payload = {
+      id: newUser._id,
+    };
+  } else {
+    payload = {
+      id: user._id,
+    };
   }
 
-  const token = jwt.sign({ googleId: userData.data.id }, JWT_SECRET, {
+  const token = jwt.sign(payload, JWT_SECRET, {
     expiresIn: "20h",
   });
 
-  const refreshToken = jwt.sign({ googleId: userData.data.id }, JWT_SECRET, {
+  const refreshToken = jwt.sign(payload, JWT_SECRET, {
     expiresIn: "7d",
   });
 
