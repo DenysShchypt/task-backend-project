@@ -9,7 +9,7 @@ const deleteColumn = async (req, res) => {
     // перевірка чи існує колонка
     const existColumn = await Column.findById(_id);
     if (!existColumn) {
-        throw HttpError(404, `Column with id: ${_id} not found`)
+        throw HttpError(404, `Column Not Found`)
     };
 
     // видалення колонки

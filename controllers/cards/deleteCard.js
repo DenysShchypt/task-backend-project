@@ -7,7 +7,7 @@ const deleteCard = async (req, res) => {
 
     const result = await Card.findByIdAndDelete(id);
     if (!result) {
-        throw HttpError(404, `Card with id: ${id} not found`);
+        throw HttpError(404, `Card Not Found`);
     }
     res.status(204).json(result);
 }
