@@ -11,7 +11,7 @@ const needHelps = (req, res) => {
 
   sendEmail(data);
 
-  res.json({ message: "success" });
+  res.json({ message: "Thank you for your request, we will contact you!" });
 };
 
 export default ctrlWrapper(needHelps);
