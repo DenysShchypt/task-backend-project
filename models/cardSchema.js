@@ -50,7 +50,7 @@ export const cardAddSchema = Joi.object({
   columnId: Joi.string().required(),
   boardId: Joi.string().required(),
 }).messages({
-  "string.pattern.base": `Column not valid`,
+  "string.pattern.base": `Column or Board not valid`,
   "any.required": `Missing field {#label}`,
 });
 
