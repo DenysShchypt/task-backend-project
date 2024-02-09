@@ -30,7 +30,7 @@ const deleteBoard = async (req, res) => {
     throw HttpError(404, `Board not found`);
   }
 
-  res.json({ message: "Board delete success" });
+  res.json({ message: "Successfull operation" });
 };
 
 export default ctrlWrapper(deleteBoard);

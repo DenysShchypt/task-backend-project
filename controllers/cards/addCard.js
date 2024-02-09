@@ -21,10 +21,6 @@ const addCard = async (req, res) => {
 
   const result = await Card.create({ ...req.body, owner });
 
-  // const user = await User.findById(req.user._id);
-  // user.cards.push(result._id);
-  // await user.save();
-
   res.status(201).json(result);
 };
 
