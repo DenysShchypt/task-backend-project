@@ -12,6 +12,7 @@ const generateToken = (user) => {
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "20h" });
   return token;
 };
+
 const signup = async (req, res) => {
   const { email, password } = req.body;
 
@@ -32,7 +33,7 @@ const signup = async (req, res) => {
   await newUser.save();
 
   res.status(201).json({
-    message: "Successfull operation",
+    message: "SuccessFull operation",
     user: { token: token, name: newUser.name, email: newUser.email },
   });
 };
