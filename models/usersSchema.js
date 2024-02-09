@@ -36,18 +36,6 @@ const userSchema = new Schema(
       default: "dark",
     },
     googleId: String,
-    // cards: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "card",
-    //   },
-    // ],
-    // columns: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "column",
-    //   },
-    // ],
   },
   { versionKey: false, timestamps: true }
 );
