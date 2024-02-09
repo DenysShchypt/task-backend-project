@@ -7,6 +7,10 @@
   },
   "servers": [
     {
+      "url": "https://virtserver.swaggerhub.com/DENYSSHCHYPTSOVIT/Task/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    },
+    {
       "url": "https://task-backend-project.onrender.com/api",
       "description": "Dev"
     }
@@ -1274,7 +1278,7 @@
       },
       "UpdateThemeParams": {
         "required": [
-          "text"
+          "theme"
         ],
         "type": "object",
         "properties": {
@@ -1291,8 +1295,8 @@
       },
       "SendHelpParams": {
         "required": [
-          "text",
-          "theme"
+          "email",
+          "text"
         ],
         "type": "object",
         "properties": {
@@ -1386,9 +1390,9 @@
             "example": "My column"
           },
           "boardId": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           }
         }
       },
@@ -1439,9 +1443,9 @@
         "type": "object",
         "properties": {
           "columnId": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           }
         }
       },
@@ -1481,9 +1485,9 @@
             "example": "2015-03-01"
           },
           "columnId": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           }
         }
       },
@@ -1562,14 +1566,14 @@
             "example": "My column"
           },
           "boardId": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           },
           "owner": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           }
         }
       },
@@ -1582,14 +1586,14 @@
             "example": "My column"
           },
           "boardId": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           },
           "owner": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           }
         }
       },
@@ -1622,14 +1626,14 @@
             "example": "2015-03-01"
           },
           "columnId": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           },
           "owner": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           }
         }
       },
@@ -1637,9 +1641,9 @@
         "type": "object",
         "properties": {
           "_id": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           },
           "titleCard": {
             "type": "string",
@@ -1667,14 +1671,14 @@
             "example": "2015-03-01"
           },
           "columnId": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           },
           "owner": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           }
         }
       },
@@ -1682,9 +1686,9 @@
         "type": "object",
         "properties": {
           "_id": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           },
           "titleCard": {
             "type": "string",
@@ -1714,13 +1718,12 @@
           "columnId": {
             "type": "string",
             "description": "Id",
-            "format": "int64",
             "example": "65c4d3229f657e563e54e029"
           },
           "owner": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           }
         }
       },
@@ -1749,9 +1752,9 @@
         "type": "object",
         "properties": {
           "_id": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           },
           "name": {
             "maxLength": 20,
@@ -1877,14 +1880,14 @@
         "type": "object",
         "properties": {
           "_id": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           },
           "owner": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           },
           "titleBoard": {
             "type": "string",
@@ -1946,14 +1949,14 @@
             "example": "My card"
           },
           "boardId": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           },
           "owner": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           }
         }
       },
@@ -1966,14 +1969,14 @@
             "example": "My column"
           },
           "boardId": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           },
           "owner": {
-            "type": "integer",
+            "type": "string",
             "description": "Id",
-            "format": "int64"
+            "example": "65c12dc037484a7784493011"
           },
           "cards": {
             "type": "array",
