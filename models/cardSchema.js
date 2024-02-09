@@ -36,15 +36,14 @@ cardSchema.post('save', handleSaveError);
 cardSchema.pre("findOneAndUpdate", setUpdateOptions);
 
 export const cardAddSchema = Joi.object({
-    titleCard: Joi.string().required().messages({
-        "any.required": `the 'titleCard' field is missing`,
-    }),
+    titleCard: Joi.string().required(),
     description: Joi.string().allow(''),
     priority: Joi.string().valid("without", "low", "medium", "high"),
     deadline: Joi.date().iso(),
-    columnId: Joi.string().required().messages({
-        "any.required": `the 'columnId' field is missing`,
-    }),
+    columnId: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),
+}).messages({
+    "string.pattern.base": `Column not valid`,
+    "any.required": `Missing field {#label}`,
 });
 
 export const cardUpdateSchema = Joi.object({
@@ -55,7 +54,10 @@ export const cardUpdateSchema = Joi.object({
 });
 
 export const cardPatchSchema = Joi.object({
-    columnId: Joi.string().required(),
+    columnId: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),
+}).messages({
+    "string.pattern.base": `Column not valid`,
+    "any.required": `Missing field {#label}`,
 });
 
 const Card = model('card', cardSchema);
