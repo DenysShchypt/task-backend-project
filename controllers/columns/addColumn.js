@@ -6,6 +6,7 @@ import { ctrlWrapper } from "../../decorators/index.js";
 const addColumn = async (req, res) => {
   const { _id: owner } = req.user;
 
+
   // перевірка boardId на валідність ід
   const { boardId } = req.body;
   if (!isValidObjectId(boardId)) {

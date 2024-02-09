@@ -2,10 +2,14 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Task Pro Swagger documentation 📓",
-    "description": "The API for Task Pro Service. 👁‍🗨 \n[Backend github repository](https://github.com/DenysShchypt/task-backend-project)/\n[Frontend github repository](https://github.com/Alexandrbig1/task-pro)\n",
+    "description": "The API for Task Pro Service. 🛠 \n[Backend github repository](https://github.com/DenysShchypt/task-backend-project)/💅\n[Frontend github repository](https://github.com/Alexandrbig1/task-pro)\n",
     "version": "1.0.0"
   },
   "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/DENYSSHCHYPTSOVIT/Task/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    },
     {
       "url": "https://task-backend-project.onrender.com/api",
       "description": "Dev"
@@ -1213,23 +1217,6 @@
           }
         }
       },
-      "RegistrationResponse": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "maxLength": 20,
-            "minLength": 2,
-            "type": "string",
-            "description": "User's name",
-            "example": "Denys"
-          },
-          "email": {
-            "type": "string",
-            "description": "A user's email address.",
-            "format": "email"
-          }
-        }
-      },
       "LoginParams": {
         "required": [
           "email",
@@ -1248,41 +1235,6 @@
             "type": "string",
             "description": "User's password",
             "example": "F558r$flo69sknx"
-          }
-        }
-      },
-      "LoginResponse": {
-        "type": "object",
-        "properties": {
-          "token": {
-            "type": "string",
-            "description": "User's token",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmU3OTJiMWRjOWQ5OWU4NjZmNjQxYiIsImlhdCI6MTcwNjk4MTY3NSwiZXhwIjoxNzA3MDUzNjc1fQ.CR1wWNZvCtiPpvpOUNpmSiBDWPeyaT_eeYXcZ_UL4OM"
-          },
-          "refreshToken": {
-            "type": "string",
-            "description": "User's refreshToken",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzIzMWNkNDViMjg3NGFjOWRjYmIyZSIsImlhdCI6MTcwNzMxMjI2NCwiZXhwIjoxNzA3OTE3MDY0fQ.Vi2u42kO8jnGzjyqJ1Q-52ioaffdDPwpQtxYLH8x2Iw"
-          },
-          "user": {
-            "$ref": "#/components/schemas/LoginResponse_user"
-          }
-        }
-      },
-      "UpdateUserResponse": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "maxLength": 20,
-            "minLength": 2,
-            "type": "string",
-            "description": "User's name",
-            "example": "Denys"
-          },
-          "email": {
-            "type": "string",
-            "description": "A user's email address.",
-            "format": "email"
           }
         }
       },
@@ -1326,7 +1278,7 @@
       },
       "UpdateThemeParams": {
         "required": [
-          "text"
+          "theme"
         ],
         "type": "object",
         "properties": {
@@ -1343,8 +1295,8 @@
       },
       "SendHelpParams": {
         "required": [
-          "text",
-          "theme"
+          "email",
+          "text"
         ],
         "type": "object",
         "properties": {
@@ -1425,20 +1377,6 @@
           "$ref": "#/components/schemas/AllBoardParams_inner"
         }
       },
-      "OneBoardResponse": {
-        "type": "object",
-        "properties": {
-          "board": {
-            "$ref": "#/components/schemas/OneBoardResponse_board"
-          },
-          "columns": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OneBoardResponse_columns"
-            }
-          }
-        }
-      },
       "AddColumnParams": {
         "required": [
           "boardId",
@@ -1452,8 +1390,9 @@
             "example": "My column"
           },
           "boardId": {
-            "type": "integer",
-            "description": "Id"
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
           }
         }
       },
@@ -1467,165 +1406,6 @@
             "type": "string",
             "description": "Column title",
             "example": "My column"
-          }
-        }
-      },
-      "AddColumnResponse": {
-        "type": "object",
-        "properties": {
-          "titleColumn": {
-            "type": "string",
-            "description": "Column title",
-            "example": "My column"
-          },
-          "boardId": {
-            "type": "integer",
-            "description": "Id"
-          },
-          "owner": {
-            "type": "integer",
-            "description": "Id"
-          }
-        }
-      },
-      "UpdateColumnResponse": {
-        "type": "object",
-        "properties": {
-          "titleColumn": {
-            "type": "string",
-            "description": "Column title",
-            "example": "My column"
-          },
-          "boardId": {
-            "type": "integer",
-            "description": "Id"
-          },
-          "owner": {
-            "type": "integer",
-            "description": "Id"
-          }
-        }
-      },
-      "AddCardResponse": {
-        "type": "object",
-        "properties": {
-          "titleCard": {
-            "type": "string",
-            "description": "Card title",
-            "example": "My card"
-          },
-          "description": {
-            "type": "string",
-            "description": "Card description",
-            "example": "My plane on the future"
-          },
-          "priority": {
-            "type": "string",
-            "description": "Priority card",
-            "enum": [
-              "without",
-              "low",
-              "medium",
-              "high"
-            ]
-          },
-          "deadline": {
-            "type": "string",
-            "description": "Card deadline",
-            "example": "2015-03-01"
-          },
-          "columnId": {
-            "type": "integer",
-            "description": "Id"
-          },
-          "owner": {
-            "type": "integer",
-            "description": "Id"
-          }
-        }
-      },
-      "UpdateCardResponse": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "integer",
-            "description": "Id"
-          },
-          "titleCard": {
-            "type": "string",
-            "description": "Card title",
-            "example": "My card"
-          },
-          "description": {
-            "type": "string",
-            "description": "Card description",
-            "example": "My plane on the future"
-          },
-          "priority": {
-            "type": "string",
-            "description": "Priority card",
-            "enum": [
-              "without",
-              "low",
-              "medium",
-              "high"
-            ]
-          },
-          "deadline": {
-            "type": "string",
-            "description": "Card deadline",
-            "example": "2015-03-01"
-          },
-          "columnId": {
-            "type": "integer",
-            "description": "Id"
-          },
-          "owner": {
-            "type": "integer",
-            "description": "Id"
-          }
-        }
-      },
-      "UpdateColumnCardResponse": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "integer",
-            "description": "Id"
-          },
-          "titleCard": {
-            "type": "string",
-            "description": "Card title",
-            "example": "My card"
-          },
-          "description": {
-            "type": "string",
-            "description": "Card description",
-            "example": "My plane on the future"
-          },
-          "priority": {
-            "type": "string",
-            "description": "Priority card",
-            "enum": [
-              "without",
-              "low",
-              "medium",
-              "high"
-            ]
-          },
-          "deadline": {
-            "type": "string",
-            "description": "Card deadline",
-            "example": "2015-03-01"
-          },
-          "columnId": {
-            "type": "string",
-            "description": "Id",
-            "example": "65c4d3229f657e563e54e029"
-          },
-          "owner": {
-            "type": "integer",
-            "description": "Id"
           }
         }
       },
@@ -1663,8 +1443,9 @@
         "type": "object",
         "properties": {
           "columnId": {
-            "type": "integer",
-            "description": "Id"
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
           }
         }
       },
@@ -1704,8 +1485,245 @@
             "example": "2015-03-01"
           },
           "columnId": {
-            "type": "integer",
-            "description": "Id"
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
+          }
+        }
+      },
+      "RegistrationResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 20,
+            "minLength": 2,
+            "type": "string",
+            "description": "User's name",
+            "example": "Denys"
+          },
+          "email": {
+            "type": "string",
+            "description": "A user's email address.",
+            "format": "email"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "User's token",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmU3OTJiMWRjOWQ5OWU4NjZmNjQxYiIsImlhdCI6MTcwNjk4MTY3NSwiZXhwIjoxNzA3MDUzNjc1fQ.CR1wWNZvCtiPpvpOUNpmSiBDWPeyaT_eeYXcZ_UL4OM"
+          },
+          "refreshToken": {
+            "type": "string",
+            "description": "User's refreshToken",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzIzMWNkNDViMjg3NGFjOWRjYmIyZSIsImlhdCI6MTcwNzMxMjI2NCwiZXhwIjoxNzA3OTE3MDY0fQ.Vi2u42kO8jnGzjyqJ1Q-52ioaffdDPwpQtxYLH8x2Iw"
+          },
+          "user": {
+            "$ref": "#/components/schemas/LoginResponse_user"
+          }
+        }
+      },
+      "UpdateUserResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 20,
+            "minLength": 2,
+            "type": "string",
+            "description": "User's name",
+            "example": "Denys"
+          },
+          "email": {
+            "type": "string",
+            "description": "A user's email address.",
+            "format": "email"
+          }
+        }
+      },
+      "OneBoardResponse": {
+        "type": "object",
+        "properties": {
+          "board": {
+            "$ref": "#/components/schemas/OneBoardResponse_board"
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OneBoardResponse_columns"
+            }
+          }
+        }
+      },
+      "AddColumnResponse": {
+        "type": "object",
+        "properties": {
+          "titleColumn": {
+            "type": "string",
+            "description": "Column title",
+            "example": "My column"
+          },
+          "boardId": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
+          }
+        }
+      },
+      "UpdateColumnResponse": {
+        "type": "object",
+        "properties": {
+          "titleColumn": {
+            "type": "string",
+            "description": "Column title",
+            "example": "My column"
+          },
+          "boardId": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
+          }
+        }
+      },
+      "AddCardResponse": {
+        "type": "object",
+        "properties": {
+          "titleCard": {
+            "type": "string",
+            "description": "Card title",
+            "example": "My card"
+          },
+          "description": {
+            "type": "string",
+            "description": "Card description",
+            "example": "My plane on the future"
+          },
+          "priority": {
+            "type": "string",
+            "description": "Priority card",
+            "enum": [
+              "without",
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "deadline": {
+            "type": "string",
+            "description": "Card deadline",
+            "example": "2015-03-01"
+          },
+          "columnId": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
+          }
+        }
+      },
+      "UpdateCardResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
+          },
+          "titleCard": {
+            "type": "string",
+            "description": "Card title",
+            "example": "My card"
+          },
+          "description": {
+            "type": "string",
+            "description": "Card description",
+            "example": "My plane on the future"
+          },
+          "priority": {
+            "type": "string",
+            "description": "Priority card",
+            "enum": [
+              "without",
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "deadline": {
+            "type": "string",
+            "description": "Card deadline",
+            "example": "2015-03-01"
+          },
+          "columnId": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
+          }
+        }
+      },
+      "UpdateColumnCardResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
+          },
+          "titleCard": {
+            "type": "string",
+            "description": "Card title",
+            "example": "My card"
+          },
+          "description": {
+            "type": "string",
+            "description": "Card description",
+            "example": "My plane on the future"
+          },
+          "priority": {
+            "type": "string",
+            "description": "Priority card",
+            "enum": [
+              "without",
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "deadline": {
+            "type": "string",
+            "description": "Card deadline",
+            "example": "2015-03-01"
+          },
+          "columnId": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c4d3229f657e563e54e029"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
           }
         }
       },
@@ -1734,8 +1752,9 @@
         "type": "object",
         "properties": {
           "_id": {
-            "type": "integer",
-            "description": "Id"
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
           },
           "name": {
             "maxLength": 20,
@@ -1768,38 +1787,6 @@
               "light",
               "violet"
             ]
-          }
-        }
-      },
-      "LoginResponse_user": {
-        "type": "object",
-        "properties": {
-          "avatar": {
-            "type": "string",
-            "description": "User's avatar",
-            "format": "binary",
-            "example": "http://res.cloudinary.com/dsywt0aej/image/upload/v1707053839/avatars/65be792b1dc9d99e866f641b_Vasily.jpg or null"
-          },
-          "theme": {
-            "type": "string",
-            "description": "User's theme",
-            "enum": [
-              "dark",
-              "light",
-              "violet"
-            ]
-          },
-          "name": {
-            "maxLength": 20,
-            "minLength": 2,
-            "type": "string",
-            "description": "User's name",
-            "example": "Denys"
-          },
-          "email": {
-            "type": "string",
-            "description": "A user's email address.",
-            "format": "email"
           }
         }
       },
@@ -1857,16 +1844,50 @@
           }
         }
       },
+      "LoginResponse_user": {
+        "type": "object",
+        "properties": {
+          "avatar": {
+            "type": "string",
+            "description": "User's avatar",
+            "format": "binary",
+            "example": "http://res.cloudinary.com/dsywt0aej/image/upload/v1707053839/avatars/65be792b1dc9d99e866f641b_Vasily.jpg or null"
+          },
+          "theme": {
+            "type": "string",
+            "description": "User's theme",
+            "enum": [
+              "dark",
+              "light",
+              "violet"
+            ]
+          },
+          "name": {
+            "maxLength": 20,
+            "minLength": 2,
+            "type": "string",
+            "description": "User's name",
+            "example": "Denys"
+          },
+          "email": {
+            "type": "string",
+            "description": "A user's email address.",
+            "format": "email"
+          }
+        }
+      },
       "OneBoardResponse_board": {
         "type": "object",
         "properties": {
           "_id": {
-            "type": "integer",
-            "description": "Id"
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
           },
           "owner": {
-            "type": "integer",
-            "description": "Id"
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
           },
           "titleBoard": {
             "type": "string",
@@ -1928,12 +1949,14 @@
             "example": "My card"
           },
           "boardId": {
-            "type": "integer",
-            "description": "Id"
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
           },
           "owner": {
-            "type": "integer",
-            "description": "Id"
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
           }
         }
       },
@@ -1946,12 +1969,14 @@
             "example": "My column"
           },
           "boardId": {
-            "type": "integer",
-            "description": "Id"
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
           },
           "owner": {
-            "type": "integer",
-            "description": "Id"
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
           },
           "cards": {
             "type": "array",

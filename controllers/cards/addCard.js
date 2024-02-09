@@ -5,14 +5,13 @@ import { Column, Card, User } from "../../models/index.js";
 
 const addCard = async (req, res) => {
   const { _id: owner } = req.user;
-
   const { columnId } = req.body;
-
-  // перевірка, чи коректний ід нам переданий
+  
+// перевірка, чи коректний ід нам переданий
   if (!isValidObjectId(columnId)) {
     throw HttpError(400, `Column not valid`);
   }
-
+  
   // перевірка columnId - чи існує та чи належить користувачу
   const haveColumn = await Column.findOne({ _id: columnId, owner });
   if (!haveColumn) {
