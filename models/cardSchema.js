@@ -2,66 +2,72 @@ import Joi from "joi";
 import { Schema, model } from "mongoose";
 import { handleSaveError, setUpdateOptions } from "../hooks/index.js";
 
-const cardSchema = new Schema({
+const cardSchema = new Schema(
+  {
     titleCard: {
-        type: String,
-        required: [true, 'Set title for card'],
+      type: String,
+      required: [true, "Set title for card"],
     },
     description: {
-        type: String,
+      type: String,
     },
     priority: {
-        type: String,
-        enum: ["without", "low", "medium", "high"],
-        default: "without",
+      type: String,
+      enum: ["without", "low", "medium", "high"],
+      default: "without",
     },
     deadline: {
-        type: Date,
+      type: Date,
     },
     columnId: {
-        type: Schema.Types.ObjectId,
-        ref: 'column',
-        required: true,
+      type: Schema.Types.ObjectId,
+      ref: "column",
+      required: true,
     },
     owner: {
-        type: Schema.Types.ObjectId,
-        ref: "user",
-        required: true,
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
     },
+    boardId: {
+      type: Schema.Types.ObjectId,
+      ref: "board",
+      required: true,
+    },
+  },
+  { versionKey: false, timestamps: true }
+);
 
-}, { versionKey: false, timestamps: true });
-
-cardSchema.post('save', handleSaveError);
+cardSchema.post("save", handleSaveError);
 
 cardSchema.pre("findOneAndUpdate", setUpdateOptions);
 
 export const cardAddSchema = Joi.object({
-    titleCard: Joi.string().required(),
-    description: Joi.string().allow(''),
-    priority: Joi.string().valid("without", "low", "medium", "high"),
-    deadline: Joi.date().iso(),
-    columnId: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),
+  titleCard: Joi.string().required(),
+  description: Joi.string().allow(""),
+  priority: Joi.string().valid("without", "low", "medium", "high"),
+  deadline: Joi.date().iso(),
+  columnId: Joi.string().required(),
+  boardId: Joi.string().required(),
 }).messages({
-    "string.pattern.base": `Column not valid`,
-    "any.required": `Missing field {#label}`,
+  "string.pattern.base": `Column not valid`,
+  "any.required": `Missing field {#label}`,
 });
 
 export const cardUpdateSchema = Joi.object({
-    titleCard: Joi.string(),
-    description: Joi.string().allow(''),
-    priority: Joi.string().valid("without", "low", "medium", "high"),
-    deadline: Joi.date().iso(),
+  titleCard: Joi.string(),
+  description: Joi.string().allow(""),
+  priority: Joi.string().valid("without", "low", "medium", "high"),
+  deadline: Joi.date().iso(),
 });
 
-export const cardPatchSchema = Joi.object({
-    columnId: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),
-}).messages({
-    "string.pattern.base": `Column not valid`,
-    "any.required": `Missing field {#label}`,
-});
+// export const cardPatchSchema = Joi.object({
+//     columnId: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),
+// }).messages({
+//     "string.pattern.base": `Column not valid`,
+//     "any.required": `Missing field {#label}`,
+// });
 
-const Card = model('card', cardSchema);
+const Card = model("card", cardSchema);
 
 export default Card;
-
-

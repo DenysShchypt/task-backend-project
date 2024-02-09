@@ -31,12 +31,12 @@ const boardSchema = new Schema(
       },
       default: "default",
     },
-    columns: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "column",
-      },
-    ],
+    // columns: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "column",
+    //   },
+    // ],
   },
   { versionKey: false, timestamps: true }
 );

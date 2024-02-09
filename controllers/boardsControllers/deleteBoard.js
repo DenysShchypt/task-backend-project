@@ -21,14 +21,19 @@ const deleteBoard = async (req, res) => {
     throw HttpError(403, "Access denied");
   }
 
-  await Card.deleteMany({ columnId: { $in: board.columns } });
+  // await Card.deleteMany({ columnId: { $in: board.columns } });
+
+  await Card.deleteMany({ boardId });
+
   await Column.deleteMany({ boardId });
 
-  const result = await Board.findOneAndDelete({ _id: boardId, owner });
+  await Board.deleteOne({ _id: boardId });
 
-  if (!result) {
-    throw HttpError(404, `Board not found`);
-  }
+  // const result = await Board.findOneAndDelete({ _id: boardId, owner });
+
+  // if (!result) {
+  //   throw HttpError(404, `Board not found`);
+  // }
 
   res.json({ message: "Successfull operation" });
 };

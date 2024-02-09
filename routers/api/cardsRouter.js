@@ -1,7 +1,7 @@
 import express from "express";
 import * as cardsController from "../../controllers/cards/index.js";
 import { validateBody } from "../../decorators/index.js";
-import { cardAddSchema, cardUpdateSchema, cardPatchSchema } from "../../models/cardSchema.js";
+import { cardAddSchema, cardUpdateSchema } from "../../models/cardSchema.js";
 import {
   authenticate,
   isValidId,
@@ -27,7 +27,7 @@ cardsRouter.put(
 cardsRouter.patch(
   "/:id",
   isValidId,
-  validateBody(cardPatchSchema),
+  // validateBody(cardPatchSchema),
   cardsController.movingCard
 );
 
