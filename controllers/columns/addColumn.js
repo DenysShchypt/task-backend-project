@@ -1,21 +1,33 @@
-import { Board, Column } from '../../models/index.js';
-import { HttpError } from "../../helpers/index.js"
+import { isValidObjectId } from "mongoose";
+import { Board, Column, User } from "../../models/index.js";
+import { HttpError } from "../../helpers/index.js";
 import { ctrlWrapper } from "../../decorators/index.js";
 
 const addColumn = async (req, res) => {
-    const { _id: owner } = req.user;
-    const { boardId } = req.body;
+  const { _id: owner } = req.user;
 
-    // перевірка boardId на належність користувачу 
-    const haveBoard = await Board.findOne({ _id: boardId, owner });
-    if (!haveBoard) {
-        throw HttpError(400, `Board not valid`)
-    };
 
-    // додаємо колонку
-    const add = await Column.create({ ...req.body, owner });
+  // перевірка boardId на валідність ід
+  const { boardId } = req.body;
+  if (!isValidObjectId(boardId)) {
+    throw HttpError(400, `Board not valid`);
+  }
 
-    res.status(201).json(add)
-}
+  // перевірка boardId на належність користувачу
+  const haveBoard = await Board.findOne({ _id: boardId, owner });
+  if (!haveBoard) {
+    throw HttpError(400, `BoardId not found`);
+  }
+
+  // додаємо колонку
+  const add = await Column.create({ ...req.body, owner });
+  // const user = await User.findById(req.user._id);
+  // user.columns.push(add._id);
+  haveBoard.columns.push(add._id);
+  await haveBoard.save();
+  // await user.save();
+
+  res.status(201).json(add);
+};
 
 export default ctrlWrapper(addColumn);
