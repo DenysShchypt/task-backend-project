@@ -2,12 +2,12 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Task Pro Swagger documentation 📓",
-    "description": "The API for Task Pro Service.👁‍🗨 \n[Backend github repository](https://github.com/DenysShchypt/task-backend-project)/\n[Frontend github repository](https://github.com/Alexandrbig1/task-pro)\n",
+    "description": "The API for Task Pro Service. 🛠 \n[Backend github repository](https://github.com/DenysShchypt/task-backend-project)/💅\n[Frontend github repository](https://github.com/Alexandrbig1/task-pro)\n",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "https://task-backend-project.onrender.com/api/",
+      "url": "https://task-backend-project.onrender.com/api",
       "description": "Dev"
     }
   ],
@@ -255,7 +255,7 @@
         ]
       }
     },
-    "/users/profile": {
+    "/users/profiles": {
       "patch": {
         "tags": [
           "User"
@@ -978,7 +978,7 @@
             "content": {}
           },
           "404": {
-            "description": "Invalid user / Invalid session",
+            "description": "Invalid user / Invalid session / Not found",
             "content": {}
           }
         },
@@ -990,67 +990,7 @@
       }
     },
     "/cards/{id}": {
-      "delete": {
-        "tags": [
-          "Cards"
-        ],
-        "summary": "Delete one card by Id",
-        "operationId": "Delete one card by Id",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Successfull operation",
-            "content": {}
-          },
-          "400": {
-            "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
-          },
-          "401": {
-            "description": "Unauthorized (invalid access token)",
-            "content": {}
-          },
-          "403": {
-            "description": "No access to data",
-            "content": {}
-          },
-          "404": {
-            "description": "Invalid user / Invalid session",
-            "content": {}
-          },
-          "409": {
-            "description": "Can`t remove!",
-            "content": {}
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "patch": {
+      "put": {
         "tags": [
           "Cards"
         ],
@@ -1105,7 +1045,132 @@
             "content": {}
           },
           "404": {
-            "description": "Invalid user / Invalid session",
+            "description": "Invalid user / Invalid session / Not found",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Cards"
+        ],
+        "summary": "Delete one card by Id",
+        "operationId": "Delete one card by Id",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfull operation",
+            "content": {}
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "403": {
+            "description": "No access to data",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session / Not found",
+            "content": {}
+          },
+          "409": {
+            "description": "Can`t remove!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Cards"
+        ],
+        "summary": "Moving card by column",
+        "operationId": "Moving card by column",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateColumnCardRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Successfull operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateColumnCardResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "403": {
+            "description": "No access to data",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session / Not found",
             "content": {}
           }
         },
@@ -1128,24 +1193,23 @@
         "type": "object",
         "properties": {
           "name": {
-            "$ref": "#/components/schemas/Name"
+            "maxLength": 20,
+            "minLength": 2,
+            "type": "string",
+            "description": "User's name",
+            "example": "Denys"
           },
           "email": {
-            "$ref": "#/components/schemas/Email"
+            "type": "string",
+            "description": "A user's email address.",
+            "format": "email"
           },
           "password": {
-            "$ref": "#/components/schemas/Password"
-          }
-        }
-      },
-      "RegistrationResponse": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "$ref": "#/components/schemas/Name"
-          },
-          "email": {
-            "$ref": "#/components/schemas/Email"
+            "maxLength": 30,
+            "minLength": 6,
+            "type": "string",
+            "description": "User's password",
+            "example": "F558r$flo69sknx"
           }
         }
       },
@@ -1157,35 +1221,16 @@
         "type": "object",
         "properties": {
           "email": {
-            "$ref": "#/components/schemas/Email"
+            "type": "string",
+            "description": "A user's email address.",
+            "format": "email"
           },
           "password": {
-            "$ref": "#/components/schemas/Password"
-          }
-        }
-      },
-      "LoginResponse": {
-        "type": "object",
-        "properties": {
-          "token": {
-            "$ref": "#/components/schemas/Token"
-          },
-          "refreshToken": {
-            "$ref": "#/components/schemas/RefreshToken"
-          },
-          "user": {
-            "$ref": "#/components/schemas/LoginResponse_user"
-          }
-        }
-      },
-      "UpdateUserResponse": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "$ref": "#/components/schemas/Name"
-          },
-          "email": {
-            "$ref": "#/components/schemas/Email"
+            "maxLength": 30,
+            "minLength": 6,
+            "type": "string",
+            "description": "User's password",
+            "example": "F558r$flo69sknx"
           }
         }
       },
@@ -1193,13 +1238,23 @@
         "type": "object",
         "properties": {
           "name": {
-            "$ref": "#/components/schemas/Name"
+            "maxLength": 20,
+            "minLength": 2,
+            "type": "string",
+            "description": "User's name",
+            "example": "Denys"
           },
           "email": {
-            "$ref": "#/components/schemas/Email"
+            "type": "string",
+            "description": "A user's email address.",
+            "format": "email"
           },
           "password": {
-            "$ref": "#/components/schemas/Password"
+            "maxLength": 30,
+            "minLength": 6,
+            "type": "string",
+            "description": "User's password",
+            "example": "F558r$flo69sknx"
           }
         }
       },
@@ -1210,7 +1265,10 @@
         "type": "object",
         "properties": {
           "avatar": {
-            "$ref": "#/components/schemas/AvatarURL"
+            "type": "string",
+            "description": "User's avatar",
+            "format": "binary",
+            "example": "http://res.cloudinary.com/dsywt0aej/image/upload/v1707053839/avatars/65be792b1dc9d99e866f641b_Vasily.jpg or null"
           }
         }
       },
@@ -1221,7 +1279,13 @@
         "type": "object",
         "properties": {
           "theme": {
-            "$ref": "#/components/schemas/Theme"
+            "type": "string",
+            "description": "User's theme",
+            "enum": [
+              "dark",
+              "light",
+              "violet"
+            ]
           }
         }
       },
@@ -1233,10 +1297,14 @@
         "type": "object",
         "properties": {
           "email": {
-            "$ref": "#/components/schemas/Email"
+            "type": "string",
+            "description": "A user's email address.",
+            "format": "email"
           },
           "text": {
-            "$ref": "#/components/schemas/Text"
+            "type": "string",
+            "description": "User's help",
+            "example": "Hello! I need your help!"
           }
         }
       },
@@ -1249,13 +1317,53 @@
         "type": "object",
         "properties": {
           "titleBoard": {
-            "$ref": "#/components/schemas/TitleBoard"
+            "type": "string",
+            "description": "Board title",
+            "example": "My board"
           },
           "background": {
-            "$ref": "#/components/schemas/Background"
+            "type": "string",
+            "description": "User's background board theme",
+            "enum": [
+              "default",
+              "balloon",
+              "clouds",
+              "flowers",
+              "full-moon",
+              "gorge",
+              "kapadokia",
+              "milky-way",
+              "moon",
+              "night",
+              "ocean",
+              "pink-tree",
+              "plant",
+              "rocks",
+              "ship",
+              "unsplash"
+            ]
           },
           "icon": {
-            "$ref": "#/components/schemas/IconBoard"
+            "type": "string",
+            "description": "User's icon board",
+            "enum": [
+              "default",
+              "balloon",
+              "clouds",
+              "flowers",
+              "full-moon",
+              "gorge",
+              "kapadokia",
+              "milky-way",
+              "moon",
+              "night",
+              "ocean",
+              "pink-tree",
+              "plant",
+              "rocks",
+              "ship",
+              "unsplash"
+            ]
           }
         }
       },
@@ -1263,6 +1371,172 @@
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/AllBoardParams_inner"
+        }
+      },
+      "AddColumnParams": {
+        "required": [
+          "boardId",
+          "titleColumn"
+        ],
+        "type": "object",
+        "properties": {
+          "titleColumn": {
+            "type": "string",
+            "description": "Column title",
+            "example": "My column"
+          },
+          "boardId": {
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
+          }
+        }
+      },
+      "UpdateColumnParams": {
+        "required": [
+          "titleColumn"
+        ],
+        "type": "object",
+        "properties": {
+          "titleColumn": {
+            "type": "string",
+            "description": "Column title",
+            "example": "My column"
+          }
+        }
+      },
+      "UpdateCardParams": {
+        "type": "object",
+        "properties": {
+          "titleCard": {
+            "type": "string",
+            "description": "Card title",
+            "example": "My card"
+          },
+          "description": {
+            "type": "string",
+            "description": "Card description",
+            "example": "My plane on the future"
+          },
+          "priority": {
+            "type": "string",
+            "description": "Priority card",
+            "enum": [
+              "without",
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "deadline": {
+            "type": "string",
+            "description": "Card deadline",
+            "example": "2015-03-01"
+          }
+        }
+      },
+      "UpdateColumnCardParams": {
+        "type": "object",
+        "properties": {
+          "columnId": {
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
+          }
+        }
+      },
+      "AddCardParams": {
+        "required": [
+          "columnId",
+          "deadline",
+          "description",
+          "priority",
+          "titleCard"
+        ],
+        "type": "object",
+        "properties": {
+          "titleCard": {
+            "type": "string",
+            "description": "Card title",
+            "example": "My card"
+          },
+          "description": {
+            "type": "string",
+            "description": "Card description",
+            "example": "My plane on the future"
+          },
+          "priority": {
+            "type": "string",
+            "description": "Priority card",
+            "enum": [
+              "without",
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "deadline": {
+            "type": "string",
+            "description": "Card deadline",
+            "example": "2015-03-01"
+          },
+          "columnId": {
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
+          }
+        }
+      },
+      "RegistrationResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 20,
+            "minLength": 2,
+            "type": "string",
+            "description": "User's name",
+            "example": "Denys"
+          },
+          "email": {
+            "type": "string",
+            "description": "A user's email address.",
+            "format": "email"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "User's token",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmU3OTJiMWRjOWQ5OWU4NjZmNjQxYiIsImlhdCI6MTcwNjk4MTY3NSwiZXhwIjoxNzA3MDUzNjc1fQ.CR1wWNZvCtiPpvpOUNpmSiBDWPeyaT_eeYXcZ_UL4OM"
+          },
+          "refreshToken": {
+            "type": "string",
+            "description": "User's refreshToken",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzIzMWNkNDViMjg3NGFjOWRjYmIyZSIsImlhdCI6MTcwNzMxMjI2NCwiZXhwIjoxNzA3OTE3MDY0fQ.Vi2u42kO8jnGzjyqJ1Q-52ioaffdDPwpQtxYLH8x2Iw"
+          },
+          "user": {
+            "$ref": "#/components/schemas/LoginResponse_user"
+          }
+        }
+      },
+      "UpdateUserResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 20,
+            "minLength": 2,
+            "type": "string",
+            "description": "User's name",
+            "example": "Denys"
+          },
+          "email": {
+            "type": "string",
+            "description": "A user's email address.",
+            "format": "email"
+          }
         }
       },
       "OneBoardResponse": {
@@ -1279,43 +1553,23 @@
           }
         }
       },
-      "AddColumnParams": {
-        "required": [
-          "boardId",
-          "titleColumn"
-        ],
-        "type": "object",
-        "properties": {
-          "titleColumn": {
-            "$ref": "#/components/schemas/TitleColumn"
-          },
-          "boardId": {
-            "$ref": "#/components/schemas/Id"
-          }
-        }
-      },
-      "UpdateColumnParams": {
-        "required": [
-          "titleColumn"
-        ],
-        "type": "object",
-        "properties": {
-          "titleColumn": {
-            "$ref": "#/components/schemas/TitleColumn"
-          }
-        }
-      },
       "AddColumnResponse": {
         "type": "object",
         "properties": {
           "titleColumn": {
-            "$ref": "#/components/schemas/TitleColumn"
+            "type": "string",
+            "description": "Column title",
+            "example": "My column"
           },
           "boardId": {
-            "$ref": "#/components/schemas/Id"
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
           },
           "owner": {
-            "$ref": "#/components/schemas/Id"
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
           }
         }
       },
@@ -1323,13 +1577,19 @@
         "type": "object",
         "properties": {
           "titleColumn": {
-            "$ref": "#/components/schemas/TitleColumn"
+            "type": "string",
+            "description": "Column title",
+            "example": "My column"
           },
           "boardId": {
-            "$ref": "#/components/schemas/Id"
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
           },
           "owner": {
-            "$ref": "#/components/schemas/Id"
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
           }
         }
       },
@@ -1337,22 +1597,39 @@
         "type": "object",
         "properties": {
           "titleCard": {
-            "$ref": "#/components/schemas/TitleCard"
+            "type": "string",
+            "description": "Card title",
+            "example": "My card"
           },
           "description": {
-            "$ref": "#/components/schemas/Description"
+            "type": "string",
+            "description": "Card description",
+            "example": "My plane on the future"
           },
           "priority": {
-            "$ref": "#/components/schemas/Priority"
+            "type": "string",
+            "description": "Priority card",
+            "enum": [
+              "without",
+              "low",
+              "medium",
+              "high"
+            ]
           },
           "deadline": {
-            "$ref": "#/components/schemas/Time"
+            "type": "string",
+            "description": "Card deadline",
+            "example": "2015-03-01"
           },
           "columnId": {
-            "$ref": "#/components/schemas/Id"
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
           },
           "owner": {
-            "$ref": "#/components/schemas/Id"
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
           }
         }
       },
@@ -1360,69 +1637,90 @@
         "type": "object",
         "properties": {
           "_id": {
-            "$ref": "#/components/schemas/Id"
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
           },
           "titleCard": {
-            "$ref": "#/components/schemas/TitleCard"
+            "type": "string",
+            "description": "Card title",
+            "example": "My card"
           },
           "description": {
-            "$ref": "#/components/schemas/Description"
+            "type": "string",
+            "description": "Card description",
+            "example": "My plane on the future"
           },
           "priority": {
-            "$ref": "#/components/schemas/Priority"
+            "type": "string",
+            "description": "Priority card",
+            "enum": [
+              "without",
+              "low",
+              "medium",
+              "high"
+            ]
           },
           "deadline": {
-            "$ref": "#/components/schemas/Time"
+            "type": "string",
+            "description": "Card deadline",
+            "example": "2015-03-01"
           },
           "columnId": {
-            "$ref": "#/components/schemas/Id"
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
           },
           "owner": {
-            "$ref": "#/components/schemas/Id"
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
           }
         }
       },
-      "UpdateCardParams": {
+      "UpdateColumnCardResponse": {
         "type": "object",
         "properties": {
+          "_id": {
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
+          },
           "titleCard": {
-            "$ref": "#/components/schemas/TitleCard"
+            "type": "string",
+            "description": "Card title",
+            "example": "My card"
           },
           "description": {
-            "$ref": "#/components/schemas/Description"
+            "type": "string",
+            "description": "Card description",
+            "example": "My plane on the future"
           },
           "priority": {
-            "$ref": "#/components/schemas/Priority"
+            "type": "string",
+            "description": "Priority card",
+            "enum": [
+              "without",
+              "low",
+              "medium",
+              "high"
+            ]
           },
           "deadline": {
-            "$ref": "#/components/schemas/Time"
-          }
-        }
-      },
-      "AddCardParams": {
-        "required": [
-          "columnId",
-          "deadline",
-          "description",
-          "priority",
-          "titleCard"
-        ],
-        "type": "object",
-        "properties": {
-          "titleCard": {
-            "$ref": "#/components/schemas/TitleCard"
-          },
-          "description": {
-            "$ref": "#/components/schemas/Description"
-          },
-          "priority": {
-            "$ref": "#/components/schemas/Priority"
-          },
-          "deadline": {
-            "$ref": "#/components/schemas/Time"
+            "type": "string",
+            "description": "Card deadline",
+            "example": "2015-03-01"
           },
           "columnId": {
-            "$ref": "#/components/schemas/Id"
+            "type": "string",
+            "description": "Id",
+            "format": "int64",
+            "example": "65c4d3229f657e563e54e029"
+          },
+          "owner": {
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
           }
         }
       },
@@ -1430,15 +1728,20 @@
         "type": "object",
         "properties": {
           "text": {
-            "$ref": "#/components/schemas/TextAnswer"
+            "type": "string",
+            "description": "User's help",
+            "example": "Thank you for your request, we will contact you!"
           }
         }
       },
       "UpdateAvatarResponse": {
         "type": "object",
         "properties": {
-          "AvatarURL": {
-            "$ref": "#/components/schemas/AvatarURL"
+          "avatar": {
+            "type": "string",
+            "description": "User's avatar",
+            "format": "binary",
+            "example": "http://res.cloudinary.com/dsywt0aej/image/upload/v1707053839/avatars/65be792b1dc9d99e866f641b_Vasily.jpg or null"
           }
         }
       },
@@ -1446,177 +1749,41 @@
         "type": "object",
         "properties": {
           "_id": {
-            "$ref": "#/components/schemas/Id"
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
           },
           "name": {
-            "$ref": "#/components/schemas/Name"
+            "maxLength": 20,
+            "minLength": 2,
+            "type": "string",
+            "description": "User's name",
+            "example": "Denys"
           },
           "email": {
-            "$ref": "#/components/schemas/Email"
+            "type": "string",
+            "description": "A user's email address.",
+            "format": "email"
           },
           "token": {
-            "$ref": "#/components/schemas/Token"
+            "type": "string",
+            "description": "User's token",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmU3OTJiMWRjOWQ5OWU4NjZmNjQxYiIsImlhdCI6MTcwNjk4MTY3NSwiZXhwIjoxNzA3MDUzNjc1fQ.CR1wWNZvCtiPpvpOUNpmSiBDWPeyaT_eeYXcZ_UL4OM"
           },
-          "avatarURL": {
-            "$ref": "#/components/schemas/AvatarURL"
-          },
-          "theme": {
-            "$ref": "#/components/schemas/Theme"
-          }
-        }
-      },
-      "Email": {
-        "type": "string",
-        "description": "A user's email address.",
-        "format": "email"
-      },
-      "Name": {
-        "maxLength": 20,
-        "minLength": 2,
-        "type": "string",
-        "description": "User's name",
-        "example": "Denys"
-      },
-      "Password": {
-        "maxLength": 30,
-        "minLength": 6,
-        "type": "string",
-        "description": "User's password",
-        "example": "F558r$flo69sknx"
-      },
-      "Token": {
-        "type": "string",
-        "description": "User's token",
-        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmU3OTJiMWRjOWQ5OWU4NjZmNjQxYiIsImlhdCI6MTcwNjk4MTY3NSwiZXhwIjoxNzA3MDUzNjc1fQ.CR1wWNZvCtiPpvpOUNpmSiBDWPeyaT_eeYXcZ_UL4OM"
-      },
-      "RefreshToken": {
-        "type": "string",
-        "description": "User's refreshToken",
-        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YzIzMWNkNDViMjg3NGFjOWRjYmIyZSIsImlhdCI6MTcwNzMxMjI2NCwiZXhwIjoxNzA3OTE3MDY0fQ.Vi2u42kO8jnGzjyqJ1Q-52ioaffdDPwpQtxYLH8x2Iw"
-      },
-      "Text": {
-        "type": "string",
-        "description": "User's help",
-        "example": "Hello! I need your help!"
-      },
-      "TextAnswer": {
-        "type": "string",
-        "description": "User's help",
-        "example": "Thank you for your request, we will contact you!"
-      },
-      "AvatarURL": {
-        "type": "string",
-        "description": "User's avatar",
-        "format": "binary",
-        "example": "http://res.cloudinary.com/dsywt0aej/image/upload/v1707053839/avatars/65be792b1dc9d99e866f641b_Vasily.jpg or null"
-      },
-      "Theme": {
-        "type": "string",
-        "description": "User's theme",
-        "enum": [
-          "dark",
-          "light",
-          "violet"
-        ]
-      },
-      "Background": {
-        "type": "string",
-        "description": "User's background board theme",
-        "enum": [
-          "default",
-          "balloon",
-          "clouds",
-          "flowers",
-          "full-moon",
-          "gorge",
-          "kapadokia",
-          "milky-way",
-          "moon",
-          "night",
-          "ocean",
-          "pink-tree",
-          "plant",
-          "rocks",
-          "ship",
-          "unsplash"
-        ]
-      },
-      "IconBoard": {
-        "type": "string",
-        "description": "User's icon board",
-        "enum": [
-          "default",
-          "balloon",
-          "clouds",
-          "flowers",
-          "full-moon",
-          "gorge",
-          "kapadokia",
-          "milky-way",
-          "moon",
-          "night",
-          "ocean",
-          "pink-tree",
-          "plant",
-          "rocks",
-          "ship",
-          "unsplash"
-        ]
-      },
-      "Priority": {
-        "type": "string",
-        "description": "Priority card",
-        "enum": [
-          "without",
-          "low",
-          "medium",
-          "high"
-        ]
-      },
-      "TitleBoard": {
-        "type": "string",
-        "description": "Board title",
-        "example": "My board"
-      },
-      "TitleColumn": {
-        "type": "string",
-        "description": "Column title",
-        "example": "My column"
-      },
-      "TitleCard": {
-        "type": "string",
-        "description": "Card title",
-        "example": "My card"
-      },
-      "Description": {
-        "type": "string",
-        "description": "Card description",
-        "example": "My plane on the future"
-      },
-      "Time": {
-        "type": "string",
-        "description": "Card deadline",
-        "example": "2015-03-01"
-      },
-      "Id": {
-        "type": "string",
-        "description": "Id",
-        "example": "65c12dc037484a7784493011"
-      },
-      "LoginResponse_user": {
-        "type": "object",
-        "properties": {
-          "avatarURL": {
-            "$ref": "#/components/schemas/AvatarURL"
+          "avatar": {
+            "type": "string",
+            "description": "User's avatar",
+            "format": "binary",
+            "example": "http://res.cloudinary.com/dsywt0aej/image/upload/v1707053839/avatars/65be792b1dc9d99e866f641b_Vasily.jpg or null"
           },
           "theme": {
-            "$ref": "#/components/schemas/Theme"
-          },
-          "name": {
-            "$ref": "#/components/schemas/Name"
-          },
-          "email": {
-            "$ref": "#/components/schemas/Email"
+            "type": "string",
+            "description": "User's theme",
+            "enum": [
+              "dark",
+              "light",
+              "violet"
+            ]
           }
         }
       },
@@ -1624,13 +1791,85 @@
         "type": "object",
         "properties": {
           "titleBoard": {
-            "$ref": "#/components/schemas/TitleBoard"
+            "type": "string",
+            "description": "Board title",
+            "example": "My board"
           },
           "backgroundBoard": {
-            "$ref": "#/components/schemas/Background"
+            "type": "string",
+            "description": "User's background board theme",
+            "enum": [
+              "default",
+              "balloon",
+              "clouds",
+              "flowers",
+              "full-moon",
+              "gorge",
+              "kapadokia",
+              "milky-way",
+              "moon",
+              "night",
+              "ocean",
+              "pink-tree",
+              "plant",
+              "rocks",
+              "ship",
+              "unsplash"
+            ]
           },
           "icon": {
-            "$ref": "#/components/schemas/IconBoard"
+            "type": "string",
+            "description": "User's icon board",
+            "enum": [
+              "default",
+              "balloon",
+              "clouds",
+              "flowers",
+              "full-moon",
+              "gorge",
+              "kapadokia",
+              "milky-way",
+              "moon",
+              "night",
+              "ocean",
+              "pink-tree",
+              "plant",
+              "rocks",
+              "ship",
+              "unsplash"
+            ]
+          }
+        }
+      },
+      "LoginResponse_user": {
+        "type": "object",
+        "properties": {
+          "avatar": {
+            "type": "string",
+            "description": "User's avatar",
+            "format": "binary",
+            "example": "http://res.cloudinary.com/dsywt0aej/image/upload/v1707053839/avatars/65be792b1dc9d99e866f641b_Vasily.jpg or null"
+          },
+          "theme": {
+            "type": "string",
+            "description": "User's theme",
+            "enum": [
+              "dark",
+              "light",
+              "violet"
+            ]
+          },
+          "name": {
+            "maxLength": 20,
+            "minLength": 2,
+            "type": "string",
+            "description": "User's name",
+            "example": "Denys"
+          },
+          "email": {
+            "type": "string",
+            "description": "A user's email address.",
+            "format": "email"
           }
         }
       },
@@ -1638,19 +1877,63 @@
         "type": "object",
         "properties": {
           "_id": {
-            "$ref": "#/components/schemas/Id"
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
           },
           "owner": {
-            "$ref": "#/components/schemas/Id"
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
           },
           "titleBoard": {
-            "$ref": "#/components/schemas/TitleBoard"
+            "type": "string",
+            "description": "Board title",
+            "example": "My board"
           },
           "background": {
-            "$ref": "#/components/schemas/Background"
+            "type": "string",
+            "description": "User's background board theme",
+            "enum": [
+              "default",
+              "balloon",
+              "clouds",
+              "flowers",
+              "full-moon",
+              "gorge",
+              "kapadokia",
+              "milky-way",
+              "moon",
+              "night",
+              "ocean",
+              "pink-tree",
+              "plant",
+              "rocks",
+              "ship",
+              "unsplash"
+            ]
           },
           "icon": {
-            "$ref": "#/components/schemas/IconBoard"
+            "type": "string",
+            "description": "User's icon board",
+            "enum": [
+              "default",
+              "balloon",
+              "clouds",
+              "flowers",
+              "full-moon",
+              "gorge",
+              "kapadokia",
+              "milky-way",
+              "moon",
+              "night",
+              "ocean",
+              "pink-tree",
+              "plant",
+              "rocks",
+              "ship",
+              "unsplash"
+            ]
           }
         }
       },
@@ -1658,13 +1941,19 @@
         "type": "object",
         "properties": {
           "titleColumn": {
-            "$ref": "#/components/schemas/TitleCard"
+            "type": "string",
+            "description": "Card title",
+            "example": "My card"
           },
           "boardId": {
-            "$ref": "#/components/schemas/Id"
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
           },
           "owner": {
-            "$ref": "#/components/schemas/Id"
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
           }
         }
       },
@@ -1672,13 +1961,19 @@
         "type": "object",
         "properties": {
           "titleColumn": {
-            "$ref": "#/components/schemas/TitleColumn"
+            "type": "string",
+            "description": "Column title",
+            "example": "My column"
           },
           "boardId": {
-            "$ref": "#/components/schemas/Id"
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
           },
           "owner": {
-            "$ref": "#/components/schemas/Id"
+            "type": "integer",
+            "description": "Id",
+            "format": "int64"
           },
           "cards": {
             "type": "array",
@@ -1796,6 +2091,15 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/UpdateCardParams"
+            }
+          }
+        }
+      },
+      "UpdateColumnCardRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateColumnCardParams"
             }
           }
         }
