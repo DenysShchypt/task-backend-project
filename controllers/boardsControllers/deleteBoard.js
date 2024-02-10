@@ -15,13 +15,13 @@ const deleteBoard = async (req, res) => {
   const { _id: owner } = req.user;
   const { boardId } = req.params;
 
-  const board = await Board.findById(boardId);
+  // const board = await Board.findById(boardId);
 
-  if (board.owner.toString() !== owner.toString()) {
-    throw HttpError(403, "Access denied");
-  }
+  // if (board.owner.toString() !== owner.toString()) {
+  //   throw HttpError(403, "Access denied");
+  // }
 
-  await Card.deleteMany({ columnId: { $in: board.columns } });
+  await Card.deleteMany({ boardId });
   await Column.deleteMany({ boardId });
 
   const result = await Board.findOneAndDelete({ _id: boardId, owner });
