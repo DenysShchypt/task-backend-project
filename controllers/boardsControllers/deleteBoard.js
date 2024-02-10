@@ -3,32 +3,18 @@ import HttpError from "../../helpers/HttpError.js";
 import { Board, Card, Column } from "../../models/index.js";
 
 const deleteBoard = async (req, res) => {
-  // const { _id: owner } = req.user;
-  // const { boardId: _id } = req.params;
-
-  // const result = await Board.findOneAndDelete({ _id, owner });
-  // if (!result) {
-  //   throw HttpError(404, `Board with id: ${_id} not found`);
-  // }
-
-  // ***
   const { _id: owner } = req.user;
   const { boardId } = req.params;
 
-  // const board = await Board.findById(boardId);
+  const board = await Board.findById(boardId);
 
-  // if (board.owner.toString() !== owner.toString()) {
-  //   throw HttpError(403, "Access denied");
-  // }
-
-  await Card.deleteMany({ boardId });
-  await Column.deleteMany({ boardId });
-
-  const result = await Board.findOneAndDelete({ _id: boardId, owner });
-
-  if (!result) {
+  if (!board) {
     throw HttpError(404, `Board not found`);
   }
+
+  await Card.deleteMany({ boardId, owner });
+  await Column.deleteMany({ boardId, owner });
+  await Board.deleteOne({ _id: boardId, owner });
 
   res.json({ message: "Successfull operation" });
 };
