@@ -6,7 +6,6 @@ import { ctrlWrapper } from "../../decorators/index.js";
 const addColumn = async (req, res) => {
   const { _id: owner } = req.user;
 
-
   // перевірка boardId на валідність ід
   const { boardId } = req.body;
   if (!isValidObjectId(boardId)) {
@@ -21,11 +20,9 @@ const addColumn = async (req, res) => {
 
   // додаємо колонку
   const add = await Column.create({ ...req.body, owner });
-  // const user = await User.findById(req.user._id);
-  // user.columns.push(add._id);
-  haveBoard.columns.push(add._id);
-  await haveBoard.save();
-  // await user.save();
+
+  // haveBoard.columns.push(add._id);
+  // await haveBoard.save();
 
   res.status(201).json(add);
 };
