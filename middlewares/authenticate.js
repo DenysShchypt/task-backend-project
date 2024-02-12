@@ -16,8 +16,12 @@ const authenticate = async (req, res, next) => {
     return next(HttpError(401, "Unauthorized (invalid access token)"));
   }
   try {
-    const { id } = jwt.verify(token, JWT_SECRET);
+    const { id, sid } = jwt.verify(token, JWT_SECRET);
+
+    console.log(sid);
+
     const user = await User.findById(id);
+
     if (!user || !user.token || token !== user.token) {
       return next(HttpError(401, "Unauthorized (invalid access token)"));
     }

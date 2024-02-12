@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { User } from "../../models/index.js";
+import { Session, User } from "../../models/index.js";
 import { ctrlWrapper } from "../../decorators/index.js";
 import { HttpError } from "../../helpers/index.js";
 import "dotenv/config";
@@ -22,8 +22,17 @@ const signin = async (req, res) => {
     throw HttpError(403, "Email doesn't exist / Password is wrong");
   }
 
-  const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "20h" });
-  const refreshToken = jwt.sign({ id: user._id }, JWT_SECRET, {
+  const newSession = await Session.create({
+    uid: user._id,
+  });
+
+  const payload = {
+    id: user._id,
+    sid: newSession._id,
+  };
+
+  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "20h" });
+  const refreshToken = jwt.sign(payload, JWT_SECRET, {
     expiresIn: "7d",
   });
   await User.findByIdAndUpdate(user._id, { token });
