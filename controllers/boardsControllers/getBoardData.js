@@ -10,7 +10,7 @@ const getBoardData = async (req, res) => {
   const board = await Board.findOne({ _id: boardId, owner });
 
   if (!board) {
-    throw HttpError(404, `Board with id: ${_id} not found`);
+    throw HttpError(404, `Board not found`);
   }
 
   const result = await Column.aggregate([

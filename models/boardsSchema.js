@@ -4,6 +4,7 @@ import { backgroundNames, iconsNames } from "../properties/index.js";
 import { handleSaveError, setUpdateOptions } from "../hooks/index.js";
 
 //MONGOOSE
+const filterNames = ["default", "without", "low", "medium", "high"]
 const boardSchema = new Schema(
   {
     owner: {
@@ -21,6 +22,11 @@ const boardSchema = new Schema(
         values: backgroundNames,
         message: `Background value must be in list ${backgroundNames}`,
       },
+      default: "default",
+    },
+    filter: {
+      type: String,
+      enum: filterNames,
       default: "default",
     },
     icon: {
@@ -43,6 +49,9 @@ export const addBoardSchema = Joi.object({
   titleBoard: Joi.string().required(),
   background: Joi.string().valid(...backgroundNames),
   icon: Joi.string().valid(...iconsNames),
+});
+export const BoardFilterSchema = Joi.object({
+  filter: Joi.string().required().valid(...filterNames),
 });
 export const updateBoardSchema = Joi.object({
   titleBoard: Joi.string(),

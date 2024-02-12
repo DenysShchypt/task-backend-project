@@ -8,10 +8,10 @@ const deleteUser = async (req, res) => {
   const user = await User.findOneAndDelete({ _id });
 
   if (!user) {
-    throw HttpError(404, `User with id: ${_id} not found`);
+    throw HttpError(404, `User not found`);
   }
 
-  res.status(204).json({ message: "User delete success" });
+  res.status(204).json({ message: "Successful operation" });
 };
 
 export default ctrlWrapper(deleteUser);
