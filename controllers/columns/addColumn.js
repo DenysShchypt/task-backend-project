@@ -21,9 +21,6 @@ const addColumn = async (req, res) => {
   // додаємо колонку
   const add = await Column.create({ ...req.body, owner });
 
-  // haveBoard.columns.push(add._id);
-  // await haveBoard.save();
-
   res.status(201).json(add);
 };
 

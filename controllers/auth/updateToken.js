@@ -12,10 +12,6 @@ const updateToken = async (req, res) => {
 
   const user = await User.findOne({ _id: id });
 
-  // const user = await User.findOne({
-  //   $or: [{ _id: id }, { googleId: id }],
-  // });
-
   if (!user) {
     throw HttpError(403);
   }

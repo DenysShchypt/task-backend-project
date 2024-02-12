@@ -17,7 +17,6 @@ const swaggerDocument = JSON.parse(
 
 // Додавання данних з env змінні оточення process.env
 dotenv.config();
-
 const app = express(); //web-server
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 app.use("/link", (req, res) => {

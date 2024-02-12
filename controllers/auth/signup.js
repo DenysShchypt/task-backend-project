@@ -33,7 +33,7 @@ const signup = async (req, res) => {
   await newUser.save();
 
   res.status(201).json({
-    message: "SuccessFull operation",
+    message: "Successful operation",
     user: { token: token, name: newUser.name, email: newUser.email },
   });
 };

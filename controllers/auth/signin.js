@@ -29,7 +29,7 @@ const signin = async (req, res) => {
   await User.findByIdAndUpdate(user._id, { token });
 
   res.json({
-    message: "Successfull operation",
+    message: "Successful operation",
     token,
     refreshToken,
     user: {

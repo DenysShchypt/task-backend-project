@@ -13,8 +13,7 @@ import "dotenv/config";
 
 const { JWT_SECRET } = process.env;
 
-const { GOOGLE_SECRET, GOOGLE_CLIENT_ID, BASE_URL, FRONT_BASE_URL } =
-  process.env;
+const { GOOGLE_SECRET, GOOGLE_CLIENT_ID, BACKEND_URL, FRONT_URL } = process.env;
 
 const googleRedirect = async (req, res) => {
   const fullUrl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
@@ -32,7 +31,7 @@ const googleRedirect = async (req, res) => {
     data: {
       client_id: GOOGLE_CLIENT_ID,
       client_secret: GOOGLE_SECRET,
-      redirect_uri: `${BASE_URL}/api/auth/google-redirect`,
+      redirect_uri: `${BACKEND_URL}/api/auth/google-redirect`,
       grant_type: "authorization_code",
       code,
     },
@@ -45,7 +44,7 @@ const googleRedirect = async (req, res) => {
     },
   });
 
-  const user = await User.findOne({ googleId: userData.data.id });
+  const user = await User.findOne({ email: userData.data.email });
 
   let payload = {};
 
@@ -56,8 +55,6 @@ const googleRedirect = async (req, res) => {
       name: userData.data.name,
       email: userData.data.email,
       password: hashPassword,
-      avatarURL: userData.data.picture,
-      googleId: userData.data.id,
     });
     await newUser.save();
     payload = {
@@ -78,7 +75,7 @@ const googleRedirect = async (req, res) => {
   });
 
   return res.redirect(
-    `${FRONT_BASE_URL}/api/auth/google-redirect/?token=${token}&refreshToken=${refreshToken}`
+    `${FRONT_URL}/api/auth/google-redirect/?token=${token}&refreshToken=${refreshToken}`
   );
 };
 

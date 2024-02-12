@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Task Pro Swagger documentation 📓",
-    "description": "The API for Task Pro Service. 🛠 \n[Backend github repository](https://github.com/DenysShchypt/task-backend-project)/💅\n[Frontend github repository](https://github.com/Alexandrbig1/task-pro)\n",
+    "description": "The API for Task Pro Service. 🛠 \n[Backend github repository](https://github.com/DenysShchypt/task-backend-project)/ 💅 \n[Frontend github repository](https://github.com/Alexandrbig1/task-pro)\n",
     "version": "1.0.0"
   },
   "servers": [
@@ -255,7 +255,7 @@
         ]
       }
     },
-    "/users/profiles": {
+    "/users/profile": {
       "patch": {
         "tags": [
           "User"
@@ -1367,6 +1367,22 @@
           }
         }
       },
+      "UpdateBoardFilterParams": {
+        "type": "object",
+        "properties": {
+          "filter": {
+            "type": "string",
+            "description": "Board filter",
+            "enum": [
+              "default",
+              "without",
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        }
+      },
       "AllBoardParams": {
         "type": "array",
         "items": {
@@ -1736,7 +1752,7 @@
       "UpdateAvatarResponse": {
         "type": "object",
         "properties": {
-          "avatar": {
+          "avatarURL": {
             "type": "string",
             "description": "User's avatar",
             "format": "binary",
@@ -1769,7 +1785,7 @@
             "description": "User's token",
             "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmU3OTJiMWRjOWQ5OWU4NjZmNjQxYiIsImlhdCI6MTcwNjk4MTY3NSwiZXhwIjoxNzA3MDUzNjc1fQ.CR1wWNZvCtiPpvpOUNpmSiBDWPeyaT_eeYXcZ_UL4OM"
           },
-          "avatar": {
+          "avatarURL": {
             "type": "string",
             "description": "User's avatar",
             "format": "binary",
@@ -1783,202 +1799,6 @@
               "light",
               "violet"
             ]
-          }
-        }
-      },
-      "AllBoardParams_inner": {
-        "type": "object",
-        "properties": {
-          "titleBoard": {
-            "type": "string",
-            "description": "Board title",
-            "example": "My board"
-          },
-          "backgroundBoard": {
-            "type": "string",
-            "description": "User's background board theme",
-            "enum": [
-              "default",
-              "balloon",
-              "clouds",
-              "flowers",
-              "full-moon",
-              "gorge",
-              "kapadokia",
-              "milky-way",
-              "moon",
-              "night",
-              "ocean",
-              "pink-tree",
-              "plant",
-              "rocks",
-              "ship",
-              "unsplash"
-            ]
-          },
-          "icon": {
-            "type": "string",
-            "description": "User's icon board",
-            "enum": [
-              "default",
-              "balloon",
-              "clouds",
-              "flowers",
-              "full-moon",
-              "gorge",
-              "kapadokia",
-              "milky-way",
-              "moon",
-              "night",
-              "ocean",
-              "pink-tree",
-              "plant",
-              "rocks",
-              "ship",
-              "unsplash"
-            ]
-          }
-        }
-      },
-      "LoginResponse_user": {
-        "type": "object",
-        "properties": {
-          "avatar": {
-            "type": "string",
-            "description": "User's avatar",
-            "format": "binary",
-            "example": "http://res.cloudinary.com/dsywt0aej/image/upload/v1707053839/avatars/65be792b1dc9d99e866f641b_Vasily.jpg or null"
-          },
-          "theme": {
-            "type": "string",
-            "description": "User's theme",
-            "enum": [
-              "dark",
-              "light",
-              "violet"
-            ]
-          },
-          "name": {
-            "maxLength": 20,
-            "minLength": 2,
-            "type": "string",
-            "description": "User's name",
-            "example": "Denys"
-          },
-          "email": {
-            "type": "string",
-            "description": "A user's email address.",
-            "format": "email"
-          }
-        }
-      },
-      "OneBoardResponse_board": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string",
-            "description": "Id",
-            "example": "65c12dc037484a7784493011"
-          },
-          "owner": {
-            "type": "string",
-            "description": "Id",
-            "example": "65c12dc037484a7784493011"
-          },
-          "titleBoard": {
-            "type": "string",
-            "description": "Board title",
-            "example": "My board"
-          },
-          "background": {
-            "type": "string",
-            "description": "User's background board theme",
-            "enum": [
-              "default",
-              "balloon",
-              "clouds",
-              "flowers",
-              "full-moon",
-              "gorge",
-              "kapadokia",
-              "milky-way",
-              "moon",
-              "night",
-              "ocean",
-              "pink-tree",
-              "plant",
-              "rocks",
-              "ship",
-              "unsplash"
-            ]
-          },
-          "icon": {
-            "type": "string",
-            "description": "User's icon board",
-            "enum": [
-              "default",
-              "balloon",
-              "clouds",
-              "flowers",
-              "full-moon",
-              "gorge",
-              "kapadokia",
-              "milky-way",
-              "moon",
-              "night",
-              "ocean",
-              "pink-tree",
-              "plant",
-              "rocks",
-              "ship",
-              "unsplash"
-            ]
-          }
-        }
-      },
-      "OneBoardResponse_cards": {
-        "type": "object",
-        "properties": {
-          "titleColumn": {
-            "type": "string",
-            "description": "Card title",
-            "example": "My card"
-          },
-          "boardId": {
-            "type": "string",
-            "description": "Id",
-            "example": "65c12dc037484a7784493011"
-          },
-          "owner": {
-            "type": "string",
-            "description": "Id",
-            "example": "65c12dc037484a7784493011"
-          }
-        }
-      },
-      "OneBoardResponse_columns": {
-        "type": "object",
-        "properties": {
-          "titleColumn": {
-            "type": "string",
-            "description": "Column title",
-            "example": "My column"
-          },
-          "boardId": {
-            "type": "string",
-            "description": "Id",
-            "example": "65c12dc037484a7784493011"
-          },
-          "owner": {
-            "type": "string",
-            "description": "Id",
-            "example": "65c12dc037484a7784493011"
-          },
-          "cards": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OneBoardResponse_cards"
-            }
           }
         }
       }
@@ -2045,6 +1865,15 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/AddBoardParams"
+            }
+          }
+        }
+      },
+      "UpdateBoardFilter": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UpdateBoardFilterParams"
             }
           }
         }
