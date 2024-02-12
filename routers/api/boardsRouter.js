@@ -3,6 +3,7 @@ import { validateBody } from "../../decorators/index.js";
 import {
   addBoardSchema,
   updateBoardSchema,
+  BoardFilterSchema
 } from "../../models/boardsSchema.js";
 import * as boardController from "../../controllers/boardsControllers/index.js";
 
@@ -16,6 +17,7 @@ boardsRouter.get("/", boardController.getAllUserBoards);
 
 boardsRouter.get("/:boardId", boardController.getBoardData);
 
+boardsRouter.patch("/filter/:boardId", validateBody(BoardFilterSchema), boardController.filterBoard);
 boardsRouter.post("/", validateBody(addBoardSchema), boardController.addBoard);
 
 boardsRouter.put(
