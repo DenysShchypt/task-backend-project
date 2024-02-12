@@ -31,13 +31,13 @@ const boardSchema = new Schema(
       },
       default: "default",
     },
+
   },
   { versionKey: false, timestamps: true }
 );
 boardSchema.post("save", handleSaveError);
 
 boardSchema.pre("findOneAndUpdate", setUpdateOptions);
-//JOI
 
 export const addBoardSchema = Joi.object({
   titleBoard: Joi.string().required(),

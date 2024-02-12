@@ -4,15 +4,15 @@ import { ctrlWrapper } from "../../decorators/index.js";
 
 const patchColumn = async (req, res) => {
 
-    const { body, params: { id: _id } } = req;
-    const { _id: owner } = req.user;
+  const { body, params: { id: _id } } = req;
+  const { _id: owner } = req.user;
 
-    const update = await Column.findOneAndUpdate({ _id, owner }, body);
+  const update = await Column.findOneAndUpdate({ _id, owner }, body);
 
   if (!update) {
-    throw HttpError(404, `Columns with id=${_id} not found!`)
+    throw HttpError(404, `Column Not Found`)
   }
-    res.json(update);
+  res.json(update);
 };
 
 export default ctrlWrapper(patchColumn);
