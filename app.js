@@ -14,15 +14,14 @@ import {
 const swaggerDocument = JSON.parse(
   await readFile(new URL("./swagger.json", import.meta.url))
 );
-
+// import path from "path";
 // Додавання данних з env змінні оточення process.env
 dotenv.config();
-
 const app = express(); //web-server
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
-app.use("/link", (req, res) => {
-  res.sendFile(path.resolve("public", "link.html"));
-});
+// app.use("/link", (req, res) => {
+//   res.sendFile(path.resolve("public", "link.html"));
+// });
 // Middleware для логування
 app.use(logger(formatsLogger));
 // Middleware for CORS questions
