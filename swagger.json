@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Task Pro Swagger documentation 📓",
-    "description": "The API for Task Pro Service. 🛠 \n[Backend github repository](https://github.com/DenysShchypt/task-backend-project)/ 💅 \n[Frontend github repository](https://github.com/Alexandrbig1/task-pro)\n",
+    "description": "The API for Task Pro Service.🛠 \n[Backend github repository](https://github.com/DenysShchypt/task-backend-project)/ 💅\n[Frontend github repository](https://github.com/Alexandrbig1/task-pro)\n",
     "version": "1.0.0"
   },
   "servers": [
@@ -47,7 +47,7 @@
         },
         "responses": {
           "201": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -84,7 +84,7 @@
         },
         "responses": {
           "201": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -129,7 +129,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {}
           },
           "400": {
@@ -173,7 +173,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -226,7 +226,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -279,7 +279,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -332,7 +332,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfull operation,",
+            "description": "Successful operation,",
             "content": {
               "application/json": {
                 "schema": {
@@ -385,7 +385,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -435,7 +435,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {}
           },
           "400": {
@@ -487,7 +487,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -538,7 +538,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -598,7 +598,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -663,7 +663,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -725,7 +725,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {}
           },
           "400": {
@@ -746,6 +746,73 @@
           },
           "409": {
             "description": "Can`t remove!",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/boards/filter/{id}": {
+      "patch": {
+        "tags": [
+          "Boards"
+        ],
+        "summary": "Update board filter by id",
+        "operationId": "Update board filter by id",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UpdateBoardFilter"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBoardFilterParams"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No token provided / Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized (invalid access token)",
+            "content": {}
+          },
+          "403": {
+            "description": "No access to data",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session / Not found",
             "content": {}
           }
         },
@@ -780,7 +847,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -840,7 +907,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {}
           },
           "400": {
@@ -903,7 +970,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -960,7 +1027,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -1023,7 +1090,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -1085,7 +1152,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {}
           },
           "400": {
@@ -1148,7 +1215,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfull operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -1799,6 +1866,224 @@
               "light",
               "violet"
             ]
+          }
+        }
+      },
+      "AllBoardParams_inner": {
+        "type": "object",
+        "properties": {
+          "titleBoard": {
+            "type": "string",
+            "description": "Board title",
+            "example": "My board"
+          },
+          "backgroundBoard": {
+            "type": "string",
+            "description": "User's background board theme",
+            "enum": [
+              "default",
+              "balloon",
+              "clouds",
+              "flowers",
+              "full-moon",
+              "gorge",
+              "kapadokia",
+              "milky-way",
+              "moon",
+              "night",
+              "ocean",
+              "pink-tree",
+              "plant",
+              "rocks",
+              "ship",
+              "unsplash"
+            ]
+          },
+          "icon": {
+            "type": "string",
+            "description": "User's icon board",
+            "enum": [
+              "default",
+              "balloon",
+              "clouds",
+              "flowers",
+              "full-moon",
+              "gorge",
+              "kapadokia",
+              "milky-way",
+              "moon",
+              "night",
+              "ocean",
+              "pink-tree",
+              "plant",
+              "rocks",
+              "ship",
+              "unsplash"
+            ]
+          },
+          "filter": {
+            "type": "string",
+            "description": "Board filter",
+            "enum": [
+              "default",
+              "without",
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        }
+      },
+      "LoginResponse_user": {
+        "type": "object",
+        "properties": {
+          "avatarURL": {
+            "type": "string",
+            "description": "User's avatar",
+            "format": "binary",
+            "example": "http://res.cloudinary.com/dsywt0aej/image/upload/v1707053839/avatars/65be792b1dc9d99e866f641b_Vasily.jpg or null"
+          },
+          "theme": {
+            "type": "string",
+            "description": "User's theme",
+            "enum": [
+              "dark",
+              "light",
+              "violet"
+            ]
+          },
+          "name": {
+            "maxLength": 20,
+            "minLength": 2,
+            "type": "string",
+            "description": "User's name",
+            "example": "Denys"
+          },
+          "email": {
+            "type": "string",
+            "description": "A user's email address.",
+            "format": "email"
+          }
+        }
+      },
+      "OneBoardResponse_board": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
+          },
+          "titleBoard": {
+            "type": "string",
+            "description": "Board title",
+            "example": "My board"
+          },
+          "background": {
+            "type": "string",
+            "description": "User's background board theme",
+            "enum": [
+              "default",
+              "balloon",
+              "clouds",
+              "flowers",
+              "full-moon",
+              "gorge",
+              "kapadokia",
+              "milky-way",
+              "moon",
+              "night",
+              "ocean",
+              "pink-tree",
+              "plant",
+              "rocks",
+              "ship",
+              "unsplash"
+            ]
+          },
+          "icon": {
+            "type": "string",
+            "description": "User's icon board",
+            "enum": [
+              "default",
+              "balloon",
+              "clouds",
+              "flowers",
+              "full-moon",
+              "gorge",
+              "kapadokia",
+              "milky-way",
+              "moon",
+              "night",
+              "ocean",
+              "pink-tree",
+              "plant",
+              "rocks",
+              "ship",
+              "unsplash"
+            ]
+          },
+          "filter": {
+            "type": "string",
+            "description": "Board filter",
+            "enum": [
+              "default",
+              "without",
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        }
+      },
+      "OneBoardResponse_cards": {
+        "type": "object",
+        "properties": {
+          "titleColumn": {
+            "type": "string",
+            "description": "Card title",
+            "example": "My card"
+          },
+          "boardId": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
+          }
+        }
+      },
+      "OneBoardResponse_columns": {
+        "type": "object",
+        "properties": {
+          "titleColumn": {
+            "type": "string",
+            "description": "Column title",
+            "example": "My column"
+          },
+          "boardId": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Id",
+            "example": "65c12dc037484a7784493011"
+          },
+          "cards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OneBoardResponse_cards"
+            }
           }
         }
       }
