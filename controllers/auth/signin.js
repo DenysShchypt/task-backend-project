@@ -38,15 +38,15 @@ const signin = async (req, res) => {
   await User.findByIdAndUpdate(user._id, { token });
 
   res.json({
-    message: "Successfull operation",
+    message: "Successful operation",
     token,
     refreshToken,
     user: {
+      avatarURL: user.avatarURL,
       name: user.name,
       email: user.email,
       theme: user.theme,
-      avatarURL: user.avatarURL,
-      name: user.name,
+      name: user.name
     },
   });
 };

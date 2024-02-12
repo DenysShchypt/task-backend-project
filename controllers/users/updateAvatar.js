@@ -30,7 +30,7 @@ export const updateAvatar = async (req, res) => {
   await fs.unlink(req.file.path);
 
   res.json({
-    message: "Successfull operation",
+    message: "Successful operation",
     avatarURL: user.avatarURL,
   });
 };
