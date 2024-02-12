@@ -1,6 +1,6 @@
 import { ctrlWrapper } from "../../decorators/index.js";
 import { HttpError } from "../../helpers/index.js";
-import { User } from "../../models/index.js";
+import { Session, User } from "../../models/index.js";
 import bcrypt from "bcrypt";
 
 import jwt from "jsonwebtoken";
@@ -51,18 +51,30 @@ const googleRedirect = async (req, res) => {
   if (!user) {
     const hashPassword = await bcrypt.hash(userData.data.id, 10);
 
+    const newSession = await Session.create({
+      uid: user._id,
+    });
+
     const newUser = await User.create({
       name: userData.data.name,
       email: userData.data.email,
       password: hashPassword,
     });
+
     await newUser.save();
+
     payload = {
       id: newUser._id,
+      sid: newSession._id,
     };
   } else {
+    const newSession = await Session.create({
+      uid: user._id,
+    });
+
     payload = {
       id: user._id,
+      sid: newSession._id,
     };
   }
 

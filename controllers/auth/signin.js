@@ -35,7 +35,8 @@ const signin = async (req, res) => {
   const refreshToken = jwt.sign(payload, JWT_SECRET, {
     expiresIn: "7d",
   });
-  await User.findByIdAndUpdate(user._id, { token });
+
+  // await User.findByIdAndUpdate(user._id, { token });
 
   res.json({
     message: "Successful operation",
@@ -46,7 +47,7 @@ const signin = async (req, res) => {
       name: user.name,
       email: user.email,
       theme: user.theme,
-      name: user.name
+      name: user.name,
     },
   });
 };
