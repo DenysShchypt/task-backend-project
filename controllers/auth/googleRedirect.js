@@ -1,14 +1,9 @@
 import { ctrlWrapper } from "../../decorators/index.js";
-import { HttpError } from "../../helpers/index.js";
 import { User } from "../../models/index.js";
 import bcrypt from "bcrypt";
-
 import jwt from "jsonwebtoken";
-
 import queryString from "query-string";
 import axios from "axios";
-import "dotenv/config";
-
 import "dotenv/config";
 
 const { JWT_SECRET } = process.env;
