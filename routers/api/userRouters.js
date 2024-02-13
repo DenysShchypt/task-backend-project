@@ -19,7 +19,7 @@ const usersRouter = express.Router();
 
 usersRouter.use(authenticate);
 
-usersRouter.get("/current-user", getCurrentUser);
+usersRouter.post("/current-user", getCurrentUser);
 
 usersRouter.patch("/avatar", upload.single("avatar"), updateAvatar);
 usersRouter.patch(
@@ -32,7 +32,7 @@ usersRouter.patch(
   validateBody(userUpdateThemeSchema),
   changeTheme
 );
-usersRouter.post("/", needHelps);
+usersRouter.post("/help", needHelps);
 
 usersRouter.delete("/delete-user", deleteUser);
 

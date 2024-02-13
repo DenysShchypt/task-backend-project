@@ -1,5 +1,4 @@
 import { ctrlWrapper } from "../../decorators/index.js";
-import { User } from "../../models/index.js";
 
 const getCurrentUser = async (req, res) => {
   const { user } = req;
@@ -10,7 +9,6 @@ const getCurrentUser = async (req, res) => {
     email: user.email,
     avatarURL: user.avatarURL,
     theme: user.theme,
-    token: user.token,
   });
 };
 
