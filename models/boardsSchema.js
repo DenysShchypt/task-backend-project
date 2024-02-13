@@ -50,13 +50,11 @@ export const addBoardSchema = Joi.object({
   background: Joi.string().valid(...backgroundNames),
   icon: Joi.string().valid(...iconsNames),
 });
-export const BoardFilterSchema = Joi.object({
-  filter: Joi.string().required().valid(...filterNames),
-});
 export const updateBoardSchema = Joi.object({
   titleBoard: Joi.string(),
   background: Joi.string().valid(...backgroundNames),
   icon: Joi.string().valid(...iconsNames),
+  filter: Joi.string().valid(...filterNames),
 });
 const Board = model("board", boardSchema);
 
