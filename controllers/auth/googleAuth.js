@@ -5,6 +5,7 @@ import "dotenv/config";
 const { GOOGLE_CLIENT_ID, BACKEND_URL } = process.env;
 
 const googleAuth = async (req, res) => {
+  // Параметри нашого застосунку
   const stringifiedParams = queryString.stringify({
     client_id: GOOGLE_CLIENT_ID,
     redirect_uri: `${BACKEND_URL}/api/auth/google-redirect`,
@@ -16,7 +17,7 @@ const googleAuth = async (req, res) => {
     access_type: "offline",
     prompt: "consent",
   });
-
+  // Передача керування google
   return res.redirect(
     `https://accounts.google.com/o/oauth2/v2/auth?${stringifiedParams}`
   );

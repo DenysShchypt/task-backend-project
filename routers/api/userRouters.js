@@ -32,7 +32,7 @@ usersRouter.patch(
   validateBody(userUpdateThemeSchema),
   changeTheme
 );
-usersRouter.post("/", needHelps);
+usersRouter.post("/help", needHelps);
 
 usersRouter.delete("/delete-user", deleteUser);
 

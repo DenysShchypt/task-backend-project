@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Task Pro Swagger documentation 📓",
-    "description": "The API for Task Pro Service.🛠 \n[Backend github repository](https://github.com/DenysShchypt/task-backend-project)/ 💅\n[Frontend github repository](https://github.com/Alexandrbig1/task-pro)\n",
+    "description": "The API for Task Pro Service. 🛠 \n[Backend github repository](https://github.com/DenysShchypt/task-backend-project)/ 💅\n[Frontend github repository](https://github.com/Alexandrbig1/task-pro)\n",
     "version": "1.0.0"
   },
   "servers": [
@@ -361,7 +361,7 @@
         ]
       }
     },
-    "/users": {
+    "/users/help": {
       "post": {
         "tags": [
           "User"
@@ -746,73 +746,6 @@
           },
           "409": {
             "description": "Can`t remove!",
-            "content": {}
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/boards/filter/{id}": {
-      "patch": {
-        "tags": [
-          "Boards"
-        ],
-        "summary": "Update board filter by id",
-        "operationId": "Update board filter by id",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "style": "simple",
-            "explode": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "$ref": "#/components/requestBodies/UpdateBoardFilter"
-        },
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpdateBoardFilterParams"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
-          },
-          "401": {
-            "description": "Unauthorized (invalid access token)",
-            "content": {}
-          },
-          "403": {
-            "description": "No access to data",
-            "content": {}
-          },
-          "404": {
-            "description": "Invalid user / Invalid session / Not found",
             "content": {}
           }
         },
@@ -1376,11 +1309,6 @@
         }
       },
       "AddBoardParams": {
-        "required": [
-          "backgroundBoard",
-          "icon",
-          "titleBoard"
-        ],
         "type": "object",
         "properties": {
           "titleBoard": {
@@ -1431,12 +1359,7 @@
               "ship",
               "unsplash"
             ]
-          }
-        }
-      },
-      "UpdateBoardFilterParams": {
-        "type": "object",
-        "properties": {
+          },
           "filter": {
             "type": "string",
             "description": "Board filter",
@@ -1847,11 +1770,6 @@
             "description": "A user's email address.",
             "format": "email"
           },
-          "token": {
-            "type": "string",
-            "description": "User's token",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YmU3OTJiMWRjOWQ5OWU4NjZmNjQxYiIsImlhdCI6MTcwNjk4MTY3NSwiZXhwIjoxNzA3MDUzNjc1fQ.CR1wWNZvCtiPpvpOUNpmSiBDWPeyaT_eeYXcZ_UL4OM"
-          },
           "avatarURL": {
             "type": "string",
             "description": "User's avatar",
@@ -2150,15 +2068,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/AddBoardParams"
-            }
-          }
-        }
-      },
-      "UpdateBoardFilter": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/UpdateBoardFilterParams"
             }
           }
         }
