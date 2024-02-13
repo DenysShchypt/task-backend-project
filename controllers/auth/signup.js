@@ -1,17 +1,16 @@
-
 import bcrypt from "bcrypt";
-import { User } from "../../models/index.js";
+import { Session, User } from "../../models/index.js";
 import { ctrlWrapper } from "../../decorators/index.js";
 import { HttpError } from "../../helpers/index.js";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 const { JWT_SECRET } = process.env;
 
-const generateToken = (user) => {
-  const payload = { id: user._id };
-  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "20h" });
-  return token;
-};
+// const generateToken = (user) => {
+//   const payload = { id: user._id };
+//   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "20h" });
+//   return token;
+// };
 
 const signup = async (req, res) => {
   const { email, password } = req.body;
@@ -28,13 +27,31 @@ const signup = async (req, res) => {
     password: hashPassword,
   });
 
-  const token = generateToken(newUser);
-  newUser.token = token;
-  await newUser.save();
+  // const token = generateToken(newUser);
+
+  // newUser.token = token;
+  // await newUser.save();
+
+  const newSession = await Session.create({
+    uid: newUser._id,
+  });
+
+  const payload = {
+    id: newUser._id,
+    sid: newSession._id,
+  };
+
+  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "20h" });
+  const refreshToken = jwt.sign(payload, JWT_SECRET, { expiresIn: "20h" });
 
   res.status(201).json({
     message: "Successful operation",
-    user: { token: token, name: newUser.name, email: newUser.email },
+    user: {
+      token: token,
+      refreshToken: refreshToken,
+      name: newUser.name,
+      email: newUser.email,
+    },
   });
 };
 
