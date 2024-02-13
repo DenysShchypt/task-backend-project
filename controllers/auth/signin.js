@@ -47,7 +47,6 @@ const signin = async (req, res) => {
       name: user.name,
       email: user.email,
       theme: user.theme,
-      name: user.name,
     },
   });
 };

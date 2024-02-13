@@ -10,8 +10,6 @@ const updateToken = async (req, res) => {
 
   const { id, sid } = jwt.verify(incomingRefreshToken, JWT_SECRET);
 
-  // console.log("updToken: ", sid);
-
   const user = await User.findOne({ _id: id });
 
   if (!user) {
@@ -24,9 +22,15 @@ const updateToken = async (req, res) => {
     throw HttpError(403);
   }
 
+  await Session.deleteOne({ _id: sid });
+
+  const newSid = await Session.create({
+    uid: user._id,
+  });
+
   const payload = {
     id: user._id,
-    sid: currentSession._id,
+    sid: newSid._id,
   };
 
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "15m" });
