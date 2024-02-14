@@ -82,9 +82,9 @@ const googleRedirect = async (req, res) => {
   const refreshToken = jwt.sign(payload, JWT_SECRET, {
     expiresIn: "7d",
   });
-  // redirect на front
+
   return res.redirect(
-    `${FRONT_URL}/api/auth/google-redirect/?token=${token}&refreshToken=${refreshToken}`
+    `${FRONT_URL}/#/google-redirect/?token=${token}&refreshToken=${refreshToken}`
   );
 };
 
