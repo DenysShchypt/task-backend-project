@@ -2,6 +2,8 @@ import Joi from "joi";
 import { Schema, model } from "mongoose";
 import { handleSaveError, setUpdateOptions } from "../hooks/index.js";
 
+const priorityCard = ["without", "low", "medium", "high"];
+
 const cardSchema = new Schema(
   {
     titleCard: {
@@ -13,7 +15,7 @@ const cardSchema = new Schema(
     },
     priority: {
       type: String,
-      enum: ["without", "low", "medium", "high"],
+      enum: priorityCard,
       default: "without",
     },
     deadline: {
@@ -39,13 +41,12 @@ const cardSchema = new Schema(
 );
 
 cardSchema.post("save", handleSaveError);
-
 cardSchema.pre("findOneAndUpdate", setUpdateOptions);
 
 export const cardAddSchema = Joi.object({
   titleCard: Joi.string().required(),
   description: Joi.string().allow(""),
-  priority: Joi.string().valid("without", "low", "medium", "high"),
+  priority: Joi.string().valid(...priorityCard),
   deadline: Joi.date().iso(),
   columnId: Joi.string()
     .regex(/^[0-9a-fA-F]{24}$/)
@@ -58,7 +59,7 @@ export const cardAddSchema = Joi.object({
 export const cardUpdateSchema = Joi.object({
   titleCard: Joi.string(),
   description: Joi.string().allow(""),
-  priority: Joi.string().valid("without", "low", "medium", "high"),
+  priority: Joi.string().valid(...priorityCard),
   deadline: Joi.date().iso(),
 });
 

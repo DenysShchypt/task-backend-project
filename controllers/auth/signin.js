@@ -36,8 +36,6 @@ const signin = async (req, res) => {
     expiresIn: "7d",
   });
 
-  // await User.findByIdAndUpdate(user._id, { token });
-
   res.json({
     message: "Successful operation",
     token,

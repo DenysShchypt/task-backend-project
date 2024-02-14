@@ -12,9 +12,8 @@ const movingCard = async (req, res) => {
     if (!existColumn) {
         throw HttpError(404, `Column Not Found`);
     }
-
     // прописуємо в картку ід нової колонки 
-    const result = await Card.findOneAndUpdate({ _id, owner }, req.body, { new: true });
+    const result = await Card.findOneAndUpdate({ _id, owner }, { columnId }, { new: true });
     if (!result) {
         throw HttpError(404, `Card Not Found`);
     }

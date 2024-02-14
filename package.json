@@ -1,5 +1,4 @@
-{
-  "name": "task-backend-project",
+{ "name": "task-backend-project",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +9,7 @@
     "dev": "cross-env NODE_ENV=development nodemon ./server.js",
     "debug": "node --inspect server.js"
   },
-  "keywords": [],
+  "keywords": [ ],
   "author": "",
   "license": "ISC",
   "dependencies": {

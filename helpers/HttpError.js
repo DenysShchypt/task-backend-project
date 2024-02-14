@@ -4,7 +4,7 @@ const messageErrorList = {
     401: "Unauthorized",
     403: "Forbidden",
     404: "Not found",
-    409: "Conflict"
+    409: "Conflict",
 };
 const HttpError = (status, message = messageErrorList[status]) => {
     // Function HttpError створює помилку в потрібним message
