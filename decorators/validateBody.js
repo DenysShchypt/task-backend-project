@@ -1,16 +1,18 @@
 import { HttpError } from "../helpers/index.js";
-const validateBody = schema => {
+const validateBody = (schema) => {
     // Створюємо функцію обгортку
     const fun = async (req, res, next) => {
         // Достаємо error з req.body
         const { error } = schema.validate(req.body);
+        console.log("error: ", error);
+
         // Перевіряємо на помилку
         if (error) {
-            // Шукати далі  Middleware обробник помилок 
-            return next(HttpError(400, error.message))
+            // Шукати далі  Middleware обробник помилок
+            return next(HttpError(400, error.message));
         }
-        next()
-    }
+        next();
+    };
     // Повертаємо функцію якщо не виникло помилок
     return fun;
 };

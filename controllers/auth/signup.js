@@ -6,12 +6,6 @@ import jwt from "jsonwebtoken";
 import "dotenv/config";
 const { JWT_SECRET } = process.env;
 
-// const generateToken = (user) => {
-//   const payload = { id: user._id };
-//   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "20h" });
-//   return token;
-// };
-
 const signup = async (req, res) => {
   const { email, password } = req.body;
 
@@ -26,11 +20,6 @@ const signup = async (req, res) => {
     ...req.body,
     password: hashPassword,
   });
-
-  // const token = generateToken(newUser);
-
-  // newUser.token = token;
-  // await newUser.save();
 
   const newSession = await Session.create({
     uid: newUser._id,

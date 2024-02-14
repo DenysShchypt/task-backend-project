@@ -16,7 +16,7 @@ const deleteBoard = async (req, res) => {
   await Column.deleteMany({ boardId, owner });
   await Board.deleteOne({ _id: boardId, owner });
 
-  res.json({ message: "Successful operation" });
+  res.status(204).json({ message: "Successful operation" });
 };
 
 export default ctrlWrapper(deleteBoard);

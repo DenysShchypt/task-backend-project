@@ -19,11 +19,12 @@ const swaggerDocument = JSON.parse(
 dotenv.config();
 const app = express(); //web-server
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
+// Middleware для логування
+app.use(logger(formatsLogger));
+
 app.use("/link", (req, res) => {
   res.sendFile(path.resolve("public", "link.html"));
 });
-// Middleware для логування
-app.use(logger(formatsLogger));
 // Middleware for CORS questions
 app.use(cors());
 // Middleware для обробки тіла запиту(req.body) по заголовку Content-type в форматі json (application/json);

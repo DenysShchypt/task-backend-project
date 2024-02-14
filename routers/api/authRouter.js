@@ -38,5 +38,4 @@ authRouter.post(
 authRouter.get("/google", googleAuth);
 authRouter.get("/google-redirect", googleRedirect);
 
-
 export default authRouter;
