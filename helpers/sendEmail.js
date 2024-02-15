@@ -1,7 +1,5 @@
-import dotenv from "dotenv";
 import nodemailer from "nodemailer";
-
-dotenv.config();
+import "dotenv/config";
 
 const { MAIL_FROM_UKRNET, API_KEY_UKRNET, NODE_EMAIL_HOST } = process.env;
 
