@@ -1,14 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Task Pro Swagger documentation 📓",
-    "description": "The API for Task Pro Service. 🛠 \n[Backend github repository](https://github.com/DenysShchypt/task-backend-project)/ 💅\n[Frontend github repository](https://github.com/Alexandrbig1/task-pro)\n",
+    "title": "TaskPro Swagger Documentation 📜",
+    "description": "\nThe API for TaskPro Service.\n🧰\n[Backend Github repository](https://github.com/DenysShchypt/task-backend-project)\n💅\n[Frontend Github repository](https://github.com/Alexandrbig1/task-pro)\n\n[Website](https://alexandrbig1.github.io/task-pro/)\n\n  TaskPro is the culmination of our journey through a 10-month Fullstack Development Bootcamp. This fullstack application showcases the depth of knowledge and skills we've acquired in building robust and feature-rich web applications.\n📲\n[Find out more about uor Team](https://docs.google.com/presentation/d/1iBWZazJHi9QtHvw1Vyw9sUz6gOfPelsSVi5HWmOpQYA/edit#slide=id.g1213a43354d_0_0)\n",
     "version": "1.0.0"
   },
   "servers": [
     {
       "url": "https://task-backend-project.onrender.com/api",
-      "description": "Dev"
+      "description": "Dev Server"
+    },
+    {
+      "url": "http://localhost:3030/api",
+      "description": "Local Dev Server"
     }
   ],
   "tags": [
@@ -41,7 +45,7 @@
         ],
         "summary": "Registers a new user",
         "operationId": "Register",
-        "parameters": [],
+        "parameters": [ ],
         "requestBody": {
           "$ref": "#/components/requestBodies/UserRegistrationRequest"
         },
@@ -58,15 +62,15 @@
           },
           "400": {
             "description": "Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "409": {
             "description": "Provided email already exists",
-            "content": {}
+            "content": { }
           },
           "5XX": {
             "description": "(5XX) Internal server error",
-            "content": {}
+            "content": { }
           }
         }
       }
@@ -78,7 +82,7 @@
         ],
         "summary": "Authenticates a user via login credentials",
         "operationId": "Login",
-        "parameters": [],
+        "parameters": [ ],
         "requestBody": {
           "$ref": "#/components/requestBodies/LoginRequest"
         },
@@ -95,15 +99,15 @@
           },
           "400": {
             "description": "Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "403": {
             "description": "Email doesn't exist / Password is wrong",
-            "content": {}
+            "content": { }
           },
           "5XX": {
             "description": "(5XX) Internal server error",
-            "content": {}
+            "content": { }
           }
         }
       }
@@ -130,24 +134,24 @@
         "responses": {
           "204": {
             "description": "Successful operation",
-            "content": {}
+            "content": { }
           },
           "400": {
             "description": "No token provided",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       }
@@ -184,20 +188,20 @@
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       }
@@ -237,20 +241,20 @@
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       }
@@ -290,20 +294,20 @@
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       }
@@ -343,20 +347,20 @@
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       }
@@ -396,20 +400,20 @@
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       }
@@ -436,32 +440,32 @@
         "responses": {
           "204": {
             "description": "Successful operation",
-            "content": {}
+            "content": { }
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "403": {
             "description": "No access to data",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session",
-            "content": {}
+            "content": { }
           },
           "409": {
             "description": "Can`t remove!",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       }
@@ -498,20 +502,20 @@
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       },
@@ -549,20 +553,20 @@
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       }
@@ -609,24 +613,24 @@
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "403": {
             "description": "No access to data",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       },
@@ -674,24 +678,24 @@
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "403": {
             "description": "No access to data",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       },
@@ -726,32 +730,32 @@
         "responses": {
           "204": {
             "description": "Successful operation",
-            "content": {}
+            "content": { }
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "403": {
             "description": "No access to data",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session",
-            "content": {}
+            "content": { }
           },
           "409": {
             "description": "Can`t remove!",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       }
@@ -791,20 +795,20 @@
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       }
@@ -841,32 +845,32 @@
         "responses": {
           "204": {
             "description": "Successful operation",
-            "content": {}
+            "content": { }
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "403": {
             "description": "No access to data",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session",
-            "content": {}
+            "content": { }
           },
           "409": {
             "description": "Can`t remove!",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       },
@@ -914,24 +918,24 @@
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "403": {
             "description": "No access to data",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       }
@@ -971,20 +975,20 @@
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session / Not found",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       }
@@ -1034,24 +1038,24 @@
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "403": {
             "description": "No access to data",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session / Not found",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       },
@@ -1086,32 +1090,32 @@
         "responses": {
           "204": {
             "description": "Successful operation",
-            "content": {}
+            "content": { }
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "403": {
             "description": "No access to data",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session / Not found",
-            "content": {}
+            "content": { }
           },
           "409": {
             "description": "Can`t remove!",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       },
@@ -1159,24 +1163,24 @@
           },
           "400": {
             "description": "No token provided / Bad request (invalid request body)",
-            "content": {}
+            "content": { }
           },
           "401": {
             "description": "Unauthorized (invalid access token)",
-            "content": {}
+            "content": { }
           },
           "403": {
             "description": "No access to data",
-            "content": {}
+            "content": { }
           },
           "404": {
             "description": "Invalid user / Invalid session / Not found",
-            "content": {}
+            "content": { }
           }
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearerAuth": [ ]
           }
         ]
       }
