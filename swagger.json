@@ -2,14 +2,10 @@
   "openapi": "3.0.0",
   "info": {
     "title": "TaskPro Swagger Documentation📓",
-    "description": "\nThe API for TaskPro Service.\n\n🧰[Backend Github repository](https://github.com/DenysShchypt/task-backend-project)\n\n\n💅[Frontend Github repository](https://github.com/Alexandrbig1/task-pro)\n\n\n🌐[Website](https://alexandrbig1.github.io/task-pro/)\n\n\n  TaskPro is the culmination of our journey through a 10-month Fullstack Development Bootcamp. This fullstack application showcases the depth of knowledge and skills we've acquired in building robust and feature-rich web applications.\n  \n\n📲[Find out more about uor Team](https://docs.google.com/presentation/d/1iBWZazJHi9QtHvw1Vyw9sUz6gOfPelsSVi5HWmOpQYA/edit#slide=id.g1213a43354d_0_0)\n",
+    "description": "\nThe API for TaskPro Service.\n\n🧰 [Backend Github repository](https://github.com/DenysShchypt/task-backend-project)\n\n\n💅 [Frontend Github repository](https://github.com/Alexandrbig1/task-pro)\n\n\n🌐 [Website](https://alexandrbig1.github.io/task-pro/)\n\n\n  TaskPro is the culmination of our journey through a 10-month Fullstack Development Bootcamp. This fullstack application showcases the depth of knowledge and skills we've acquired in building robust and feature-rich web applications.\n  \n\n📲 [Find out more about uor Team](https://docs.google.com/presentation/d/1iBWZazJHi9QtHvw1Vyw9sUz6gOfPelsSVi5HWmOpQYA/edit#slide=id.g1213a43354d_0_0)\n",
     "version": "1.0.0"
   },
   "servers": [
-    {
-      "url": "https://virtserver.swaggerhub.com/DENYSSHCHYPTSOVIT/Task/1.0.0",
-      "description": "SwaggerHub API Auto Mocking"
-    },
     {
       "url": "https://task-backend-project.onrender.com/api",
       "description": "Dev Server"
