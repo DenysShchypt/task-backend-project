@@ -4,7 +4,6 @@ const validateBody = (schema) => {
     const fun = async (req, res, next) => {
         // Достаємо error з req.body
         const { error } = schema.validate(req.body);
-        console.log("error: ", error);
 
         // Перевіряємо на помилку
         if (error) {
