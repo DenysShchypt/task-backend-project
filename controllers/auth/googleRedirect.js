@@ -11,6 +11,7 @@ const { JWT_SECRET } = process.env;
 const { GOOGLE_SECRET, GOOGLE_CLIENT_ID, BACKEND_URL, FRONT_URL } = process.env;
 
 const googleRedirect = async (req, res) => {
+  console.log('hello');
   const fullUrl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
 
   const urlObj = new URL(fullUrl);
@@ -39,55 +40,52 @@ const googleRedirect = async (req, res) => {
       Authorization: `Bearer ${tokenData.data.access_token}`,
     },
   });
-  console.log(userData);
+  console.log(userData.data);
   const user = await User.findOne({ email: userData.data.email });
 
-  // let payload = {};
+  let payload = {};
 
-  // if (!user) {
-  //   const hashPassword = await bcrypt.hash(userData.data.id, 10);
+  if (!user) {
+    const hashPassword = await bcrypt.hash(userData.data.id, 10);
 
-  //   const newSession = await Session.create({
-  //     uid: user._id,
-  //   });
+    const newSession = await Session.create({
+      uid: user._id,
+    });
 
-  //   const newUser = await User.create({
-  //     name: userData.data.name,
-  //     email: userData.data.email,
-  //     password: hashPassword,
-  //   });
+    const newUser = await User.create({
+      name: userData.data.name,
+      email: userData.data.email,
+      password: hashPassword,
+    });
 
-  //   await newUser.save();
+    await newUser.save();
 
-  //   payload = {
-  //     id: newUser._id,
-  //     sid: newSession._id,
-  //   };
-  // } else {
-  //   const newSession = await Session.create({
-  //     uid: user._id,
-  //   });
+    payload = {
+      id: newUser._id,
+      sid: newSession._id,
+    };
+  } else {
+    const newSession = await Session.create({
+      uid: user._id,
+    });
 
-  //   payload = {
-  //     id: user._id,
-  //     sid: newSession._id,
-  //   };
-  // }
+    payload = {
+      id: user._id,
+      sid: newSession._id,
+    };
+  }
 
-  // const token = jwt.sign(payload, JWT_SECRET, {
-  //   expiresIn: "20h",
-  // });
+  const token = jwt.sign(payload, JWT_SECRET, {
+    expiresIn: "20h",
+  });
 
-  // const refreshToken = jwt.sign(payload, JWT_SECRET, {
-  //   expiresIn: "7d",
-  // });
-  // redirect на front
+  const refreshToken = jwt.sign(payload, JWT_SECRET, {
+    expiresIn: "7d",
+  });
+
   return res.redirect(
-    `${FRONT_URL}?email=${userData.data.email}`);
-
-  // return res.redirect(
-  //   `${FRONT_URL}/#/google-redirect/?token=${token}&refreshToken=${refreshToken}`
-  // );
+    `${FRONT_URL}/#/google-redirect/?token=${token}&refreshToken=${refreshToken}`
+  );
 };
 
 export default ctrlWrapper(googleRedirect);
