@@ -83,8 +83,11 @@ const googleRedirect = async (req, res) => {
   // });
   // redirect на front
   return res.redirect(
-    `${FRONT_URL}?email=${userData.data.email}`
-  );
+    `${FRONT_URL}?email=${userData.data.email}`);
+
+  // return res.redirect(
+  //   `${FRONT_URL}/#/google-redirect/?token=${token}&refreshToken=${refreshToken}`
+  // );
 };
 
 export default ctrlWrapper(googleRedirect);
