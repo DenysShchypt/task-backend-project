@@ -1,9 +1,10 @@
 import express from "express";
 import logger from "morgan";
 import cors from "cors";
+import path from "path";
 import swaggerUi from "swagger-ui-express";
 import { readFile } from "fs/promises";
-import dotenv from "dotenv";
+import "dotenv/config";
 import {
   authRouter,
   boardsRouter,
@@ -11,24 +12,24 @@ import {
   columnsRouter,
   usersRouter,
 } from "./routers/api/index.js";
+
 const swaggerDocument = JSON.parse(
   await readFile(new URL("./swagger.json", import.meta.url))
 );
 
-// Додавання данних з env змінні оточення process.env
-dotenv.config();
 const app = express(); //web-server
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 // Middleware для логування
 app.use(logger(formatsLogger));
 
-app.use("/link", (req, res) => {
-  res.sendFile(path.resolve("public", "link.html"));
-});
+
 // Middleware for CORS questions
 app.use(cors());
 // Middleware для обробки тіла запиту(req.body) по заголовку Content-type в форматі json (application/json);
 app.use(express.json());
+app.use("/link", (req, res) => {
+  res.sendFile(path.resolve("link.html"));
+});
 // Обробка запитів на API за допомогою маршрутів
 app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);

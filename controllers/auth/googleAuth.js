@@ -11,7 +11,7 @@ const googleAuth = async (req, res) => {
     redirect_uri: `${BACKEND_URL}/api/auth/google-redirect`,
     scope: [
       "https://www.googleapis.com/auth/userinfo.email",
-      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.profile"
     ].join(" "),
     response_type: "code",
     access_type: "offline",
