@@ -17,7 +17,6 @@ const googleAuth = (req, res) => {
     access_type: "offline",
     prompt: "consent",
   });
-
   // Передача керування google
   return res.redirect(
     `https://accounts.google.com/o/oauth2/v2/auth?${stringifiedParams}`

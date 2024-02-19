@@ -84,8 +84,11 @@ const googleRedirect = async (req, res) => {
   });
 
   return res.redirect(
-    `${FRONT_URL}/#/google-redirect/?token=${token}&refreshToken=${refreshToken}`
+    `${FRONT_URL}?token=${token}&refreshToken=${refreshToken}`
   );
+  // return res.redirect(
+  //   `${FRONT_URL}/#/google-redirect/?token=${token}&refreshToken=${refreshToken}`
+  // );
 };
 
 export default ctrlWrapper(googleRedirect);
