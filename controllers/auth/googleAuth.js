@@ -2,7 +2,7 @@ import { ctrlWrapper } from "../../decorators/index.js";
 import queryString from "query-string";
 import "dotenv/config";
 
-const { GOOGLE_CLIENT_ID, BACKEND_URL } = process.env;
+const { GOOGLE_CLIENT_ID, BACKEND_URL, FRONT_URL } = process.env;
 
 const googleAuth = (req, res) => {
   // Параметри нашого застосунку
