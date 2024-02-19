@@ -11,14 +11,11 @@ const { JWT_SECRET } = process.env;
 const { GOOGLE_SECRET, GOOGLE_CLIENT_ID, BACKEND_URL, FRONT_URL } = process.env;
 
 const googleRedirect = async (req, res) => {
-  console.log('hello');
   const fullUrl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
-
   const urlObj = new URL(fullUrl);
 
   // Запит google на отримання code
   const urlParams = queryString.parse(urlObj.search);
-
   const code = urlParams.code;
   // Запит і отримання token
   const tokenData = await axios({
@@ -40,7 +37,6 @@ const googleRedirect = async (req, res) => {
       Authorization: `Bearer ${tokenData.data.access_token}`,
     },
   });
-  console.log(userData.data);
   const user = await User.findOne({ email: userData.data.email });
 
   let payload = {};
@@ -68,7 +64,6 @@ const googleRedirect = async (req, res) => {
     const newSession = await Session.create({
       uid: user._id,
     });
-
     payload = {
       id: user._id,
       sid: newSession._id,
@@ -84,11 +79,8 @@ const googleRedirect = async (req, res) => {
   });
 
   return res.redirect(
-    `${FRONT_URL}?token=${token}&refreshToken=${refreshToken}`
+    `${FRONT_URL}/#/google-redirect/?token=${token}&refreshToken=${refreshToken}`
   );
-  // return res.redirect(
-  //   `${FRONT_URL}/#/google-redirect/?token=${token}&refreshToken=${refreshToken}`
-  // );
 };
 
 export default ctrlWrapper(googleRedirect);
